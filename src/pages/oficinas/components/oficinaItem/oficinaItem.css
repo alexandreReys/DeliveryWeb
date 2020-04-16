@@ -1,0 +1,45 @@
+.oficina-item {
+  background: rgba(255, 255, 255, 0.891);
+  box-shadow: 0 0 14px 0 rgba(0, 0, 0, 1);
+  border-radius: 12px;
+  padding: 10px;
+}
+.oficina-item header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.oficina-item header .oficina-info {
+  margin-left: 10px;
+}
+.oficina-info .titulo {
+  display: block;
+  font-size: 1.1rem;
+  color: #333;
+}
+.oficina-item .edit-icon {
+  color: green;
+  cursor: pointer;
+}
+.oficina-item .trash-icon {
+  color: red;
+  cursor: pointer;
+}
+.oficina-info .span1 {
+  font-size: 0.9rem;
+  color: rgb(0, 0, 0);
+}
+.oficina-info .span2 {
+  display: block;
+  font-size: 0.8rem;
+  color: rgb(0, 0, 0);
+}
+.oficina-item p {
+  color: #666;
+  font-size: 0.7rem;
+  line-height: 20px;
+  margin: 10px 0;
+}
+.oficina-item a:hover {
+  color: #5a2ea6;
+}
