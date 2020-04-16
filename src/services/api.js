@@ -12,6 +12,8 @@ if (environment === "production") {
   mysqlBaseUrl = process.env.REACT_APP_PROD_BASE_URL;
 }
 
+console.log(mysqlBaseUrl);
+
 export const api = axios.create({
   baseURL: mysqlBaseUrl,
 });
