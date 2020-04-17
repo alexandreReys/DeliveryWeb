@@ -4,7 +4,7 @@ import { ErrorMessage, Formik, Form, Field } from "formik";
 import * as yup from "yup";
 
 import { api } from "../../services/api";
-import { login } from "../../services/auth";
+import * as loginService from "../../services/loginService";
 
 import "./login.css";
 
@@ -19,7 +19,7 @@ class Login extends Component {
       const response = await api.post("/auth", values);
       const { data } = response;
       if (data.token) {
-        login(data.token, data.username);
+        loginService.login(data.token, data.username);
       } else {
         this.setState({ errorMsg: "Usuário e/ou Senha não encontrado" });
       }

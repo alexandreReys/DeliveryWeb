@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { logout } from "../../services/auth";
+import * as loginService from "../../services/loginService";
 
 import { connect } from "react-redux";
 
@@ -55,7 +55,7 @@ const Nav = ({ loggedUser }) => {
             <button
               className="btn-logout ml-3"
               onClick={() => {
-                logout();
+                loginService.logout();
               }}
             >
               Sair

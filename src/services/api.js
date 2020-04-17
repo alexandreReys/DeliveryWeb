@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken } from "./auth";
+import * as loginService from "./loginService";
 
 const environment = process.env.REACT_APP_ENV;
 
@@ -17,7 +17,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use(async (config) => {
-  const token = getToken();
+  const token = loginService.getToken();
   if (token) {
     config.headers.authorization = `${token}`;
   }
