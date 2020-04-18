@@ -5,11 +5,11 @@ const environment = process.env.REACT_APP_ENV;
 
 let mysqlBaseUrl;
 if (environment === "development") {
-  mysqlBaseUrl = process.env.REACT_APP_DEV_BASE_URL || "http://localhost:3000";
-}
-
-if (environment === "production") {
+  mysqlBaseUrl = process.env.REACT_APP_DEV_BASE_URL;
+} else if (environment === "production") {
   mysqlBaseUrl = process.env.REACT_APP_PROD_BASE_URL;
+} else {
+  mysqlBaseUrl = "http://motoguardian-com-br.umbler.net";
 }
 
 export const api = axios.create({
