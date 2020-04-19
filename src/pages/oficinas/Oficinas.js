@@ -24,7 +24,6 @@ const App = ({ operacaoOficina }) => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_ENV);
     store.dispatch(actionOficinaList());
     getOficinasList();
   }, []);
