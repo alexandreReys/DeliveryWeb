@@ -1,10 +1,10 @@
-.oficina-form .oficina-container {
+.veiculo-form .veiculo-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 8vh 1fr;
 }
 
-.oficina-form header {
+.veiculo-form header {
   grid-column-start: 1;
   grid-column-end: 4;
 
@@ -13,7 +13,7 @@
   color: blue;
 }
 
-.oficina-form main {
+.veiculo-form main {
   grid-column-start: 1;
   grid-column-end: 4;
 
@@ -21,19 +21,19 @@
   padding: 10px 0 0;
 }
 
-.oficina-form .form-columns {
+.veiculo-form .form-columns {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 15px;
 }
 
-.oficina-form main label {
+.veiculo-form main label {
   display: block;
   margin-bottom: 0;
   font-weight: bold;
 }
 
-.oficina-form main input,
+.veiculo-form main input,
 select {
   font-size: 0.9rem;
   height: 32px;
@@ -41,33 +41,29 @@ select {
   box-shadow: 4px 4px 0 0 rgb(0, 0, 0, 0.6);
 }
 
-.oficina-form .input-txt {
+.veiculo-form .input-txt {
   width: 100%;
 }
 
-.oficina-form .input-cep,
+.veiculo-form .input-cep,
 .input-num,
 .input-tel {
   width: 50%;
 }
 
-.oficina-form .input-estado {
-  width: 80%;
-}
-
 @media (max-width: 1100px) {
-  .oficina-form .form-columns {
+  .veiculo-form .form-columns {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 800px) {
-  .oficina-form .form-columns {
+  .veiculo-form .form-columns {
     grid-template-columns: 1fr;
   }
 }
 
-.oficina-form footer {
+.veiculo-form footer {
   grid-column-start: 1;
   grid-column-end: 4;
 
@@ -78,7 +74,7 @@ select {
   justify-items: center;
 }
 
-.oficina-form footer button {
+.veiculo-form footer button {
   width: 55%;
   border: 0;
   background: rgb(53, 53, 253);
@@ -91,6 +87,6 @@ select {
   transition: background 0.5s;
 }
 
-.oficina-form footer button:hover {
+.veiculo-form footer button:hover {
   background: rgb(0, 0, 78);
 }

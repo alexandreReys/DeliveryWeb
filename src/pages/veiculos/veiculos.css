@@ -2,29 +2,29 @@
   padding: 20px 5px;
 }
 
-#oficinas {
+#veiculos {
   max-width: 1600px;
   margin: 0 auto;
   padding: 100px 5px;
 }
 
-#oficinas .btnMais {
+#veiculos .btnMais {
   position: fixed;
   float: bottom;
   bottom: 35px;
   right: 15px;
   z-index: 100;
 }
-#oficinas .btnMais {
+#veiculos .btnMais {
   display: inline-block;
 }
-#oficinas .btnCircular {
+#veiculos .btnCircular {
   border-radius: 50%;
   font-size: 20px;
   padding: 15px;
 }
 
-#oficinas .oficina-form {
+#veiculos .veiculo-form {
   width: 100%;
   background: #fff;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.9);
@@ -33,30 +33,30 @@
   color: #333;
 }
 
-#oficinas .oficina-list ul {
+#veiculos .veiculo-list ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   list-style: none;
 }
 
-#oficinas #loading h2 {
+#veiculos #loading h2 {
   color: yellow;
 }
 
 @media (max-width: 1000px) {
-  #oficinas .oficina-list ul {
+  #veiculos .veiculo-list ul {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 700px) {
-  #oficinas .oficina-list ul {
+  #veiculos .veiculo-list ul {
     grid-template-columns: 1fr;
   }
 }
 
-.oficina-list-header {
+.veiculo-list-header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;

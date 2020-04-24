@@ -1,0 +1,45 @@
+.cliente-item {
+  background: rgba(255, 255, 255, 0.891);
+  box-shadow: 0 0 14px 0 rgba(0, 0, 0, 1);
+  border-radius: 12px;
+  padding: 10px;
+}
+.cliente-item header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.cliente-item header .cliente-info {
+  margin-left: 10px;
+}
+.cliente-info .titulo {
+  display: block;
+  font-size: 1.1rem;
+  color: #333;
+}
+.cliente-item .edit-icon {
+  color: green;
+  cursor: pointer;
+}
+.cliente-item .trash-icon {
+  color: red;
+  cursor: pointer;
+}
+.cliente-info .span1 {
+  font-size: 0.9rem;
+  color: rgb(0, 0, 0);
+}
+.cliente-info .span2 {
+  display: block;
+  font-size: 0.8rem;
+  color: rgb(0, 0, 0);
+}
+.cliente-item p {
+  color: #666;
+  font-size: 0.7rem;
+  line-height: 20px;
+  margin: 10px 0;
+}
+.cliente-item a:hover {
+  color: #5a2ea6;
+}

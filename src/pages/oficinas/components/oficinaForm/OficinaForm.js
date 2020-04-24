@@ -158,7 +158,7 @@ function OficinaForm({ propSubmit }) {
             <div className="input-block">
               <label htmlFor="EstadoOficina">Estado</label>
               <select
-                className="input-txt"
+                className="input-txt input-estado"
                 name="EstadoOficina"
                 id="EstadoOficina"
                 required

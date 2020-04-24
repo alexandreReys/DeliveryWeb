@@ -1,8 +1,12 @@
 import { combineReducers } from "redux";
-import authReducer from "./reducers/authReducer";
+import loginReducer from "./reducers/loginReducer";
 import oficinaReducer from "./reducers/oficinaReducer";
+import clienteReducer from "./reducers/clienteReducer";
+import veiculoReducer from "./reducers/veiculoReducer";
 
 export default combineReducers({
-  authState: authReducer,
+  loginState: loginReducer,
   oficinaState: oficinaReducer,
+  clienteState: clienteReducer,
+  veiculoState: veiculoReducer,
 });

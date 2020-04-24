@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-
 import { ErrorMessage, Formik, Form, Field } from "formik";
 import * as yup from "yup";
-
 import { api } from "../../services/api";
 import * as loginService from "../../services/loginService";
 
@@ -74,6 +72,7 @@ class Login extends Component {
             <div className="login-group">
               <label htmlFor="pwd">Senha</label>
               <Field
+                type="password"
                 className="login-field"
                 name="pwd"
                 placeholder="Digite a Senha"

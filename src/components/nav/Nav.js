@@ -67,6 +67,6 @@ const Nav = ({ loggedUser }) => {
   );
 };
 
-export default connect((state) => ({ loggedUser: state.authState.loggedUser }))(
-  Nav
-);
+export default connect((state) => ({
+  loggedUser: state.loginState.loggedUser,
+}))(Nav);

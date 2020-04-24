@@ -17,3 +17,29 @@ export function actionOficinaDelete() {
 export function actionOficinaList() {
   return { type: "ACTION_OFICINA_LIST" };
 }
+
+export function actionClienteAdd() {
+  return { type: "ACTION_CLIENTE_ADD" };
+}
+export function actionClienteEdit(dadosCliente) {
+  return { type: "ACTION_CLIENTE_EDIT", dadosCliente };
+}
+export function actionClienteDelete() {
+  return { type: "ACTION_CLIENTE_DELETE" };
+}
+export function actionClienteList() {
+  return { type: "ACTION_CLIENTE_LIST" };
+}
+
+export function actionVeiculoAdd() {
+  return { type: "ACTION_VEICULO_ADD" };
+}
+export function actionVeiculoEdit(dadosVeiculo) {
+  return { type: "ACTION_VEICULO_EDIT", dadosVeiculo };
+}
+export function actionVeiculoDelete() {
+  return { type: "ACTION_VEICULO_DELETE" };
+}
+export function actionVeiculoList() {
+  return { type: "ACTION_VEICULO_LIST" };
+}

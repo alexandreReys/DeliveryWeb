@@ -127,7 +127,7 @@ const App = ({ operacaoOficina }) => {
 
           {loading && (
             <div id="loading">
-              <h4>Loading ...</h4>
+              <h2>Loading ...</h2>
             </div>
           )}
 
@@ -144,13 +144,14 @@ const App = ({ operacaoOficina }) => {
               </ul>
               <div className="btnMais">
                 <div className="col-3">
-                  <button className="btn btn-info btnCircular">
+                  <button
+                    className="btn btn-info btnCircular"
+                    onClick={() => {
+                      handlerListAddButton();
+                    }}
+                  >
                     <i>
-                      <FaPlus
-                        onClick={() => {
-                          handlerListAddButton();
-                        }}
-                      />
+                      <FaPlus />
                     </i>
                   </button>
                 </div>
