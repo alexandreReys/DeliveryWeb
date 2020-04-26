@@ -181,10 +181,12 @@ function ClienteForm({ propSubmit }) {
           </div>
 
           <footer>
-            <button type="submit">Salvar</button>
+            <button className="btn-man-forn" type="submit">
+              Salvar
+            </button>
             <button
               type="reset"
-              className="btn-cancel"
+              className="btn-man-forn btn-cancel"
               onClick={() => {
                 store.dispatch(actionClienteList());
               }}

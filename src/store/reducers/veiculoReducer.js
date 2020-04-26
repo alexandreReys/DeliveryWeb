@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   AnoVeiculo: "",
   CorVeiculo: "",
   operacaoVeiculo: "list",
+  mounted: false,
 };
 
 export default function veiculoReducer(state = INITIAL_STATE, action) {
@@ -20,12 +21,15 @@ export default function veiculoReducer(state = INITIAL_STATE, action) {
       return functionEdit(state, action);
     case "ACTION_VEICULO_DELETE":
       return functionDelete();
+    case "ACTION_VEICULO_MOUNTED":
+      return functionMounted(state, action);
     default:
       return state;
   }
 }
 
 const functionList = () => INITIAL_STATE;
+
 const functionAdd = (state) => ({
   ...state,
   IdVeiculo: "",
@@ -38,6 +42,7 @@ const functionAdd = (state) => ({
   CorVeiculo: "",
   operacaoVeiculo: "add",
 });
+
 const functionEdit = (state, { dadosVeiculo }) => {
   return {
     ...state,
@@ -52,4 +57,15 @@ const functionEdit = (state, { dadosVeiculo }) => {
     operacaoVeiculo: "edit",
   };
 };
-const functionDelete = (state) => ({ ...state, operacaoVeiculo: "delete" });
+
+const functionDelete = (state) => {
+  return { ...state, operacaoVeiculo: "delete" };
+};
+
+const functionMounted = (state, action) => {
+  if (!action.mounted) {
+    return { ...state, mounted: action.mounted, operacaoVeiculo: "list" };
+  } else {
+    return { ...state, mounted: action.mounted };
+  }
+};

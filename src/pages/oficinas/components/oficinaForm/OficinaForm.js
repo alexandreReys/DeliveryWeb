@@ -217,10 +217,12 @@ function OficinaForm({ propSubmit }) {
           </div>
 
           <footer>
-            <button type="submit">Salvar</button>
+            <button className="btn-man-forn" type="submit">
+              Salvar
+            </button>
             <button
+              className="btn-man-forn btn-cancel"
               type="reset"
-              className="btn-cancel"
               onClick={() => {
                 store.dispatch(actionOficinaList());
               }}

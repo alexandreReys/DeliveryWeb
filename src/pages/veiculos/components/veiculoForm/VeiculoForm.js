@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import store from "store/index";
-import { actionVeiculoList } from "store/actions";
+import { actionVeiculoList, actionVeiculoMounted } from "store/actions";
 import { getClientes } from "services/clienteService";
 import "./veiculoForm.css";
 
 function VeiculoForm({ propSubmit }) {
+  const [clienteList, setClienteList] = useState([]);
+
   const [IdVeiculo] = useState(store.getState().veiculoState.IdVeiculo);
   const [IdClienteVeiculo, setIdClienteVeiculo] = useState(
     store.getState().veiculoState.IdClienteVeiculo
@@ -27,19 +29,23 @@ function VeiculoForm({ propSubmit }) {
   const [CorVeiculo, setCorVeiculo] = useState(
     store.getState().veiculoState.CorVeiculo
   );
-  const [clienteList, setClienteList] = useState([]);
 
   useEffect(() => {
-    getClienteList();
-  }, []);
-
-  async function getClienteList() {
     async function loadClientes() {
+      setClienteList([
+        {
+          IdCliente: 0,
+          NomeCliente: "Loading ...",
+        },
+      ]);
       const response = await getClientes();
-      setClienteList(response);
+      if (store.getState().veiculoState.mounted) setClienteList(response);
     }
-    loadClientes();
-  }
+
+    store.dispatch(actionVeiculoMounted(true));
+    loadClientes(); // getClienteList();
+    return () => store.dispatch(actionVeiculoMounted(false));
+  }, []);
 
   /////////////////////////////////////////////////
   async function handleSubmit(e) {
@@ -178,11 +184,14 @@ function VeiculoForm({ propSubmit }) {
               />
             </div>
           </div>
+
           <footer>
-            <button type="submit">Salvar</button>
+            <button className="btn-man-forn" type="submit">
+              Salvar
+            </button>
             <button
               type="reset"
-              className="btn-cancel"
+              className="btn-man-forn btn-cancel"
               onClick={() => {
                 store.dispatch(actionVeiculoList());
               }}

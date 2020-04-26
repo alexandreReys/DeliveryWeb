@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import * as loginService from "../../services/loginService";
-
 import { connect } from "react-redux";
-
 import "./nav.css";
 
 const Nav = ({ loggedUser }) => {
@@ -30,19 +27,31 @@ const Nav = ({ loggedUser }) => {
 
       <div className="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
+          <li
+            className="nav-item"
+            data-toggle="collapse"
+            data-target=".navbar-collapse.show"
+          >
             <Link className="nav-link" to="/oficinas">
               Oficinas
             </Link>
           </li>
 
-          <li className="nav-item">
+          <li
+            className="nav-item"
+            data-toggle="collapse"
+            data-target=".navbar-collapse.show"
+          >
             <Link className="nav-link" to="/clientes">
               Clientes
             </Link>
           </li>
 
-          <li className="nav-item">
+          <li
+            className="nav-item"
+            data-toggle="collapse"
+            data-target=".navbar-collapse.show"
+          >
             <Link className="nav-link" to="/veiculos">
               Veiculos
             </Link>
@@ -50,7 +59,11 @@ const Nav = ({ loggedUser }) => {
         </ul>
 
         {!!loggedUser && (
-          <div className="logged-user text-light">
+          <div
+            className="logged-user text-light"
+            data-toggle="collapse"
+            data-target=".navbar-collapse.show"
+          >
             <span>{loggedUser}</span>
             <button
               className="btn-logout ml-3"

@@ -43,3 +43,6 @@ export function actionVeiculoDelete() {
 export function actionVeiculoList() {
   return { type: "ACTION_VEICULO_LIST" };
 }
+export function actionVeiculoMounted(mounted) {
+  return { type: "ACTION_VEICULO_MOUNTED", mounted };
+}

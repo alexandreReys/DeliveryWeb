@@ -77,20 +77,3 @@ select {
   margin-top: 30px;
   justify-items: center;
 }
-
-.oficina-form footer button {
-  width: 55%;
-  border: 0;
-  background: rgb(53, 53, 253);
-  border-radius: 10px;
-  padding: 15px 20px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #fff;
-  cursor: point;
-  transition: background 0.5s;
-}
-
-.oficina-form footer button:hover {
-  background: rgb(0, 0, 78);
-}

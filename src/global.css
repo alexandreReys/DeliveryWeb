@@ -34,3 +34,23 @@ input,
 select {
   padding: 0 0 0 5px;
 }
+
+/* .oficina-form footer button { */
+.btn-man-forn {
+  width: 55%;
+  min-width: 100px;
+  border: 0;
+  background: rgb(53, 53, 253);
+  border-radius: 10px;
+  padding: 15px 1px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: point;
+  transition: background 0.5s;
+}
+
+/* .oficina-form footer button:hover { */
+.btn-man-forn:hover {
+  background: rgb(0, 0, 78);
+}

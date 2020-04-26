@@ -1,38 +1,37 @@
-.ho-me {
-  height: 100vh;
-  background-image: url("../../assets/img/motoMecanico01.jpg");
-  background-size: 100% 100%;
-  margin: 0 auto;
-  padding: 100px 5px;
-  text-align: center;
-}
-
-#background {
+#home-background {
   padding: 0 0;
   width: 100%;
-  height: 100vh;
+  margin-top: 8vh;
+  height: 92vh;
   background: url("../../assets/img/motoMecanico01.jpg");
   background-size: 100% 100%;
 }
-#mascara {
+#home-mascara {
   width: 100%;
   height: 100vh;
+  padding-top: 6vh;
   float: left;
   background: #333;
   opacity: 0.6;
 }
-#background p {
-  font-size: 250px;
+#home-background p {
+  /* font-size: 250px; */
+  font-size: 12vw;
   font-weight: bold;
   font-family: "Anton", sans-serif;
   text-align: center;
   color: #b3c6ff;
   margin: 0;
 }
-#background h6 {
+
+#secondary-text {
+  margin-top: 10px;
+}
+
+#home-background h6 {
   font-size: 30px;
+  font-family: arial;
   text-align: center;
   color: #b3c6ff;
   margin: 0;
-  font-family: arial;
 }
