@@ -130,7 +130,7 @@ const App = ({ operacaoCliente }) => {
 
           {loading && (
             <div id="loading">
-              <h2>{loadingText}</h2>
+              <h3>{loadingText}</h3>
             </div>
           )}
 
