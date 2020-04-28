@@ -14,6 +14,7 @@ class Login extends Component {
 
   handleSubmit = async (values) => {
     try {
+      this.setState({ errorMsg: "" });
       const response = await api.post("/auth", values);
       const { data } = response;
       if (data.token) {
