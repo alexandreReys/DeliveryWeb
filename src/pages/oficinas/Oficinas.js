@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import OficinaForm from "pages/oficinas/components/oficinaForm/OficinaForm";
 import OficinaItem from "pages/oficinas/components/oficinaItem/OficinaItem";
-import store from "store/index";
+import store from "store";
 import { actionOficinaAdd, actionOficinaList } from "store/actions";
 import { DebounceInput } from "react-debounce-input";
 
@@ -18,8 +18,11 @@ import {
 import "pages/oficinas/oficinas.css";
 
 const App = ({ operacaoOficina }) => {
+  const [loading, setLoading] = useState(true);
+  const [loadingText] = useState(store.getState().defaultState.loadingText);
+
   const [oficinas, setOficinas] = useState([]);
-  const [loading, setLoading] = useState("true");
+
   const [searching, setSearching] = useState(false);
   const [searchText, setSearchText] = useState("");
 
@@ -39,9 +42,9 @@ const App = ({ operacaoOficina }) => {
   async function getOficinasList() {
     async function loadOficinas() {
       setSearchText("");
-      setLoading("true");
+      setLoading(true);
       const response = await getOficinas();
-      setLoading("");
+      setLoading(false);
       setOficinas(response);
     }
     loadOficinas();
@@ -49,9 +52,9 @@ const App = ({ operacaoOficina }) => {
 
   async function getOficinasFantasia(searchText) {
     async function loadOficinasFantasia(searchText) {
-      setLoading("true");
+      setLoading(true);
       const response = await getOficinasPorFantasia(searchText);
-      setLoading("");
+      setLoading(false);
       setOficinas(response);
     }
     loadOficinasFantasia(searchText);
@@ -127,7 +130,7 @@ const App = ({ operacaoOficina }) => {
 
           {loading && (
             <div id="loading">
-              <h2>Loading ...</h2>
+              <h2>{loadingText}</h2>
             </div>
           )}
 

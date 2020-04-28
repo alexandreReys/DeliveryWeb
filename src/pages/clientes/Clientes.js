@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import ClienteForm from "pages/clientes/components/clienteForm/ClienteForm";
 import ClienteItem from "pages/clientes/components/clienteItem/ClienteItem";
-import store from "store/index";
+import store from "store";
 import { actionClienteAdd, actionClienteList } from "store/actions";
 import { DebounceInput } from "react-debounce-input";
 
@@ -18,8 +18,11 @@ import {
 import "pages/clientes/clientes.css";
 
 const App = ({ operacaoCliente }) => {
+  const [loading, setLoading] = useState(true);
+  const [loadingText] = useState(store.getState().defaultState.loadingText);
+
   const [clientes, setClientes] = useState([]);
-  const [loading, setLoading] = useState("true");
+
   const [searching, setSearching] = useState(false);
   const [searchText, setSearchText] = useState("");
 
@@ -39,9 +42,9 @@ const App = ({ operacaoCliente }) => {
   async function getClientesList() {
     async function loadClientes() {
       setSearchText("");
-      setLoading("true");
+      setLoading(true);
       const response = await getClientes();
-      setLoading("");
+      setLoading(false);
       setClientes(response);
     }
     loadClientes();
@@ -49,9 +52,9 @@ const App = ({ operacaoCliente }) => {
 
   async function getClientesNome(searchText) {
     async function loadClientesNome(searchText) {
-      setLoading("true");
+      setLoading(true);
       const response = await getClientesPorNome(searchText);
-      setLoading("");
+      setLoading(false);
       setClientes(response);
     }
     loadClientesNome(searchText);
@@ -127,7 +130,7 @@ const App = ({ operacaoCliente }) => {
 
           {loading && (
             <div id="loading">
-              <h2>Loading ...</h2>
+              <h2>{loadingText}</h2>
             </div>
           )}
 

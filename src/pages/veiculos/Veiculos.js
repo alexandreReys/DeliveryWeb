@@ -18,8 +18,11 @@ import {
 import "pages/veiculos/veiculos.css";
 
 const App = ({ operacaoVeiculo }) => {
+  const [loading, setLoading] = useState(true);
+  const [loadingText] = useState(store.getState().defaultState.loadingText);
+
   const [veiculos, setVeiculos] = useState([]);
-  const [loading, setLoading] = useState("true");
+
   const [searching, setSearching] = useState(false);
   const [searchText, setSearchText] = useState("");
 
@@ -39,9 +42,9 @@ const App = ({ operacaoVeiculo }) => {
   async function getVeiculosList() {
     async function loadVeiculos() {
       setSearchText("");
-      setLoading("true");
+      setLoading(true);
       const response = await getVeiculos();
-      setLoading("");
+      setLoading(false);
       setVeiculos(response);
     }
     loadVeiculos();
@@ -49,9 +52,9 @@ const App = ({ operacaoVeiculo }) => {
 
   async function getVeiculosDescricao(searchText) {
     async function loadVeiculosDescricao(searchText) {
-      setLoading("true");
+      setLoading(true);
       const response = await getVeiculosPorDescricao(searchText);
-      setLoading("");
+      setLoading(false);
       setVeiculos(response);
     }
     loadVeiculosDescricao(searchText);
@@ -127,7 +130,7 @@ const App = ({ operacaoVeiculo }) => {
 
           {loading && (
             <div id="loading">
-              <h2>Loading ...</h2>
+              <h2>{loadingText}</h2>
             </div>
           )}
 

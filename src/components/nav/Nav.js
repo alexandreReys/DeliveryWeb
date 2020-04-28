@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as loginService from "../../services/loginService";
 import { connect } from "react-redux";
+import store from "store";
 import "./nav.css";
 
 const Nav = ({ loggedUser }) => {
@@ -9,7 +10,7 @@ const Nav = ({ loggedUser }) => {
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       {/* navbar-brand */}
       <Link className="navbar-brand" to="/">
-        MotoHelp
+        {store.getState().defaultState.appTitle}
       </Link>
 
       {/* navbar-toggler-icon */}

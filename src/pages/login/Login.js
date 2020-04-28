@@ -3,18 +3,20 @@ import { ErrorMessage, Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { api } from "../../services/api";
 import * as loginService from "../../services/loginService";
+import store from "store/index";
 
 import "./login.css";
 
 // const Login = () => {
 class Login extends Component {
   state = {
+    defaultErrorMsg: store.getState().defaultState.errorMsgText,
     errorMsg: "",
   };
 
   handleSubmit = async (values) => {
     try {
-      this.setState({ errorMsg: "" });
+      this.setState({ errorMsg: this.state.defaultErrorMsg });
       const response = await api.post("/auth", values);
       const { data } = response;
       if (data.token) {
