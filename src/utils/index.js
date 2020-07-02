@@ -27,3 +27,95 @@ export const estadosList = [
   { estado: "SE", estadoNome: "Sergipe" },
   { estado: "TO", estadoNome: "Tocantins" },
 ];
+
+export const MoneyMaskedToStringUnmasked = (paramValor) => {
+  if (typeof paramValor === "number") {
+    return paramValor;
+  }
+
+  if (paramValor.indexOf("R$") === -1) {
+    return paramValor;
+  }
+
+  let result = paramValor.replace("R$", "");
+  result = result.replace(".", "");
+  result = result.replace(".", "");
+  result = result.replace(",", ".");
+
+  return result;
+};
+
+// dd/mm/yyyy
+export const formattedDate = (date) => {
+  const d = date.toString().substring(0, 10);
+  return d.substr(8, 2) + "/" + d.substr(5, 2) + "/" + d.substr(0, 4);
+};
+
+// dd/mm/yyyy 00:00
+export const formattedDateTime = (date, time) => {
+  const d = date.toString().substring(0, 10);
+  const t = time.toString().substring(0, 5);
+  return d.substr(8, 2) + "/" + d.substr(5, 2) + "/" + d.substr(0, 4) + " " + t;
+};
+
+// Data : dd/mm/yyyy  -  Horário : 00:00
+export const formattedDateTime2 = (date, time) => {
+  const d = date.toString().substring(0, 10);
+  const t = time.toString().substring(0, 5);
+
+  const dateStr = d.substr(8, 2) + "/" + d.substr(5, 2) + "/" + d.substr(0, 4);
+  const timeStr = t;
+
+  return `Data : ${dateStr}  -  Horário : ${timeStr}`;
+};
+
+// dd/mm/yyyy as 00:00
+export const formattedDateTime3 = (date, time) => {
+  const d = date.toString().substring(0, 10);
+  const t = time.toString().substring(0, 5);
+  return (
+    d.substr(8, 2) +
+    "/" +
+    d.substr(5, 2) +
+    "/" +
+    d.substr(0, 4) +
+    " as " +
+    t +
+    "hs"
+  );
+};
+
+export const firstWord = (phrase) => {
+  if (!phrase) return "";
+
+  const arrWords = phrase.split(" ");
+  if (arrWords) return arrWords[0];
+  return phrase;
+};
+
+// dd/mm/yyyy
+export const formatttedToday = () => {
+  const today = new Date();
+
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1;
+  let yyyy = today.getFullYear();
+
+  if (dd < 10) dd = "0" + dd;
+  if (mm < 10) mm = "0" + mm;
+
+  return dd + "/" + mm + "/" + yyyy;
+};
+
+// 00:00
+export const formatttedCurrentTime = () => {
+  const now = new Date();
+
+  let hh = now.getHours();
+  let mm = now.getMinutes() + 1;
+
+  if (hh < 10) hh = "0" + hh;
+  if (mm < 10) mm = "0" + mm;
+
+  return hh + ":" + mm;
+};

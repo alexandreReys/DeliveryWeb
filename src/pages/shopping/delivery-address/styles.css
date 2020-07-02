@@ -1,0 +1,118 @@
+.delivery-address-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 70px 20px 70px;
+  column-gap: 40px;
+}
+
+/*///////////////////////////////////////////////////////// */
+
+#deliveryAddress header {
+  grid-column-start: 1;
+  grid-column-end: 5;
+
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: blue;
+}
+
+/*///////////////////////////////////////////////////////// */
+
+#deliveryAddress aside {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  padding: 10px 10px 20px;
+  border: 1px solid lightgray;
+}
+
+/*///////////////////////////////////////////////////////// */
+
+#deliveryAddress .delivery-address-group {
+  height: 1.8rem;
+}
+#deliveryAddress .delivery-address-inputs {
+  font-size: 0.8rem;
+}
+
+#deliveryAddress .label-caption {
+  height: 1.6rem;
+  width: 30% !important;
+  font-weight: bold;
+  margin: 0 !important;
+}
+
+#deliveryAddress .label-value {
+  height: 1.6rem;
+  width: 70% !important;
+  font-weight: bold;
+  margin: 0 !important;
+  padding: 0.2rem;
+  background: #d6d6d6;
+
+  /* 
+  color: black;
+  margin: 2.5px 0 !important; */
+}
+
+#deliveryAddress .delivery-address-field {
+  width: 70% !important;
+  padding: 0.2rem;
+  border: 1px solid lightgrey;
+
+  /* margin: 2.5px 0 !important;
+  height: 1.6rem;
+  color: black; */
+}
+
+#deliveryAddress input:disabled {
+  background-color: silver !important;
+  font-weight: bold;
+}
+
+#deliveryAddress .delivery-address-small-field--- {
+  width: 50% !important;
+}
+
+#deliveryAddress ::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: grey;
+  opacity: 1; /* Firefox */
+}
+
+#deliveryAddress .delivery-address-field:focus {
+  box-shadow: 0 1px 1px #00000080;
+  outline: none;
+}
+
+#deliveryAddress .delivery-address-error {
+  /* margin-left: 30px; */
+  display: block;
+  color: red;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/*///////////////////////////////////////////////////////// */
+
+#deliveryAddress footer {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-template-columns: 1fr;
+  text-align: center;
+  padding: 20px 0 0;
+}
+
+#deliveryAddress .delivery-address-btn {
+  background: blue;
+  color: #fdfdfd;
+  padding: 0.5rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+#deliveryAddress .delivery-address-btn:hover {
+  background: navy;
+}

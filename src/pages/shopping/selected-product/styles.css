@@ -1,0 +1,72 @@
+.container-selected-product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100%;
+  padding: 100px 20px 0px;
+  width: 100%;
+  background-color: #fff;
+}
+
+#selectedProduct aside {
+  padding-bottom: 20px;
+  height: 80vh;
+  text-align: right;
+  /* background-color: yellow; */
+}
+
+#selectedProduct aside img {
+  width: 400px;
+  height: 400px;
+}
+
+#selectedProduct content {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 20px;
+}
+
+.qtty-box {
+  margin-top: 40px;
+  padding: 1px;
+  border: 1px solid orange;
+  border-radius: 16px;
+  width: 250px;
+  text-align: center;
+}
+
+.qtty-minus {
+  display: inline-block;
+  width: 20%;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: #f1a312;
+}
+
+.qtty {
+  display: inline-block;
+  width: 60%;
+  font-size: 2.5rem;
+}
+
+.qtty-plus {
+  display: inline-block;
+  width: 20%;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: #f1a312;
+}
+.button-add:hover {
+  background-color: orange;
+  color: #fff;
+}
+.button-add {
+  margin-top: 40px;
+  padding: 16px;
+  border: 1px solid grey;
+  border-radius: 25px;
+  width: 250px;
+  text-align: center;
+  font-weight: bolder;
+  background-color: #f5bd56;
+  cursor: pointer;
+}

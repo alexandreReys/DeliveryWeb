@@ -1,0 +1,198 @@
+.container-order-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100%;
+  grid-gap: 20px;
+  padding: 60px 20px 80px 20px;
+}
+
+@media (max-width: 800px) {
+  .container-order-details {
+    display: block;
+  }
+  #order-details aside .resumo {
+    font-size: 1.5rem;
+  }
+  #order-details aside .resumo-total,
+  .resumo-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+  }
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+.container-order-details .order-date-time {
+  border: 1px solid rgb(206, 206, 206);
+  box-shadow: 0 4px 4px #000;
+  border-radius: 5px;
+  margin: 20px 0;
+  padding: 10px 8px 0px;
+  background-color: #ca0303;
+  color: white;
+  font-weight: bolder;
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+#order-details .order-items-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 1px 0px;
+}
+
+#order-details .order-items {
+  font-size: 0.9rem;
+  padding: 5px 0px;
+}
+
+#order-details .c1 {
+  display: inline-block;
+  width: 60%;
+  font-weight: bold;
+}
+#order-details .c3 {
+  display: inline-block;
+  width: 15%;
+  text-align: center;
+}
+#order-details .c5 {
+  display: inline-block;
+  width: 23%;
+  text-align: right;
+  font-weight: bold;
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+.container-order-details .order-sumary {
+  border: 1px solid rgb(206, 206, 206);
+  margin: 20px 0;
+  padding: 10px 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  color: #000;
+  font-size: 0.9rem;
+}
+
+.container-order-details .order-sumary .subtotal {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.container-order-details .order-sumary .total {
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.container-order-details .order-sumary .changeValue {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: red;
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+.container-order-details .status-button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.container-order-details .status-button {
+  border: 1px solid rgb(206, 206, 206);
+  margin: 8px 0 0 0;
+  padding: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px #000;
+  background-color: #0000ff;
+  color: #fff;
+  font-size: 1rem;
+  width: 20%;
+  text-align: center;
+  cursor: pointer;
+}
+.container-order-details .status-button:hover {
+  background-color: navy;
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+#order-details aside {
+  margin-top: 20px;
+  /* border: 1px solid rgb(224, 224, 224); */
+  padding-bottom: 20px;
+  border-radius: 10px;
+  /* background-color: #fff3c4; */
+  /* min-height: 100vh; */
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+/* #order-details .customer-map {
+  height: 25vh;
+  border: 1px solid grey;
+  box-shadow: 0 4px 4px #000;
+  border-radius: 5px;
+} */
+
+/* #order-details .customer-map img {
+  height: 100%;
+  width: 100%;
+} */
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+#order-details .order-details {
+  display: flex;
+  border: 1px solid grey;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px #000;
+  /* background-color: #e0dbdb; */
+  background-color: #fff;
+  font-size: 0.8rem;
+}
+
+#order-details .order-details b {
+  font-size: 0.9rem;
+}
+
+#order-details .order-details-left {
+  width: 35%;
+  padding: 5px 20px;
+}
+
+#order-details .order-details-right {
+  width: 65%;
+  padding: 5px 20px;
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+#order-details .order-historic {
+  padding: 4px 40px 10px 20px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px #000;
+  /* background-color: #e0dbdb; */
+  background-color: #fff;
+  font-size: 0.8rem;
+}
+
+#order-details .order-historic b {
+  font-size: 1rem;
+}
+
+#order-details .order-historic-left,
+.order-historic-right {
+  display: inline-block;
+  width: 50%;
+}
+
+#order-details .order-historic-right {
+  text-align: right;
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+.col2 {
+  float: right;
+}

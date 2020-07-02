@@ -1,0 +1,39 @@
+#orders #loading {
+  padding: 20px 5px;
+}
+
+#orders {
+  /* margin: 0 auto; */
+  padding: 100px 20px;
+}
+
+#orders .table th {
+  padding: 0.25rem !important;
+  font-size: 0.9rem;
+}
+
+#orders .table td {
+  padding: 0.25rem !important;
+  font-size: 0.8rem;
+}
+
+#orders .table tr {
+  cursor: pointer;
+}
+
+#orders table {
+  width: 100%;
+}
+
+.orders-list-header {
+  margin-bottom: 8px;
+  font-size: 1.8rem;
+}
+
+#orders .orders-list ul {
+  list-style: none;
+}
+
+#orders #loading h5 {
+  color: red;
+}

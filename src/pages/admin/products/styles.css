@@ -1,0 +1,97 @@
+#loading {
+  padding: 20px 5px;
+}
+
+#vinhos {
+  /* margin: 0 auto; */
+  padding: 100px 20px;
+}
+
+#vinhos .btnMais {
+  position: fixed;
+  float: bottom;
+  bottom: 65px;
+  right: 15px;
+  z-index: 100;
+}
+#vinhos .btnMais {
+  display: inline-block;
+}
+#vinhos .btnCircular {
+  border-radius: 50%;
+  box-shadow: 0 4px 4px #000;
+  font-size: 20px;
+  padding: 15px;
+}
+#vinhos .btnCircular:hover {
+  background-color: rgb(0, 0, 104);
+}
+
+#vinhos .vinho-form {
+  width: 100%;
+  /* background: #fff; */
+  background: rgba(228, 226, 226, 0.891);
+  box-shadow: 0 0 6px 0;
+  border-radius: 6px;
+  padding: 20px 20px 30px;
+  color: #333;
+}
+
+#vinhos .vinho-list ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  list-style: none;
+}
+
+#vinhos #loading h5 {
+  color: red;
+}
+
+@media (max-width: 1000px) {
+  #vinhos .vinho-list ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  #vinhos .vinho-list ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vinho-list-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 1.8rem;
+}
+
+.search-bar {
+  cursor: pointer;
+}
+
+.search-bar .button-search {
+  margin-right: 18px;
+}
+
+.search-input {
+  display: flex;
+  justify-content: flex-end;
+  height: 38px;
+  margin-bottom: 20px;
+}
+
+.search-input .input {
+  width: 350px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.search-cancel {
+  margin-left: 15px;
+  margin-top: 7px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}

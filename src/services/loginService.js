@@ -1,6 +1,6 @@
-import { history } from "../components/routes/history";
-import store from "../store/index";
-import { actionLogin, actionLogout } from "../store/actions";
+import { history } from "routes/history";
+import store from "store/index";
+import { actionLogin, actionLogout } from "store/actions";
 
 export const TOKEN_KEY = "app-token";
 export const USERNAME_KEY = "app-username";
@@ -25,7 +25,7 @@ export const login = (token, username) => {
   store.dispatch(actionLogin(username));
   localStorage.setItem(TOKEN_KEY, token);
   localStorage.setItem(USERNAME_KEY, username);
-  history.push("/");
+  history.push("/admin");
 };
 
 export const logout = () => {

@@ -1,48 +1,74 @@
-export function actionLogout() {
-  return { type: "ACTION_LOGOUT" };
+export function actionAdminModuleActivate() {
+  return { type: "ACTION_ADMIN_MODULE_ACTIVATE" };
 }
+export function actionAdminModuleDeactivate() {
+  return { type: "ACTION_ADMIN_MODULE_DEACTIVATE" };
+}
+
 export function actionLogin(user) {
   return { type: "ACTION_LOGIN", user };
 }
-
-export function actionOficinaAdd() {
-  return { type: "ACTION_OFICINA_ADD" };
-}
-export function actionOficinaEdit(dadosOficina) {
-  return { type: "ACTION_OFICINA_EDIT", dadosOficina };
-}
-export function actionOficinaDelete() {
-  return { type: "ACTION_OFICINA_DELETE" };
-}
-export function actionOficinaList() {
-  return { type: "ACTION_OFICINA_LIST" };
+export function actionLogout() {
+  return { type: "ACTION_LOGOUT" };
 }
 
-export function actionClienteAdd() {
-  return { type: "ACTION_CLIENTE_ADD" };
+export function actionVinhoGetProducts(products) {
+  return { type: "ACTION_VINHO_GET_PRODUCTS", products };
 }
-export function actionClienteEdit(dadosCliente) {
-  return { type: "ACTION_CLIENTE_EDIT", dadosCliente };
+export function actionVinhoAdd() {
+  return { type: "ACTION_VINHO_ADD" };
 }
-export function actionClienteDelete() {
-  return { type: "ACTION_CLIENTE_DELETE" };
+export function actionVinhoEdit(dadosVinho) {
+  return { type: "ACTION_VINHO_EDIT", dadosVinho };
 }
-export function actionClienteList() {
-  return { type: "ACTION_CLIENTE_LIST" };
+export function actionVinhoDelete() {
+  return { type: "ACTION_VINHO_DELETE" };
+}
+export function actionVinhoList() {
+  return { type: "ACTION_VINHO_LIST" };
 }
 
-export function actionVeiculoAdd() {
-  return { type: "ACTION_VEICULO_ADD" };
+export function actionCartReset() {
+  return { type: "ACTION_CART_RESET" };
 }
-export function actionVeiculoEdit(dadosVeiculo) {
-  return { type: "ACTION_VEICULO_EDIT", dadosVeiculo };
+export function actionSelectProduct(product) {
+  return { type: "ACTION_SELECT_PRODUCT", product };
 }
-export function actionVeiculoDelete() {
-  return { type: "ACTION_VEICULO_DELETE" };
+export function actionAddToCart(itemToAdd) {
+  return { type: "ACTION_ADD_TO_CART", itemToAdd };
 }
-export function actionVeiculoList() {
-  return { type: "ACTION_VEICULO_LIST" };
+export function actionSubFromCart(itemToSub) {
+  return { type: "ACTION_SUB_FROM_CART", itemToSub };
 }
-export function actionVeiculoMounted(mounted) {
-  return { type: "ACTION_VEICULO_MOUNTED", mounted };
+export function actionRemoveFromCart(itemToRemove) {
+  return { type: "ACTION_REMOVE_FROM_CART", itemToRemove };
+}
+export function actionSelectPaymentType(paymentTypeData) {
+  return { type: "ACTION_SELECT_PAYMENT_TYPE", paymentTypeData };
+}
+
+export function actionGetDeliveryAddress() {
+  return { type: "ACTION_GET_DELIVERY_ADDRESS" };
+}
+export function actionDeliveryAddressSave(address) {
+  return { type: "ACTION_DELIVERY_ADDRESS_SAVE", address };
+}
+
+export function actionSetOrder(order) {
+  return { type: "ACTION_SET_ORDER", order };
+}
+export function actionStoreOrder(order) {
+  return { type: "ACTION_STORE_ORDER", order };
+}
+export function actionSetOrderOperation(operation) {
+  return { type: "ACTION_SET_ORDER_OPERATION", operation };
+}
+export function actionGetOrders(orders) {
+  return { type: "ACTION_GET_ORDERS", orders };
+}
+export function actionGetOrderItems(orderItems) {
+  return { type: "ACTION_GET_ORDER_ITEMS", orderItems };
+}
+export function actionGetOrderHistory(orderHistory) {
+  return { type: "ACTION_GET_ORDER_HISTORY", orderHistory };
 }

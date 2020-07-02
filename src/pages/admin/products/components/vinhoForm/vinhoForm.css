@@ -1,0 +1,115 @@
+.vinho-form .vinho-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 8vh 1fr;
+}
+
+.vinho-form header {
+  grid-column-start: 1;
+  grid-column-end: 4;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: blue;
+}
+
+.vinho-form main {
+  grid-column-start: 1;
+  grid-column-end: 4;
+
+  padding: 10px 0 0;
+}
+
+.vinho-form .form-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 20px;
+  column-gap: 20px;
+}
+
+.vinho-form main label {
+  display: block;
+  margin-bottom: 0;
+  margin-left: 3px;
+  font-weight: bold;
+}
+
+.vinho-form main input,
+select {
+  height: 32px;
+}
+
+.vinho-form main input,
+select {
+  padding: 15px 6px;
+  font-size: 0.9rem;
+  border: 1px solid grey;
+  border-radius: 5px;
+  /* box-shadow: 4px 4px 0 0 rgb(0, 0, 0, 0.6); */
+}
+
+.vinho-form main .label-select-img {
+  background-color: #194e72;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px #000;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px 0px;
+  padding: 10px 20px;
+  width: 190px;
+}
+.vinho-form main .label-select-img:hover {
+  background-color: #0e2e44;
+}
+
+.vinho-form main input[type="file"] {
+  display: none;
+}
+
+.vinho-form main textarea {
+  padding: 10px 5px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  background: f;
+}
+
+.vinho-form .input-txt {
+  width: 100%;
+}
+
+.vinho-form .input-50 {
+  width: 50%;
+}
+
+.vinho-form img {
+  margin-top: 2px;
+  border: 2px solid #999;
+  /* padding: 7px; */
+  width: 140px;
+  height: 140px;
+  font-size: 2rem;
+  border-radius: 6px;
+}
+
+@media (max-width: 1100px) {
+  .vinho-form .form-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .vinho-form .form-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vinho-form footer {
+  grid-column-start: 1;
+  grid-column-end: 4;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  margin-top: 30px;
+  justify-items: center;
+}
