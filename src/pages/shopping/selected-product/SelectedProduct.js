@@ -41,17 +41,18 @@ const SelectedProduct = () => {
 
   return (
     <div id="selectedProduct" className="container-selected-product">
-      <aside>
+      <header>
         <BsArrowLeft
           className="arrow-back-abs"
           onClick={() => {
             history.goBack();
           }}
         />
+      </header>
+      <aside>
         {!!selectedProduct.image && <img src={selectedProduct.image} alt="" />}
         {!selectedProduct.image && <img src={logo} alt="loading ..." />}
       </aside>
-
       <content>
         <h1 className="product-name">{selectedProduct.description}</h1>
         <h4 className="product-price">{selectedProductPrice}</h4>

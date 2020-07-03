@@ -56,10 +56,11 @@ textarea {
 }
 
 .arrow-back-abs {
-  position: absolute;
-  font-size: 7rem;
-  float: inline-start;
+  /* position: absolute; */
+  font-size: 5rem;
+  /* float: inline-start; */
   cursor: pointer;
+  padding-bottom: 0 !important;
 }
 
 .arrow-back {

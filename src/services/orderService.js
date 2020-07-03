@@ -107,6 +107,26 @@ export const rejectOrder = async (id) => {
   return;
 };
 
+export const deliveringOrder = async (id) => {
+  try {
+    await api.put(`/delivery-order/delivering/${id}`);
+  } catch (error) {
+    console.error("ErrorMessage: ", error);
+    return null;
+  }
+  return;
+};
+
+export const deliveredOrder = async (id) => {
+  try {
+    await api.put(`/delivery-order/delivered/${id}`);
+  } catch (error) {
+    console.error("ErrorMessage: ", error);
+    return null;
+  }
+  return;
+};
+
 export const getCep = async (postalCode) => {
   let address = [];
   try {

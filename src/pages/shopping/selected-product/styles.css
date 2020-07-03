@@ -1,17 +1,28 @@
 .container-selected-product {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100%;
-  padding: 100px 20px 0px;
-  width: 100%;
+  /* grid-template-rows: 100%; */
+  padding: 75px 20px 0px;
+  /* width: 100%; */
   background-color: #fff;
 }
 
+#selectedProduct header {
+  grid-column-start: 1;
+  grid-column-end: 3;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 55px;
+}
+
 #selectedProduct aside {
+  grid-column-start: 1;
+  grid-column-end: 2;
+
   padding-bottom: 20px;
   height: 80vh;
   text-align: right;
-  /* background-color: yellow; */
 }
 
 #selectedProduct aside img {
@@ -20,6 +31,9 @@
 }
 
 #selectedProduct content {
+  grid-column-start: 2;
+  grid-column-end: 3;
+
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 20px;

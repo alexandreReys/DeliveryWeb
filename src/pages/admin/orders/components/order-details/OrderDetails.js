@@ -39,6 +39,18 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+  const handleReject = () => {
+    orderService.rejectOrder(order.IdOrder);
+    store.dispatch(actionSetOrderOperation("list"));
+  };
+  const handleDelivering = () => {
+    orderService.deliveringOrder(order.IdOrder);
+    store.dispatch(actionSetOrderOperation("list"));
+  };
+  const handleDelivered = () => {
+    orderService.deliveredOrder(order.IdOrder);
+    store.dispatch(actionSetOrderOperation("list"));
+  };
 
   return (
     <div id="order-details" className="container-order-details">
@@ -94,32 +106,16 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
         </div>
 
         <div className="status-button-group">
-          <div
-            className="status-button"
-            onClick={() => {
-              orderService.rejectOrder(order.IdOrder);
-              store.dispatch(actionSetOrderOperation("list"));
-            }}
-          >
+          <div className="status-button" onClick={handleReject}>
             Rejeitar
           </div>
           <div className="status-button btn-imprimir" onClick={handlePrint}>
             Imprimir
           </div>
-          <div
-            className="status-button "
-            onClick={() => {
-              store.dispatch(actionSetOrderOperation("list"));
-            }}
-          >
+          <div className="status-button " onClick={handleDelivering}>
             Entregar
           </div>
-          <div
-            className="status-button "
-            onClick={() => {
-              store.dispatch(actionSetOrderOperation("list"));
-            }}
-          >
+          <div className="status-button " onClick={handleDelivered}>
             Entregue
           </div>
         </div>
@@ -137,14 +133,14 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
             {`Tel: ${order.CustomerPhoneNumberOrder}`}
             <br />
             <br />
-            <b>Comentários</b>
-            <br />
-            {!order.CommentsOrder ? "N/A" : order.CommentsOrder}
-            <br />
-            <br />
             <b>Dia e hora</b>
             <br />
             {orderDateTime}
+            <br />
+            <br />
+            <b>Comentários</b>
+            <br />
+            {!order.CommentsOrder ? "N/A" : order.CommentsOrder}
             <br />
             <br />
             <b>Avaliação</b>
@@ -172,11 +168,6 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
             <b>Forma de pagamento</b>
             <br />
             {order.PaymantTypeOrder}
-            <br />
-            <br />
-            <b>Motivos</b>
-            <br />
-            {!order.EvaluationReasonOrder ? "N/A" : order.EvaluationReasonOrder}
           </div>
         </div>
 
