@@ -1,6 +1,6 @@
 import React from "react";
 import store from "store";
-import logo from "assets/img/logo2.png";
+import logo from "assets/img/logo.png";
 import { actionSelectProduct } from "store/actions";
 import { history } from "routes/history";
 import { moneyMask } from "utils/masks";

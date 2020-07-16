@@ -9,6 +9,8 @@ export const api = axios.create({
   baseURL: mysqlBaseUrl,
 });
 
+console.log("mysqlBaseUrl", mysqlBaseUrl);
+
 api.interceptors.request.use(async (config) => {
   const token = loginService.getToken();
   if (token) {

@@ -57,17 +57,20 @@ export const postOrder = async () => {
   return;
 };
 
-export const getOrders = async () => {
+export const getOrders = async (status) => {
   let orders = [];
   try {
-    orders = await api.get("/delivery-order");
+    if (!status) {
+      orders = await api.get("/delivery-order");
+    } else {
+      orders = await api.get(`/delivery-order/status/${status}`);
+    }
   } catch (error) {
     console.error("ErrorMessage: ", error);
     return null;
   }
 
   store.dispatch(actionGetOrders(orders.data));
-
   return orders.data;
 };
 

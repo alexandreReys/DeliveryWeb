@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   CodigoErpVinho: "",
   Imagem1Vinho: "",
   operacaoVinho: "list",
+  selectedCategory: "",
 };
 
 export default function vinhoReducer(state = INITIAL_STATE, action) {
@@ -25,6 +26,8 @@ export default function vinhoReducer(state = INITIAL_STATE, action) {
       return functionEdit(state, action);
     case "ACTION_VINHO_DELETE":
       return functionDelete();
+    case "ACTION_SET_PRODUCT_CATEGORY":
+      return functionSetProductCategory(state, action);
     default:
       return state;
   }
@@ -34,6 +37,13 @@ const functionGetProducts = (state, { products }) => {
   return {
     ...state,
     products: products,
+  };
+};
+
+const functionSetProductCategory = (state, { category }) => {
+  return {
+    ...state,
+    selectedCategory: category,
   };
 };
 

@@ -1,79 +1,90 @@
 .container-selected-product {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* grid-template-rows: 100%; */
-  padding: 75px 20px 0px;
-  /* width: 100%; */
-  background-color: #fff;
+  margin-top: 55px;
+}
+#selectedProduct header {
+  padding: 0 !important;
 }
 
-#selectedProduct header {
-  grid-column-start: 1;
-  grid-column-end: 3;
-
+.arrow-back-abs {
   margin: 0 !important;
   padding: 0 !important;
-  height: 55px;
+}
+
+#selectedProduct .container-product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 #selectedProduct aside {
-  grid-column-start: 1;
-  grid-column-end: 2;
-
   padding-bottom: 20px;
-  height: 80vh;
   text-align: right;
 }
-
 #selectedProduct aside img {
   width: 400px;
-  height: 400px;
 }
-
 #selectedProduct content {
-  grid-column-start: 2;
-  grid-column-end: 3;
-
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 20px;
 }
+@media (max-width: 700px) {
+  #selectedProduct .container-product {
+    grid-template-columns: 1fr;
+  }
+  #selectedProduct aside {
+    padding-bottom: 0;
+    text-align: center;
+  }
+  #selectedProduct content {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+  #selectedProduct .qtty-box {
+    margin-top: 10px !important;
+    margin: 0 20%;
+    width: 60% !important;
+  }
+  #selectedProduct .qtty {
+    font-size: 1.6rem !important;
+  }
+  #selectedProduct aside img {
+    width: 150px !important;
+  }
+  #selectedProduct .button-add {
+    margin-top: 30px !important;
+  }
+}
 
-.qtty-box {
+#selectedProduct .qtty-box {
   margin-top: 40px;
-  padding: 1px;
+  padding: 0;
   border: 1px solid orange;
   border-radius: 16px;
   width: 250px;
   text-align: center;
+  box-shadow: 1px 2px 4px #000;
 }
-
-.qtty-minus {
+#selectedProduct .qtty-minus {
   display: inline-block;
   width: 20%;
-  font-size: 2.5rem;
+  font-size: 2rem;
   cursor: pointer;
-  color: #f1a312;
+  color: blue;
 }
-
-.qtty {
+#selectedProduct .qtty {
   display: inline-block;
   width: 60%;
   font-size: 2.5rem;
 }
-
-.qtty-plus {
+#selectedProduct .qtty-plus {
   display: inline-block;
   width: 20%;
-  font-size: 2.5rem;
+  font-size: 2rem;
   cursor: pointer;
-  color: #f1a312;
+  color: blue !important;
 }
-.button-add:hover {
-  background-color: orange;
-  color: #fff;
-}
-.button-add {
+
+#selectedProduct .button-add {
   margin-top: 40px;
   padding: 16px;
   border: 1px solid grey;
@@ -83,4 +94,9 @@
   font-weight: bolder;
   background-color: #f5bd56;
   cursor: pointer;
+  box-shadow: 1px 2px 4px #000;
+}
+#selectedProduct .button-add:hover {
+  background-color: orange;
+  color: #fff;
 }

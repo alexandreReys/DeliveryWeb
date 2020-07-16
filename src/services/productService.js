@@ -2,16 +2,48 @@ import { api } from "./api";
 import store from "store";
 import { actionVinhoGetProducts } from "store/actions";
 
-export const getVinhos = async () => {
-  const resp = await api.get("/vinhos");
+export const getProducts = async () => {
+  const resp = await api.get("/products");
   const products = resp.data;
   store.dispatch(actionVinhoGetProducts(products));
   return products;
 };
 
-export const getVinhosPorNome = async (nome) => {
+export const getProductsGroupedByCategory = async () => {
+  let resp = [];
+  await api
+    .get("/products/category/grouped")
+    .then((response) => {
+      resp = response;
+    })
+    .catch((error) => console.log(error));
+
+  const products = resp.data;
+  const categs = Object.keys(products);
+  let response = [];
+  categs.map((categ) => {
+    return response.push({ category: categ, products: products[categ] });
+  });
+  return response;
+};
+
+export const getProductsByCategory = async (category) => {
+  const params = { params: { Category: category } };
+
+  return await api
+    .get("/products/category", params)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return null;
+    });
+};
+
+export const getProductsPorNome = async (nome) => {
   const params = { params: { DescricaoVinho: nome } };
-  const resp = await api.get("/vinhos/name", params);
+  const resp = await api.get("/products/name", params);
   return resp.data;
 };
 
@@ -19,7 +51,7 @@ export const postVinho = async (data) => {
   const insertData = await processImage(data);
   let resp;
   try {
-    resp = await api.post("/vinhos", insertData);
+    resp = await api.post("/products", insertData);
   } catch (error) {
     console.error("ErrorMessage: ", error);
     return null;
@@ -36,14 +68,14 @@ export const postVinhoImage = async (file) => {
       "content-type": "multipart/form-data",
     },
   };
-  const resp = await api.post("/vinhos/image", formData, config);
+  const resp = await api.post("/products/image", formData, config);
   return resp.data;
 };
 
 export const putVinho = async (data) => {
   const updateData = await processImage(data);
   try {
-    var response = await api.put("/vinhos", updateData);
+    var response = await api.put("/products", updateData);
   } catch (error) {
     console.error("ErrorMessage: ", error);
     return null;
@@ -54,7 +86,7 @@ export const putVinho = async (data) => {
 
 export const deleteVinho = async (itemId) => {
   const params = { params: { IdVinho: itemId } };
-  const resp = await api.delete("/vinhos", params);
+  const resp = await api.delete("/products", params);
   return resp.data;
 };
 

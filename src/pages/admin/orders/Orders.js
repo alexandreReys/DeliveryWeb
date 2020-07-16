@@ -1,22 +1,140 @@
 import React, { useState, useEffect } from "react";
+import { FiRefreshCcw } from "react-icons/fi";
+import ReactTooltip from "react-tooltip";
 import { connect } from "react-redux";
+
 import { moneyMask } from "utils/masks";
 import * as orderService from "services/orderService";
 import * as utils from "utils";
+import * as actions from "store/actions";
 import OrderDetails from "./components/order-details/OrderDetails";
 import store from "store";
-import {
-  actionAdminModuleActivate,
-  actionSetOrderOperation,
-  actionStoreOrder,
-} from "store/actions";
 
 import "./styles.css";
 
-const Header = () => {
+//////////////////////////////////////////////////////////////////////////////
+const Orders = ({ operation }) => {
+  return (
+    <>
+      {operation === "list" && (
+        <div id="orders">
+          <OrdersList />
+        </div>
+      )}
+
+      {operation === "details" && <OrderDetails />}
+    </>
+  );
+};
+
+//////////////////////////////////////////////////////////////////////////////
+const OrdersList = () => {
+  const [loading, setLoading] = useState(true);
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    store.dispatch(actions.actionAdminModuleActivate());
+    getOrdersList();
+  }, []);
+
+  const getOrdersList = async () => {
+    async function loadOrders() {
+      setLoading(true);
+      const response = await orderService.getOrders(
+        store.getState().orderState.selectedStatus
+      );
+      setLoading(false);
+      setOrders(response);
+    }
+    loadOrders();
+  };
+
+  return (
+    <div className="orders-list">
+      <Header handleRefresh={getOrdersList} />
+      {loading && <Loading />}
+      {!loading && <OrdersTable orders={orders} />}
+    </div>
+  );
+};
+
+//////////////////////////////////////////////////////////////////////////////
+const Header = ({ handleRefresh }) => {
   return (
     <div className="orders-list-header">
-      <div>Painel de Administração - Histórico</div>
+      <div>Painel Admin - Pedidos</div>
+      <div className="buttons-conteiner">
+        <div
+          className="status-button show-all-button"
+          data-tip="Todos"
+          onClick={() => {
+            store.dispatch(actions.actionSetSelectedStatus("Todos"));
+            handleRefresh();
+          }}
+        >
+          T
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+        </div>
+
+        <div
+          className="status-button pendente-button"
+          data-tip="Pendentes"
+          onClick={() => {
+            store.dispatch(actions.actionSetSelectedStatus("Pendente"));
+            handleRefresh();
+          }}
+        >
+          P
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+        </div>
+
+        <div
+          className="status-button saiu-button"
+          data-tip="Saiu para Entrega"
+          onClick={() => {
+            store.dispatch(
+              actions.actionSetSelectedStatus("Saiu para entregar")
+            );
+            handleRefresh();
+          }}
+        >
+          S
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+        </div>
+
+        <div
+          className="status-button entregue-button"
+          data-tip="Entregues"
+          onClick={() => {
+            store.dispatch(actions.actionSetSelectedStatus("Entregue"));
+            handleRefresh();
+          }}
+        >
+          E
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+        </div>
+
+        <div
+          className="status-button rejeitado-button"
+          data-tip="Rejeitados"
+          onClick={() => {
+            store.dispatch(actions.actionSetSelectedStatus("Rejeitado"));
+            handleRefresh();
+          }}
+        >
+          R
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+        </div>
+
+        <FiRefreshCcw
+          className="refresh-button"
+          data-tip="Refresh"
+          onClick={() => {
+            handleRefresh();
+          }}
+        />
+        <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+      </div>
     </div>
   );
 };
@@ -32,6 +150,22 @@ const Loading = () => {
 };
 
 //////////////////////////////////////////////////////////////////////////////
+
+const trClassName = (statusOrder) => {
+  switch (statusOrder) {
+    case "Pendente":
+      return "tr-black";
+    case "Entregue":
+      return "tr-blue";
+    case "Rejeitado":
+      return "tr-red";
+    case "Saiu para entregar":
+      return "tr-green";
+    default:
+      return "tr-black";
+  }
+};
+
 const OrdersTable = ({ orders }) => {
   return (
     <>
@@ -50,74 +184,32 @@ const OrdersTable = ({ orders }) => {
         </thead>
 
         <tbody>
-          {orders.map((order) => (
-            <tr
-              key={order.IdOrder}
-              onClick={() => {
-                orderService.getOrderItems(order.IdOrder);
-                orderService.getOrderHistory(order.IdOrder);
-                store.dispatch(actionStoreOrder(order));
-                store.dispatch(actionSetOrderOperation("details"));
-              }}
-            >
-              <td>{order.IdOrder}</td>
-              <td>{order.CustomerNameOrder}</td>
-              <td>{order.EvaluationOrder}</td>
-              <td>
-                {utils.formattedDateTime(order.DateOrder, order.TimeOrder)}
-              </td>
-              <td>{order.StatusOrder}</td>
-              <td>{order.DeliveryManOrder}</td>
-              <td>{order.PaymantTypeOrder}</td>
-              <td>{moneyMask(order.TotalOrder)}</td>
-            </tr>
-          ))}
+          {orders &&
+            orders.map((order) => (
+              <tr
+                className={trClassName(order.StatusOrder)}
+                key={order.IdOrder}
+                onClick={() => {
+                  orderService.getOrderItems(order.IdOrder);
+                  orderService.getOrderHistory(order.IdOrder);
+                  store.dispatch(actions.actionStoreOrder(order));
+                  store.dispatch(actions.actionSetOrderOperation("details"));
+                }}
+              >
+                <td>{order.IdOrder}</td>
+                <td>{order.CustomerNameOrder}</td>
+                <td>{order.EvaluationOrder}</td>
+                <td>
+                  {utils.formattedDateTime(order.DateOrder, order.TimeOrder)}
+                </td>
+                <td>{order.StatusOrder}</td>
+                <td>{order.DeliveryManOrder}</td>
+                <td>{order.PaymantTypeOrder}</td>
+                <td>{moneyMask(order.TotalOrder)}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
-    </>
-  );
-};
-
-//////////////////////////////////////////////////////////////////////////////
-const OrdersList = () => {
-  const [loading, setLoading] = useState(true);
-  const [orders, setOrders] = useState([]);
-
-  useEffect(() => {
-    store.dispatch(actionAdminModuleActivate());
-    getOrdersList();
-  }, []);
-
-  async function getOrdersList() {
-    async function loadOrders() {
-      setLoading(true);
-      const response = await orderService.getOrders();
-      setLoading(false);
-      setOrders(response);
-    }
-    loadOrders();
-  }
-
-  return (
-    <div className="orders-list">
-      <Header />
-      {loading && <Loading />}
-      {!loading && <OrdersTable orders={orders} />}
-    </div>
-  );
-};
-
-//////////////////////////////////////////////////////////////////////////////
-const Orders = ({ operation }) => {
-  return (
-    <>
-      {operation === "list" && (
-        <div id="orders">
-          <OrdersList />
-        </div>
-      )}
-
-      {operation === "details" && <OrderDetails />}
     </>
   );
 };

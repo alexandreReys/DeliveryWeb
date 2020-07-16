@@ -70,14 +70,18 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
             <div className="c5">Preço</div>
           </div>
 
-          {orderItems.map((item) => {
+          {orderItems.map((orderItemsProduct) => {
             var itemTotal = moneyMask(
-              item.priceOrderItem * item.quantityOrderItem
+              orderItemsProduct.priceOrderItem *
+                orderItemsProduct.quantityOrderItem
             );
             return (
-              <div className="order-items" key={item.idProductOrderItem}>
-                <div className="c1">{item.DescricaoVinho}</div>
-                <div className="c3">{item.quantityOrderItem}</div>
+              <div
+                className="order-items"
+                key={orderItemsProduct.idProductOrderItem}
+              >
+                <div className="c1">{orderItemsProduct.DescricaoVinho}</div>
+                <div className="c3">{orderItemsProduct.quantityOrderItem}</div>
                 <div className="c5">{itemTotal}</div>
               </div>
             );
@@ -175,15 +179,18 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
           <b>Histórico</b>
           <br />
 
-          {orderHistory.map((item, index) => {
+          {orderHistory.map((orderHistoryItem, index) => {
             const orderHistoryDateTime = utils.formattedDateTime(
-              item.Date_OrderHistory,
-              item.Time_OrderHistory
+              orderHistoryItem.Date_OrderHistory,
+              orderHistoryItem.Time_OrderHistory
             );
             return (
               <>
-                <div className="order-historic-left">
-                  {index + 1}.{item.Status_OrderHistory}
+                <div
+                  className="order-historic-left"
+                  key={orderHistoryItem.Id_OrderHistory}
+                >
+                  {index + 1}.{orderHistoryItem.Status_OrderHistory}
                 </div>
                 <div className="order-historic-right">
                   {orderHistoryDateTime}

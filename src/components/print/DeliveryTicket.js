@@ -65,7 +65,7 @@ class DeliveryTicket extends React.Component {
               item.quantityOrderItem * item.priceOrderItem
             );
             return (
-              <div className="table-item">
+              <div className="table-item" key={item.idProductOrderItem}>
                 <span className="column-left product-description">
                   {item.DescricaoVinho}
                 </span>

@@ -27,6 +27,9 @@ export function actionVinhoDelete() {
 export function actionVinhoList() {
   return { type: "ACTION_VINHO_LIST" };
 }
+export function actionSetProductCategory(category) {
+  return { type: "ACTION_SET_PRODUCT_CATEGORY", category };
+}
 
 export function actionCartReset() {
   return { type: "ACTION_CART_RESET" };
@@ -62,6 +65,9 @@ export function actionStoreOrder(order) {
 }
 export function actionSetOrderOperation(operation) {
   return { type: "ACTION_SET_ORDER_OPERATION", operation };
+}
+export function actionSetSelectedStatus(selectedStatus) {
+  return { type: "ACTION_SET_SELECTED_STATUS", selectedStatus };
 }
 export function actionGetOrders(orders) {
   return { type: "ACTION_GET_ORDERS", orders };

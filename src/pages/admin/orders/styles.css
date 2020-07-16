@@ -25,9 +25,95 @@
   width: 100%;
 }
 
-.orders-list-header {
+#orders .orders-list-header {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 8px;
   font-size: 1.8rem;
+}
+
+#orders .buttons-conteiner {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+  border: 1px solid #ffa500;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin-right: 20px;
+}
+
+svg {
+  margin: auto 0;
+}
+
+#orders .tr-red {
+  color: red;
+  font-weight: bold;
+}
+#orders .tr-blue {
+  color: blue;
+  font-weight: bold;
+}
+#orders .tr-black {
+  color: black;
+  font-weight: bold;
+}
+#orders .tr-green {
+  color: green;
+  font-weight: bold;
+}
+#orders .tr-darkviolet {
+  color: darkviolet;
+  font-weight: bold;
+}
+
+#orders .status-button {
+  display: block;
+  padding: 0 10px;
+  margin: auto 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid silver;
+  border-radius: 5px;
+  box-shadow: 0 2px 1px #000;
+}
+
+#orders .show-all-button {
+  color: yellow;
+  background-color: black;
+}
+#orders .pendente-button {
+  color: black;
+}
+#orders .saiu-button {
+  color: green;
+}
+#orders .entregue-button {
+  color: blue;
+}
+#orders .rejeitado-button {
+  color: red;
+}
+#orders .refresh-button {
+  display: block;
+  color: #008001;
+  cursor: pointer;
+}
+
+#orders .show-all-button:hover,
+#orders .rejeitado-button:hover,
+#orders .entregue-button:hover,
+#orders .saiu-button:hover,
+#orders .pendente-button:hover {
+  color: white;
+  background-color: grey;
+}
+
+.tool-tip {
+  font-size: 1rem;
+  background-color: #00006e !important;
+  border-radius: 30px;
 }
 
 #orders .orders-list ul {

@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   customerAddressOrder: "",
   orderId: 0,
   operation: "list",
+  selectedStatus: "Todos",
   orders: [],
   order: [],
   orderItems: [],
@@ -22,6 +23,8 @@ export default function orderReducer(state = INITIAL_STATE, action) {
       return actionGetOrders(state, action);
     case "ACTION_SET_ORDER_OPERATION":
       return actionSetOrderOperation(state, action);
+    case "ACTION_SET_SELECTED_STATUS":
+      return actionSetSelectedStatus(state, action);
     case "ACTION_STORE_ORDER":
       return actionStoreOrder(state, action);
     case "ACTION_GET_ORDER_ITEMS":
@@ -59,6 +62,13 @@ const actionSetOrderOperation = (state, { operation }) => {
   return {
     ...state,
     operation,
+  };
+};
+
+const actionSetSelectedStatus = (state, { selectedStatus }) => {
+  return {
+    ...state,
+    selectedStatus,
   };
 };
 

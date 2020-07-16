@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import MainItem from "pages/shopping/main/components/mainItem/MainItem";
 import { actionVinhoList } from "store/actions";
 import { DebounceInput } from "react-debounce-input";
-import { getVinhos } from "services/vinhoService";
+import { getProducts } from "services/productService";
 import banner from "assets/img/banner1.png";
 import store from "store";
 import {
@@ -23,30 +23,30 @@ const App = ({ operacaoVinho }) => {
     store.dispatch(actionGetDeliveryAddress());
     store.dispatch(actionAdminModuleDeactivate());
     store.dispatch(actionVinhoList());
-    getVinhosList();
+    getProductList();
   }, []);
 
   useEffect(() => {
-    if (!loading) getVinhosNome(searchText);
+    if (!loading) getProductsByDescription(searchText);
     // eslint-disable-next-line
   }, [searchText]);
 
-  async function getVinhosList() {
-    async function loadVinhos() {
+  async function getProductList() {
+    async function loadProducts() {
       setSearchText("");
       setLoading(true);
       let products = store.getState().vinhoState.products;
       if (!products.length) {
-        products = await getVinhos();
+        products = await getProducts();
       }
       setLoading(false);
       setVinhos(products);
     }
-    loadVinhos();
+    loadProducts();
   }
 
-  async function getVinhosNome(searchText) {
-    async function loadVinhosNome(searchText) {
+  async function getProductsByDescription(searchText) {
+    async function loadProductsByDescription(searchText) {
       setLoading(true);
       const response = await store
         .getState()
@@ -59,7 +59,7 @@ const App = ({ operacaoVinho }) => {
       setLoading(false);
       setVinhos(response);
     }
-    loadVinhosNome(searchText);
+    loadProductsByDescription(searchText);
   }
 
   return (

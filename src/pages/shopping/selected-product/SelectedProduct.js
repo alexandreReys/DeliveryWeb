@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "assets/img/logo.png";
+import logo2 from "assets/img/logo2.png";
 import { BsArrowLeft } from "react-icons/bs";
 import store from "store";
 import { actionAddToCart } from "store/actions";
@@ -9,13 +9,48 @@ import { moneyMask } from "utils/masks";
 import "./styles.css";
 
 const SelectedProduct = () => {
-  const [quantity, setQuantity] = useState(1);
   const selectedProduct = store.getState().cartState.item;
 
   if (!selectedProduct.price) {
     history.push("/");
     return false;
   }
+
+  return (
+    <div id="selectedProduct" className="container-selected-product">
+      <HeaderTop />
+      <div className="container-product">
+        <ProductImage selectedProduct={selectedProduct} />
+        <ProductContent selectedProduct={selectedProduct} />
+      </div>
+    </div>
+  );
+};
+
+const HeaderTop = () => {
+  return (
+    <header>
+      <BsArrowLeft
+        className="arrow-back-abs"
+        onClick={() => {
+          history.goBack();
+        }}
+      />
+    </header>
+  );
+};
+
+const ProductImage = ({ selectedProduct }) => {
+  return (
+    <aside>
+      {!!selectedProduct.image && <img src={selectedProduct.image} alt="" />}
+      {!selectedProduct.image && <img src={logo2} alt="loading ..." />}
+    </aside>
+  );
+};
+
+const ProductContent = ({ selectedProduct }) => {
+  const [quantity, setQuantity] = useState(1);
 
   const selectedProductPrice = moneyMask(selectedProduct.price);
 
@@ -40,38 +75,24 @@ const SelectedProduct = () => {
   };
 
   return (
-    <div id="selectedProduct" className="container-selected-product">
-      <header>
-        <BsArrowLeft
-          className="arrow-back-abs"
-          onClick={() => {
-            history.goBack();
-          }}
-        />
-      </header>
-      <aside>
-        {!!selectedProduct.image && <img src={selectedProduct.image} alt="" />}
-        {!selectedProduct.image && <img src={logo} alt="loading ..." />}
-      </aside>
-      <content>
-        <h1 className="product-name">{selectedProduct.description}</h1>
-        <h4 className="product-price">{selectedProductPrice}</h4>
-        <div className="qtty-box">
-          <div className="qtty-minus" onClick={onClickQttyMinus}>
-            -
-          </div>
-          <div className="qtty">{quantity}</div>
-          <div className="qtty-plus" onClick={onClickQttyPlus}>
-            +
-          </div>
+    <content>
+      <h1 className="product-name">{selectedProduct.description}</h1>
+      <h4 className="product-price">{selectedProductPrice}</h4>
+      <div className="qtty-box">
+        <div className="btn qtty-minus" onClick={onClickQttyMinus}>
+          -
         </div>
-        <div>
-          <label className="button-add" onClick={clickOnButtonAdd}>
-            Adicionar
-          </label>
+        <div className="qtty">{quantity}</div>
+        <div className="btn qtty-plus" onClick={onClickQttyPlus}>
+          +
         </div>
-      </content>
-    </div>
+      </div>
+      <div>
+        <label className="button-add" onClick={clickOnButtonAdd}>
+          Adicionar
+        </label>
+      </div>
+    </content>
   );
 };
 

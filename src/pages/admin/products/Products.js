@@ -13,12 +13,12 @@ import {
 } from "store/actions";
 
 import {
-  getVinhos,
-  getVinhosPorNome,
+  getProducts,
+  getProductsPorNome,
   postVinho,
   putVinho,
   deleteVinho,
-} from "services/vinhoService";
+} from "services/productService";
 
 import "./styles.css";
 
@@ -26,7 +26,7 @@ const App = ({ operacaoVinho }) => {
   const [loading, setLoading] = useState(true);
   const [loadingText] = useState(store.getState().defaultState.loadingText);
 
-  const [vinhos, setVinhos] = useState([]);
+  const [vinhos, setProducts] = useState([]);
 
   const [searching, setSearching] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -34,11 +34,11 @@ const App = ({ operacaoVinho }) => {
   useEffect(() => {
     store.dispatch(actionAdminModuleActivate());
     store.dispatch(actionVinhoList());
-    getVinhosList();
+    getProductsList();
   }, []);
 
   useEffect(() => {
-    if (!loading) getVinhosNome(searchText);
+    if (!loading) getProductsNome(searchText);
     // eslint-disable-next-line
   }, [searchText]);
 
@@ -46,25 +46,25 @@ const App = ({ operacaoVinho }) => {
     store.dispatch(actionVinhoAdd());
   };
 
-  async function getVinhosList() {
-    async function loadVinhos() {
+  async function getProductsList() {
+    async function loadProducts() {
       setSearchText("");
       setLoading(true);
-      const response = await getVinhos();
+      const response = await getProducts();
       setLoading(false);
-      setVinhos(response);
+      setProducts(response);
     }
-    loadVinhos();
+    loadProducts();
   }
 
-  async function getVinhosNome(searchText) {
-    async function loadVinhosNome(searchText) {
+  async function getProductsNome(searchText) {
+    async function loadProductsNome(searchText) {
       setLoading(true);
-      const response = await getVinhosPorNome(searchText);
+      const response = await getProductsPorNome(searchText);
       setLoading(false);
-      setVinhos(response);
+      setProducts(response);
     }
-    loadVinhosNome(searchText);
+    loadProductsNome(searchText);
   }
 
   async function handleFormSaveButton(formData) {
@@ -77,7 +77,7 @@ const App = ({ operacaoVinho }) => {
         // Inclui no BD
         const response = await postVinho(formData);
         if (response.affectedRows > 0) {
-          getVinhosList();
+          getProductsList();
         }
       }
     }
@@ -86,9 +86,9 @@ const App = ({ operacaoVinho }) => {
       // Altera no BD
       const response = await putVinho(formData);
 
-      if (!response) setVinhos([]);
+      if (!response) setProducts([]);
       else if (response.affectedRows > 0) {
-        await getVinhosList();
+        await getProductsList();
       }
     }
   }
@@ -99,7 +99,7 @@ const App = ({ operacaoVinho }) => {
       // Deletar no BD
       const response = await deleteVinho(itemID);
       if (response.affectedRows > 0) {
-        await getVinhosList();
+        await getProductsList();
       }
     }
   };
@@ -137,12 +137,14 @@ const App = ({ operacaoVinho }) => {
             </div>
           )}
 
+          {/* loading text */}
           {loading && (
             <div id="loading">
               <h5>{loadingText}</h5>
             </div>
           )}
 
+          {/* add button */}
           {!loading && (
             <>
               <ul>
