@@ -51,7 +51,10 @@ export const getProductsPorNome = async (nome) => {
 };
 
 export const postVinho = async (data) => {
+  console.log("data", data);
+
   const insertData = await processImage(data);
+
   console.log("insertData", insertData);
 
   let resp;
