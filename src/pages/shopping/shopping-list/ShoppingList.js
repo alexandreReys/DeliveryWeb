@@ -27,7 +27,9 @@ const ShoppingList = () => {
 
   async function getProductList() {
     const data = await productService.getProductsGroupedByCategory();
-    setProducts(data);
+    if (data) {
+      setProducts(data);
+    }
   }
 
   return (

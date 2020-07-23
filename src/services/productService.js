@@ -18,12 +18,15 @@ export const getProductsGroupedByCategory = async () => {
     })
     .catch((error) => console.log(error));
 
-  const products = resp.data;
-  const categs = Object.keys(products);
   let response = [];
-  categs.map((categ) => {
-    return response.push({ category: categ, products: products[categ] });
-  });
+  const products = resp.data;
+  if (products) {
+    const categs = Object.keys(products);
+    categs.map((categ) => {
+      return response.push({ category: categ, products: products[categ] });
+    });
+  }
+
   return response;
 };
 
@@ -49,6 +52,8 @@ export const getProductsPorNome = async (nome) => {
 
 export const postVinho = async (data) => {
   const insertData = await processImage(data);
+  console.log("insertData", insertData);
+
   let resp;
   try {
     resp = await api.post("/products", insertData);
@@ -57,6 +62,7 @@ export const postVinho = async (data) => {
     return null;
   }
 
+  console.log("resp.data", resp.data);
   return resp.data;
 };
 
