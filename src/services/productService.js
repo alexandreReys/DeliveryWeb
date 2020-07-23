@@ -50,6 +50,24 @@ export const getProductsPorNome = async (nome) => {
   return resp.data;
 };
 
+export const putVinho = async (data) => {
+  const updateData = await processImage(data);
+  try {
+    var response = await api.put("/products", updateData);
+  } catch (error) {
+    console.error("ErrorMessage: ", error);
+    return null;
+  }
+
+  return response.data;
+};
+
+export const deleteVinho = async (itemId) => {
+  const params = { params: { IdVinho: itemId } };
+  const resp = await api.delete("/products", params);
+  return resp.data;
+};
+
 export const postVinho = async (data) => {
   console.log("data", data);
 
@@ -69,41 +87,20 @@ export const postVinho = async (data) => {
   return resp.data;
 };
 
-export const postVinhoImage = async (file) => {
-  const formData = new FormData();
-  formData.append("file", file);
-  const config = {
-    headers: {
-      "content-type": "multipart/form-data",
-    },
-  };
-  const resp = await api.post("/products/image", formData, config);
-  return resp.data;
-};
-
-export const putVinho = async (data) => {
-  const updateData = await processImage(data);
-  try {
-    var response = await api.put("/products", updateData);
-  } catch (error) {
-    console.error("ErrorMessage: ", error);
-    return null;
-  }
-
-  return response.data;
-};
-
-export const deleteVinho = async (itemId) => {
-  const params = { params: { IdVinho: itemId } };
-  const resp = await api.delete("/products", params);
-  return resp.data;
-};
-
 const processImage = async (data) => {
   let idImg1 = data.ImagemFile1Vinho;
+  let res;
 
   if (idImg1) {
-    let res = await postVinhoImage(idImg1);
+    try {
+      res = await postVinhoImage(idImg1);
+      console.log("res", res);
+    } catch (error) {
+      console.log(error);
+
+      throw new error();
+    }
+
     idImg1 = res.id;
   } else {
     idImg1 = data.Imagem1Vinho;
@@ -125,4 +122,16 @@ const processImage = async (data) => {
   };
 
   return response;
+};
+
+export const postVinhoImage = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data",
+    },
+  };
+  const resp = await api.post("/products/image", formData, config);
+  return resp.data;
 };
