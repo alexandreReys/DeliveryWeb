@@ -22,7 +22,11 @@ const Orders = ({ operation }) => {
         </div>
       )}
 
-      {operation === "details" && <OrderDetails />}
+      {operation === "details" && (
+        <div id="orderDetails">
+          <OrderDetails />
+        </div>
+      )}
     </>
   );
 };
@@ -33,8 +37,16 @@ const OrdersList = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
+    store.dispatch(actions.actionSetSelectedStatus("Pendente"));
     store.dispatch(actions.actionAdminModuleActivate());
     getOrdersList();
+    
+    const timeoutID = window.setInterval(() => {
+      getOrdersList();
+      console.log("Refresh");
+    }, 30000);
+
+    return () => window.clearTimeout(timeoutID );
   }, []);
 
   const getOrdersList = async () => {
@@ -160,6 +172,8 @@ const trClassName = (statusOrder) => {
     case "Rejeitado":
       return "tr-red";
     case "Saiu para entregar":
+      return "tr-green";
+    case "A caminho":
       return "tr-green";
     default:
       return "tr-black";

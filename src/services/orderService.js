@@ -60,7 +60,7 @@ export const postOrder = async () => {
 export const getOrders = async (status) => {
   let orders = [];
   try {
-    if (!status) {
+    if (!status || status === "Todos") {
       orders = await api.get("/delivery-order");
     } else {
       orders = await api.get(`/delivery-order/status/${status}`);

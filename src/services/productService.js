@@ -69,11 +69,7 @@ export const deleteVinho = async (itemId) => {
 };
 
 export const postVinho = async (data) => {
-  console.log("data", data);
-
   const insertData = await processImage(data);
-
-  console.log("insertData", insertData);
 
   let resp;
   try {
@@ -83,7 +79,6 @@ export const postVinho = async (data) => {
     return null;
   }
 
-  console.log("resp.data", resp.data);
   return resp.data;
 };
 
@@ -94,11 +89,10 @@ const processImage = async (data) => {
   if (idImg1) {
     try {
       res = await postVinhoImage(idImg1);
-      console.log("res", res);
     } catch (error) {
       console.log(error);
 
-      throw new error();
+      throw error;
     }
 
     idImg1 = res.id;
@@ -127,11 +121,20 @@ const processImage = async (data) => {
 export const postVinhoImage = async (file) => {
   const formData = new FormData();
   formData.append("file", file);
+
   const config = {
     headers: {
       "content-type": "multipart/form-data",
     },
   };
-  const resp = await api.post("/products/image", formData, config);
+
+  let resp;
+  try {
+    resp = await api.post("/products/image", formData, config);
+  } catch (error) {
+    console.log(error);
+
+    throw error;
+  }
   return resp.data;
 };
