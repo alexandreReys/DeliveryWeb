@@ -22,7 +22,7 @@ import {
 
 import "./styles.css";
 
-const App = ({ operacaoVinho }) => {
+const Products = ({ operacaoVinho }) => {
   const [loading, setLoading] = useState(true);
   const [loadingText] = useState(store.getState().defaultState.loadingText);
 
@@ -109,7 +109,7 @@ const App = ({ operacaoVinho }) => {
       {(operacaoVinho === "list" || operacaoVinho === "delete") && (
         <div className="vinho-list">
           <div className="vinho-list-header">
-            <div>Vinhos</div>
+            <div>Produtos</div>
             <div
               className="search-bar"
               onClick={() => {
@@ -159,7 +159,7 @@ const App = ({ operacaoVinho }) => {
               <div className="btnMais">
                 <div className="col-3">
                   <button
-                    className="btn btn-info btnCircular"
+                    className="btn btnCircular"
                     onClick={() => {
                       handlerListAddButton();
                     }}
@@ -186,4 +186,4 @@ const App = ({ operacaoVinho }) => {
 
 export default connect((state) => ({
   operacaoVinho: state.vinhoState.operacaoVinho,
-}))(App);
+}))(Products);

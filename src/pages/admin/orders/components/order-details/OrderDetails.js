@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import { history } from "routes/history";
+import { connect } from "react-redux";
+
 import * as orderService from "services/orderService";
 
-import { connect } from "react-redux";
 import store from "store";
 import { moneyMask } from "utils/masks";
 import * as utils from "utils";
@@ -43,14 +45,19 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
     orderService.rejectOrder(order.IdOrder);
     store.dispatch(actionSetOrderOperation("list"));
   };
-  const handleDelivering = () => {
-    orderService.deliveringOrder(order.IdOrder);
+  const handleCancel = () => {
+    history.push("/orders");
     store.dispatch(actionSetOrderOperation("list"));
+
   };
-  const handleDelivered = () => {
-    orderService.deliveredOrder(order.IdOrder);
-    store.dispatch(actionSetOrderOperation("list"));
-  };
+  // const handleDelivering = () => {
+  //   orderService.deliveringOrder(order.IdOrder);
+  //   store.dispatch(actionSetOrderOperation("list"));
+  // };
+  // const handleDelivered = () => {
+  //   orderService.deliveredOrder(order.IdOrder);
+  //   store.dispatch(actionSetOrderOperation("list"));
+  // };
 
   return (
     <div id="order-details" className="container-order-details">
@@ -110,18 +117,21 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
         </div>
 
         <div className="status-button-group">
-          <div className="status-button" onClick={handleReject}>
+          <div className="status-button status-button-20" onClick={handleReject}>
             Rejeitar
           </div>
-          <div className="status-button btn-imprimir" onClick={handlePrint}>
+          <div className="status-button status-button-20" onClick={handleCancel}>
+            Cancelar
+          </div>
+          <div className="status-button btn-imprimir status-button-40" onClick={handlePrint}>
             Imprimir
           </div>
-          <div className="status-button " onClick={handleDelivering}>
+          {/* <div className="status-button " onClick={handleDelivering}>
             Entregar
           </div>
           <div className="status-button " onClick={handleDelivered}>
             Entregue
-          </div>
+          </div> */}
         </div>
       </content>
 

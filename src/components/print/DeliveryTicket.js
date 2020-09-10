@@ -7,32 +7,18 @@ import "./styles.css";
 
 class DeliveryTicket extends React.Component {
   render() {
-    const deliveryDate = utils.formattedDate(
-      store.getState().orderState.order.DateOrder
-    );
+    const deliveryDate = utils.formattedDate(store.getState().orderState.order.DateOrder);
     const orderItems = store.getState().orderState.orderItems;
-    const totalProductsOrder = moneyMask(
-      store.getState().orderState.order.TotalProductsOrder
-    );
-    const shippingAmountOrder = moneyMask(
-      store.getState().orderState.order.ShippingAmountOrder
-    );
+    const totalProductsOrder = moneyMask(store.getState().orderState.order.TotalProductsOrder);
+    const shippingAmountOrder = moneyMask(store.getState().orderState.order.ShippingAmountOrder);
     const totalOrder = moneyMask(store.getState().orderState.order.TotalOrder);
-    const changeValueOrder = moneyMask(
-      store.getState().orderState.order.ChangeValueOrder
-    );
-    const totalOrder2 = moneyMask(
-      store.getState().orderState.order.TotalOrder / 2
-    );
-    const totalOrder3 = moneyMask(
-      store.getState().orderState.order.TotalOrder / 3
-    );
-    const totalOrder4 = moneyMask(
-      store.getState().orderState.order.TotalOrder / 4
-    );
-    const totalOrder5 = moneyMask(
-      store.getState().orderState.order.TotalOrder / 5
-    );
+    
+    const changeValueOrder = moneyMask(store.getState().orderState.order.ChangeValueOrder);
+    const totalOrder2 = moneyMask(store.getState().orderState.order.TotalOrder / 2);
+    const totalOrder3 = moneyMask(store.getState().orderState.order.TotalOrder / 3);
+    const totalOrder4 = moneyMask(store.getState().orderState.order.TotalOrder / 4);
+    const totalOrder5 = moneyMask(store.getState().orderState.order.TotalOrder / 5);
+
     return (
       <section id="DeliveryTicket" className="print-content">
         <div className="ticket-content">

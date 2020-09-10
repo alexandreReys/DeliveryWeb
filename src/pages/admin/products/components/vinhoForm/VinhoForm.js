@@ -8,27 +8,16 @@ import "./vinhoForm.css";
 
 function VinhoForm({ propSubmit }) {
   const [IdVinho] = useState(store.getState().vinhoState.IdVinho);
-  const [DescricaoVinho, setDescricaoVinho] = useState(
-    store.getState().vinhoState.DescricaoVinho
-  );
-  const [PrecoVinho, setPrecoVinho] = useState(
-    store.getState().vinhoState.PrecoVinho
-  );
-  const [TipoVinho, setTipoVinho] = useState(
-    store.getState().vinhoState.TipoVinho
-  );
-  const [ComentarioVinho, setComentarioVinho] = useState(
-    store.getState().vinhoState.ComentarioVinho
-  );
-  const [CodigoErpVinho, setCodigoErpVinho] = useState(
-    store.getState().vinhoState.CodigoErpVinho
-  );
+  const [DescricaoVinho, setDescricaoVinho] = useState(store.getState().vinhoState.DescricaoVinho);
+  const [PrecoVinho, setPrecoVinho] = useState(store.getState().vinhoState.PrecoVinho);
+  const [TipoVinho, setTipoVinho] = useState(store.getState().vinhoState.TipoVinho);
+  const [ComentarioVinho, setComentarioVinho] = useState(store.getState().vinhoState.ComentarioVinho);
+  const [CodigoErpVinho, setCodigoErpVinho] = useState(store.getState().vinhoState.CodigoErpVinho);
+  const [fileInputState] = useState();
   const [Imagem1Vinho] = useState(store.getState().vinhoState.Imagem1Vinho);
-  const [ImagemInput1Vinho, setImagemInput1Vinho] = useState("");
-  const [ImagemFile1Vinho, setImagemFile1Vinho] = useState(null);
-  const [Img1Preview, setImg1Preview] = useState(
-    store.getState().vinhoState.Imagem1Vinho
-  );
+  const [Imagem1IdVinho] = useState(store.getState().vinhoState.Imagem1IdVinho);
+  const [previewSource, setPreviewSource] = useState(store.getState().vinhoState.Imagem1Vinho);
+
 
   /////////////////////////////////////////////////
   async function handleSubmit(e) {
@@ -44,11 +33,25 @@ function VinhoForm({ propSubmit }) {
       ComentarioVinho,
       CodigoErpVinho,
       Imagem1Vinho,
-      ImagemFile1Vinho,
+      Imagem1IdVinho,
+      base64EncodedImage: previewSource,
     };
 
     store.dispatch(actionVinhoList());
     await propSubmit(formData);
+  }
+
+  function handleFileInputChange(e) {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
+
+  function previewFile(file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    }
   }
 
   /////////////////////////////////////////////////
@@ -141,18 +144,13 @@ function VinhoForm({ propSubmit }) {
 
               <input
                 type="file"
-                className="input-txt"
                 name="ImagemInput1Vinho"
                 id="ImagemInput1Vinho"
-                value={ImagemInput1Vinho}
-                onChange={(e) => {
-                  setImg1Preview(URL.createObjectURL(e.target.files[0]));
-                  setImagemInput1Vinho(e.target.value);
-                  setImagemFile1Vinho(e.target.files[0]);
-                }}
+                onChange={handleFileInputChange}
+                value={fileInputState}
               />
               <img
-                src={Img1Preview}
+                src={previewSource}
                 className="fotoProduto"
                 alt=".  Não selecionado"
               />

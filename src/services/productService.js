@@ -26,7 +26,6 @@ export const getProductsGroupedByCategory = async () => {
       return response.push({ category: categ, products: products[categ] });
     });
   }
-
   return response;
 };
 
@@ -50,17 +49,6 @@ export const getProductsPorNome = async (nome) => {
   return resp.data;
 };
 
-export const putVinho = async (data) => {
-  const updateData = await processImage(data);
-  try {
-    var response = await api.put("/products", updateData);
-  } catch (error) {
-    console.error("ErrorMessage: ", error);
-    return null;
-  }
-
-  return response.data;
-};
 
 export const deleteVinho = async (itemId) => {
   const params = { params: { IdVinho: itemId } };
@@ -68,38 +56,54 @@ export const deleteVinho = async (itemId) => {
   return resp.data;
 };
 
+
+
+
 export const postVinho = async (data) => {
   const insertData = await processImage(data);
-
-  let resp;
   try {
-    resp = await api.post("/products", insertData);
+    var resp = await api.post("/products", insertData);
   } catch (error) {
-    console.error("ErrorMessage: ", error);
-    return null;
+    return console.error("ErrorMessage (postVinho): ", error);
   }
-
   return resp.data;
 };
 
-const processImage = async (data) => {
-  let idImg1 = data.ImagemFile1Vinho;
-  let res;
-
-  if (idImg1) {
-    try {
-      res = await postVinhoImage(idImg1);
-    } catch (error) {
-      console.log(error);
-
-      throw error;
-    }
-
-    idImg1 = res.id;
-  } else {
-    idImg1 = data.Imagem1Vinho;
+export const putVinho = async (data) => {
+  const updateData = await processImage(data);
+  try {
+    var response = await api.put("/products", updateData);
+  } catch (error) {
+    return console.error("ErrorMessage (putVinho): ", error);
   }
+  return response.data;
+};
 
+const processImage = async (data) => {
+  console.log("processImage data", data);
+
+
+
+
+
+
+  if (data.base64EncodedImage !== data.Imagem1Vinho) {
+    if (data.base64EncodedImage) {
+      try {
+        await deleteProductImage(data.Imagem1IdVinho);
+      } catch (error) {
+        console.log("Error Message (processImage/delete)", error);
+      }
+
+      try {
+        const imageUploadResponse = await postProductImage(data.base64EncodedImage);
+        data.Imagem1Vinho = imageUploadResponse.url;
+        data.Imagem1IdVinho = imageUploadResponse.public_id;
+      } catch (error) {
+        console.log("Error Message (processImage/post)", error);
+      }
+    };
+  };
   const response = {
     DescricaoVinho: data.DescricaoVinho,
     PrecoVinho: data.PrecoVinho,
@@ -109,32 +113,40 @@ const processImage = async (data) => {
     GarrafaVinho: data.GarrafaVinho,
     ComentarioVinho: data.ComentarioVinho,
     CodigoErpVinho: data.CodigoErpVinho,
-    Imagem1Vinho: idImg1,
+    Imagem1Vinho: data.Imagem1Vinho,
+    Imagem1IdVinho: data.Imagem1IdVinho,
     Imagem2Vinho: null,
     Imagem3Vinho: null,
     IdVinho: data.IdVinho,
   };
-
   return response;
 };
 
-export const postVinhoImage = async (file) => {
-  const formData = new FormData();
-  formData.append("file", file);
-
-  const config = {
-    headers: {
-      "content-type": "multipart/form-data",
-    },
-  };
-
-  let resp;
+export const postProductImage = async (base64EncodedImage) => {
+  const body = { data: base64EncodedImage };
+  const headers = { headers: { "content-type": "application/json" } };
   try {
-    resp = await api.post("/products/image", formData, config);
+    var response = await api.post("/products/img", body, headers);
   } catch (error) {
-    console.log(error);
-
-    throw error;
+    return console.log("postProductImage", error);
   }
-  return resp.data;
+  return response.data;
+};
+
+export const deleteProductImage = async (publicId) => {
+  const params = { params: { Imagem1IdVinho: publicId } };
+
+  console.log("params", params);
+
+
+
+
+
+  const headers = { headers: { "content-type": "application/json" } };
+  try {
+    var response = await api.delete("/products/img", params, headers);
+  } catch (error) {
+    return console.log("deleteProductImage", error);
+  }
+  return response.data;
 };

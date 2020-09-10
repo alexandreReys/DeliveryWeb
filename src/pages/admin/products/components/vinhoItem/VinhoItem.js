@@ -22,6 +22,7 @@ function VinhoItem({ vinho, onDelete }) {
       ComentarioVinho: vinho.ComentarioVinho,
       CodigoErpVinho: vinho.CodigoErpVinho,
       Imagem1Vinho: vinho.Imagem1Vinho,
+      Imagem1IdVinho: vinho.Imagem1IdVinho,
     };
     store.dispatch(actionVinhoEdit(dadosVinho));
   };

@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   ComentarioVinho: "",
   CodigoErpVinho: "",
   Imagem1Vinho: "",
+  Imagem1IdVinho: "",
   operacaoVinho: "list",
   selectedCategory: "",
 };
@@ -59,6 +60,7 @@ const functionList = (state) => ({
   ComentarioVinho: "",
   CodigoErpVinho: "",
   Imagem1Vinho: "",
+  Imagem1IdVinho: "",
   operacaoVinho: "list",
 });
 
@@ -74,6 +76,7 @@ const functionAdd = (state) => ({
   ComentarioVinho: "",
   CodigoErpVinho: "",
   Imagem1Vinho: "",
+  Imagem1IdVinho: "",
   operacaoVinho: "add",
 });
 
@@ -90,6 +93,7 @@ const functionEdit = (state, { dadosVinho }) => {
     ComentarioVinho: dadosVinho.ComentarioVinho,
     CodigoErpVinho: dadosVinho.CodigoErpVinho,
     Imagem1Vinho: dadosVinho.Imagem1Vinho,
+    Imagem1IdVinho: dadosVinho.Imagem1IdVinho,
     operacaoVinho: "edit",
   };
 };

@@ -10,6 +10,7 @@
 #orders .table th {
   padding: 0.25rem !important;
   font-size: 0.9rem;
+  color: navy;
 }
 
 #orders .table td {
@@ -29,7 +30,11 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
+}
+#orders .orders-list-header .status-header{
+  font-weight: bold;
+  color: brown;
 }
 
 #orders .buttons-conteiner {
@@ -80,8 +85,8 @@ svg {
 }
 
 #orders .show-all-button {
-  color: yellow;
-  background-color: black;
+  color: red;
+  /* background-color: green; */
 }
 #orders .pendente-button {
   color: black;
@@ -93,7 +98,7 @@ svg {
   color: blue;
 }
 #orders .rejeitado-button {
-  color: red;
+  color: #ff7043;
 }
 #orders .refresh-button {
   display: block;
@@ -122,4 +127,8 @@ svg {
 
 #orders #loading h5 {
   color: red;
+}
+#orders .selected-button {
+  color: white;
+  background-color: red;
 }

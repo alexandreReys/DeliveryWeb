@@ -40,13 +40,13 @@ const OrdersList = () => {
     store.dispatch(actions.actionSetSelectedStatus("Pendente"));
     store.dispatch(actions.actionAdminModuleActivate());
     getOrdersList();
-    
+
     const timeoutID = window.setInterval(() => {
       getOrdersList();
       console.log("Refresh");
     }, 30000);
 
-    return () => window.clearTimeout(timeoutID );
+    return () => window.clearTimeout(timeoutID);
   }, []);
 
   const getOrdersList = async () => {
@@ -73,81 +73,90 @@ const OrdersList = () => {
 //////////////////////////////////////////////////////////////////////////////
 const Header = ({ handleRefresh }) => {
   return (
-    <div className="orders-list-header">
-      <div>Painel Admin - Pedidos</div>
-      <div className="buttons-conteiner">
-        <div
-          className="status-button show-all-button"
-          data-tip="Todos"
-          onClick={() => {
-            store.dispatch(actions.actionSetSelectedStatus("Todos"));
-            handleRefresh();
-          }}
-        >
-          T
-          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
-        </div>
-
-        <div
-          className="status-button pendente-button"
-          data-tip="Pendentes"
-          onClick={() => {
-            store.dispatch(actions.actionSetSelectedStatus("Pendente"));
-            handleRefresh();
-          }}
-        >
-          P
-          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
-        </div>
-
-        <div
-          className="status-button saiu-button"
-          data-tip="Saiu para Entrega"
-          onClick={() => {
-            store.dispatch(
-              actions.actionSetSelectedStatus("Saiu para entregar")
-            );
-            handleRefresh();
-          }}
-        >
-          S
-          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
-        </div>
-
-        <div
-          className="status-button entregue-button"
-          data-tip="Entregues"
-          onClick={() => {
-            store.dispatch(actions.actionSetSelectedStatus("Entregue"));
-            handleRefresh();
-          }}
-        >
-          E
-          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
-        </div>
-
-        <div
-          className="status-button rejeitado-button"
-          data-tip="Rejeitados"
-          onClick={() => {
-            store.dispatch(actions.actionSetSelectedStatus("Rejeitado"));
-            handleRefresh();
-          }}
-        >
-          R
-          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
-        </div>
-
-        <FiRefreshCcw
-          className="refresh-button"
-          data-tip="Refresh"
-          onClick={() => {
-            handleRefresh();
-          }}
-        />
-        <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+    <>
+      <div className="orders-list-header">
+        Painel Adminstrativo - Pedidos
       </div>
-    </div>
+      <div className="orders-list-header">
+        <div className="status-header">
+        {`Status: "${store.getState().orderState.selectedStatus}"`}
+        </div>
+        <div className="buttons-conteiner">
+
+          <div
+            className={btnClassName("Pendente", "pendente-button")}
+            data-tip="Pendentes"
+            onClick={() => {
+              store.dispatch(actions.actionSetSelectedStatus("Pendente"));
+              handleRefresh();
+            }}
+          >
+            P
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+          </div>
+
+          <div
+            className={btnClassName("Saiu para entregar", "saiu-button")}
+            data-tip="Saiu para Entrega"
+            onClick={() => {
+              store.dispatch(
+                actions.actionSetSelectedStatus("Saiu para entregar")
+              );
+              handleRefresh();
+            }}
+          >
+            S
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+          </div>
+
+          <div
+            className={btnClassName("Entregue", "entregue-button")}
+            data-tip="Entregues"
+            onClick={() => {
+              store.dispatch(actions.actionSetSelectedStatus("Entregue"));
+              handleRefresh();
+            }}
+          >
+            E
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+          </div>
+
+          <div
+            className={btnClassName("Rejeitado", "rejeitado-button")}
+            data-tip="Rejeitados"
+            onClick={() => {
+              store.dispatch(actions.actionSetSelectedStatus("Rejeitado"));
+              handleRefresh();
+            }}
+          >
+            R
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+          </div>
+
+          <div
+            className={btnClassName("Todos", "show-all-button")}
+            data-tip="Todos"
+            onClick={() => {
+              store.dispatch(actions.actionSetSelectedStatus("Todos"));
+              handleRefresh();
+            }}
+          >
+            T
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+          </div>
+
+
+          <FiRefreshCcw
+            className="refresh-button"
+            data-tip="Refresh"
+            onClick={() => {
+              handleRefresh();
+            }}
+          />
+          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+        </div>
+      </div>
+    </>
   );
 };
 
@@ -178,6 +187,15 @@ const trClassName = (statusOrder) => {
     default:
       return "tr-black";
   }
+};
+const btnClassName = (statusBtn, classBtn) => {
+  const defaultClassName = "status-button " + classBtn;
+  const selectedStatus = store.getState().orderState.selectedStatus;
+
+  if (statusBtn !== selectedStatus)
+    return defaultClassName
+  else
+    return defaultClassName + " selected-button";
 };
 
 const OrdersTable = ({ orders }) => {
