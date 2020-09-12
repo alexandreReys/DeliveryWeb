@@ -7,183 +7,183 @@ import store from "store";
 import { DebounceInput } from "react-debounce-input";
 
 import {
-  actionAdminModuleActivate,
-  actionVinhoAdd,
-  actionVinhoList,
+    actionAdminModuleActivate,
+    actionVinhoAdd,
+    actionVinhoList,
 } from "store/actions";
 
 import {
-  getProducts,
-  getProductsPorNome,
-  postVinho,
-  putVinho,
-  deleteVinho,
+    getProducts,
+    getProductsPorNome,
+    postVinho,
+    putVinho,
+    deleteVinho,
 } from "services/productService";
 
 import "./styles.css";
 
 const Products = ({ operacaoVinho }) => {
-  const [loading, setLoading] = useState(true);
-  const [loadingText] = useState(store.getState().defaultState.loadingText);
+    const [loading, setLoading] = useState(true);
+    const [loadingText] = useState(store.getState().defaultState.loadingText);
 
-  const [vinhos, setProducts] = useState([]);
+    const [vinhos, setProducts] = useState([]);
 
-  const [searching, setSearching] = useState(false);
-  const [searchText, setSearchText] = useState("");
+    const [searching, setSearching] = useState(false);
+    const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    store.dispatch(actionAdminModuleActivate());
-    store.dispatch(actionVinhoList());
-    getProductsList();
-  }, []);
+    useEffect(() => {
+        store.dispatch(actionAdminModuleActivate());
+        store.dispatch(actionVinhoList());
+        getProductsList();
+    }, []);
 
-  useEffect(() => {
-    if (!loading) getProductsNome(searchText);
-    // eslint-disable-next-line
-  }, [searchText]);
+    useEffect(() => {
+        if (!loading) getProductsNome(searchText);
+        // eslint-disable-next-line
+    }, [searchText]);
 
-  const handlerListAddButton = () => {
-    store.dispatch(actionVinhoAdd());
-  };
+    const handlerListAddButton = () => {
+        store.dispatch(actionVinhoAdd());
+    };
 
-  async function getProductsList() {
-    async function loadProducts() {
-      setSearchText("");
-      setLoading(true);
-      const response = await getProducts();
-      setLoading(false);
-      setProducts(response);
-    }
-    loadProducts();
-  }
-
-  async function getProductsNome(searchText) {
-    async function loadProductsNome(searchText) {
-      setLoading(true);
-      const response = await getProductsPorNome(searchText);
-      setLoading(false);
-      setProducts(response);
-    }
-    loadProductsNome(searchText);
-  }
-
-  async function handleFormSaveButton(formData) {
-    if (operacaoVinho === "add") {
-      const VinhoArray = vinhos.filter((vinho) => {
-        return vinho.DescricaoVinho === formData.DescricaoVinho;
-      });
-
-      if (VinhoArray === null || VinhoArray.length === 0) {
-        // Inclui no BD
-        const response = await postVinho(formData);
-        if (response.affectedRows > 0) {
-          getProductsList();
+    async function getProductsList() {
+        async function loadProducts() {
+            setSearchText("");
+            setLoading(true);
+            const response = await getProducts();
+            setLoading(false);
+            setProducts(response);
         }
-      }
+        loadProducts();
     }
 
-    if (operacaoVinho === "edit") {
-      // Altera no BD
-      const response = await putVinho(formData);
-
-      if (!response) setProducts([]);
-      else if (response.affectedRows > 0) {
-        await getProductsList();
-      }
+    async function getProductsNome(searchText) {
+        async function loadProductsNome(searchText) {
+            setLoading(true);
+            const response = await getProductsPorNome(searchText);
+            setLoading(false);
+            setProducts(response);
+        }
+        loadProductsNome(searchText);
     }
-  }
 
-  const handlerDeleteButton = async (itemID) => {
-    const r = window.confirm("Confirma Exclusão ??");
-    if (r === true) {
-      // Deletar no BD
-      const response = await deleteVinho(itemID);
-      if (response.affectedRows > 0) {
-        await getProductsList();
-      }
+    async function handleFormSaveButton(formData) {
+        if (operacaoVinho === "add") {
+            const VinhoArray = vinhos.filter((vinho) => {
+                return vinho.DescricaoVinho === formData.DescricaoVinho;
+            });
+
+            if (VinhoArray === null || VinhoArray.length === 0) {
+                // Inclui no BD
+                const response = await postVinho(formData);
+                if (response.affectedRows > 0) {
+                    getProductsList();
+                }
+            }
+        }
+
+        if (operacaoVinho === "edit") {
+            // Altera no BD
+            const response = await putVinho(formData);
+
+            if (!response) setProducts([]);
+            else if (response.affectedRows > 0) {
+                await getProductsList();
+            }
+        }
     }
-  };
 
-  return (
-    <div id="vinhos">
-      {(operacaoVinho === "list" || operacaoVinho === "delete") && (
-        <div className="vinho-list">
-          <div className="vinho-list-header">
-            <div>Produtos</div>
-            <div
-              className="search-bar"
-              onClick={() => {
-                setSearching(!searching);
-                if (searching === true) setSearchText("");
-              }}
-            >
-              <FaSearch className="button-search" size={22} />
-              {/* Search */}
-            </div>
-          </div>
+    const handlerDeleteButton = async (itemID) => {
+        const r = window.confirm("Confirma Exclusão ??");
+        if (r === true) {
+            // Deletar no BD
+            const response = await deleteVinho(itemID);
+            if (response.affectedRows > 0) {
+                await getProductsList();
+            }
+        }
+    };
 
-          {searching && (
-            <div className="search-input">
-              <DebounceInput
-                className="input"
-                value={searchText}
-                minLength={2}
-                debounceTimeout={800}
-                onChange={(e) => setSearchText(e.target.value)}
-              />
-              <div className="search-cancel" onClick={() => setSearchText("")}>
-                X
+    return (
+        <div id="vinhos">
+            {(operacaoVinho === "list" || operacaoVinho === "delete") && (
+                <div className="vinho-list">
+                    <div className="vinho-list-header">
+                        <div>Produtos</div>
+                        <div
+                            className="search-bar"
+                            onClick={() => {
+                                setSearching(!searching);
+                                if (searching === true) setSearchText("");
+                            }}
+                        >
+                            <FaSearch className="button-search" size={22} />
+                            {/* Search */}
+                        </div>
+                    </div>
+
+                    {searching && (
+                        <div className="search-input">
+                            <DebounceInput
+                                className="input"
+                                value={searchText}
+                                minLength={2}
+                                debounceTimeout={800}
+                                onChange={(e) => setSearchText(e.target.value)}
+                            />
+                            <div className="search-cancel" onClick={() => setSearchText("")}>
+                                X
               </div>
-            </div>
-          )}
+                        </div>
+                    )}
 
-          {/* loading text */}
-          {loading && (
-            <div id="loading">
-              <h5>{loadingText}</h5>
-            </div>
-          )}
+                    {/* loading text */}
+                    {loading && (
+                        <div id="loading">
+                            <h5>{loadingText}</h5>
+                        </div>
+                    )}
 
-          {/* add button */}
-          {!loading && (
-            <>
-              <ul>
-                {vinhos.map((vinho) => (
-                  <VinhoItem
-                    key={vinho.IdVinho}
-                    vinho={vinho}
-                    onDelete={handlerDeleteButton}
-                  />
-                ))}
-              </ul>
-              <div className="btnMais">
-                <div className="col-3">
-                  <button
-                    className="btn btnCircular"
-                    onClick={() => {
-                      handlerListAddButton();
-                    }}
-                  >
-                    <i>
-                      <FaPlus />
-                    </i>
-                  </button>
+                    {/* add button */}
+                    {!loading && (
+                        <>
+                            <ul>
+                                {vinhos.map((vinho) => (
+                                    <VinhoItem
+                                        key={vinho.IdVinho}
+                                        vinho={vinho}
+                                        onDelete={handlerDeleteButton}
+                                    />
+                                ))}
+                            </ul>
+                            <div className="btnMais">
+                                <div className="col-3">
+                                    <button
+                                        className="btn btnCircular"
+                                        onClick={() => {
+                                            handlerListAddButton();
+                                        }}
+                                    >
+                                        <i>
+                                            <FaPlus />
+                                        </i>
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
-              </div>
-            </>
-          )}
-        </div>
-      )}
+            )}
 
-      {(operacaoVinho === "add" || operacaoVinho === "edit") && (
-        <div className="vinho-form">
-          <VinhoForm propSubmit={handleFormSaveButton} />
+            {(operacaoVinho === "add" || operacaoVinho === "edit") && (
+                <div className="vinho-form">
+                    <VinhoForm propSubmit={handleFormSaveButton} />
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default connect((state) => ({
-  operacaoVinho: state.vinhoState.operacaoVinho,
+    operacaoVinho: state.vinhoState.operacaoVinho,
 }))(Products);

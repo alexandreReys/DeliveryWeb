@@ -69,6 +69,9 @@ export const postVinho = async (data) => {
   return resp.data;
 };
 
+
+
+
 export const putVinho = async (data) => {
   const updateData = await processImage(data);
   try {
@@ -80,21 +83,19 @@ export const putVinho = async (data) => {
 };
 
 const processImage = async (data) => {
-  console.log("processImage data", data);
-
-
-
-
-
+  // console.log("pré Imagem1IdVinho", data.Imagem1IdVinho);
+  // console.log("pré base64EncodedImage", data.base64EncodedImage);
 
   if (data.base64EncodedImage !== data.Imagem1Vinho) {
-    if (data.base64EncodedImage) {
+    if (data.Imagem1IdVinho) {
       try {
         await deleteProductImage(data.Imagem1IdVinho);
       } catch (error) {
         console.log("Error Message (processImage/delete)", error);
       }
+    };
 
+    if (data.base64EncodedImage) {
       try {
         const imageUploadResponse = await postProductImage(data.base64EncodedImage);
         data.Imagem1Vinho = imageUploadResponse.url;
@@ -104,6 +105,7 @@ const processImage = async (data) => {
       }
     };
   };
+  
   const response = {
     DescricaoVinho: data.DescricaoVinho,
     PrecoVinho: data.PrecoVinho,
@@ -135,13 +137,6 @@ export const postProductImage = async (base64EncodedImage) => {
 
 export const deleteProductImage = async (publicId) => {
   const params = { params: { Imagem1IdVinho: publicId } };
-
-  console.log("params", params);
-
-
-
-
-
   const headers = { headers: { "content-type": "application/json" } };
   try {
     var response = await api.delete("/products/img", params, headers);

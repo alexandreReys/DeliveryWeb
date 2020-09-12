@@ -14,6 +14,8 @@ import PurchaseConfirmation from "pages/shopping/payment-confirmation/PaymentCon
 import OrderConfirmation from "pages/shopping/order-confirmation/OrderConfirmation";
 import ShoppingList from "pages/shopping/shopping-list/ShoppingList";
 
+import PrivacyPolicy from "pages/shopping/privacy-policiy/PrivacyPolicy";
+
 import TestModal from "components/modal/testModal";
 import TestPrint from "components/print/TestPrint";
 import ShoppingListCateg from "pages/shopping/shopping-list-categ/ShoppingListCateg";
@@ -32,6 +34,8 @@ const Routes = () => (
     <Route path="/delivery-address" component={DeliveryAddress} />
     <Route path="/purchase-confirmation" component={PurchaseConfirmation} />
     <Route path="/order-confirmation" component={OrderConfirmation} />
+    
+    <Route path="/privacy-policy" component={PrivacyPolicy} />
 
     <Route path="/test-modal" component={TestModal} />
     <Route path="/test-print" component={TestPrint} />
