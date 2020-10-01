@@ -4,7 +4,7 @@ import { actionVinhoList } from "store/actions";
 import { TextInputMask } from "react-web-masked-text";
 import { MoneyMaskedToStringUnmasked } from "utils";
 
-import "./vinhoForm.css";
+import "./styles.css";
 
 function VinhoForm({ propSubmit }) {
   const [IdVinho] = useState(store.getState().vinhoState.IdVinho);

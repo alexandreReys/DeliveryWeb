@@ -27,7 +27,7 @@
   box-shadow: 0 4px 4px #000;
   border-radius: 5px;
   margin: 20px 0;
-  padding: 10px 8px 0px;
+  padding: 10px 8px 7px;
   background-color: #ca0303;
   color: white;
   font-weight: bolder;
@@ -154,7 +154,7 @@
   box-shadow: 0 4px 4px #000;
   /* background-color: #e0dbdb; */
   background-color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 #order-details .order-details b {

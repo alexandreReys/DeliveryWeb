@@ -6,6 +6,9 @@ import Home from "pages/admin/home/Home";
 import Login from "pages/admin/login/Login";
 import Products from "pages/admin/products/Products";
 import Orders from "pages/admin/orders/Orders";
+import Notifications from "pages/admin/notifications/Notifications";
+import Deliveryman from "pages/admin/deliveryman/Deliveryman";
+
 import Main from "pages/shopping/main/Main";
 import ShoppingCart from "pages/shopping/shopping-cart/ShoppingCart";
 import SelectedProduct from "pages/shopping/selected-product/SelectedProduct";
@@ -13,12 +16,11 @@ import DeliveryAddress from "pages/shopping/delivery-address/DeliveryAddress";
 import PurchaseConfirmation from "pages/shopping/payment-confirmation/PaymentConfirmation";
 import OrderConfirmation from "pages/shopping/order-confirmation/OrderConfirmation";
 import ShoppingList from "pages/shopping/shopping-list/ShoppingList";
-
 import PrivacyPolicy from "pages/shopping/privacy-policiy/PrivacyPolicy";
+import ShoppingListCateg from "pages/shopping/shopping-list-categ/ShoppingListCateg";
 
 import TestModal from "components/modal/testModal";
 import TestPrint from "components/print/TestPrint";
-import ShoppingListCateg from "pages/shopping/shopping-list-categ/ShoppingListCateg";
 
 const Routes = () => (
   <Switch>
@@ -29,6 +31,8 @@ const Routes = () => (
     <PrivateRoute path="/admin" component={Orders} />
     <PrivateRoute path="/products" component={Products} />
     <PrivateRoute path="/orders" component={Orders} />
+    <PrivateRoute path="/notifications" component={Notifications} />
+    <PrivateRoute path="/deliveryman" component={Deliveryman} />
     <Route path="/shopping-cart" component={ShoppingCart} />
     <Route path="/selected-product" component={SelectedProduct} />
     <Route path="/delivery-address" component={DeliveryAddress} />

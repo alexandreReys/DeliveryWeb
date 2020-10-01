@@ -4,8 +4,8 @@ import { history } from "routes/history";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { DebounceInput } from "react-debounce-input";
 
-import VinhoForm from "./components/vinhoForm/VinhoForm";
-import VinhoItem from "./components/vinhoItem/VinhoItem";
+import DeliverymanForm from "./components/deliverymanForm/DeliverymanForm";
+import DeliverymanItem from "./components/deliverymanItem/DeliverymanItem";
 import store from "store";
 
 import {
@@ -24,7 +24,7 @@ import {
 
 import "./styles.css";
 
-const Products = ({ operacaoVinho }) => {
+const Deliveryman = ({ operacaoVinho }) => {
     const [loading, setLoading] = useState(true);
     const [loadingText] = useState(store.getState().defaultState.loadingText);
 
@@ -111,7 +111,7 @@ const Products = ({ operacaoVinho }) => {
     };
     
     return (
-        <div id="vinhos">
+        <div id="deliveryman">
             {(operacaoVinho === "list" || operacaoVinho === "delete") && (
                 <div className="vinho-list">
 
@@ -176,7 +176,7 @@ const Products = ({ operacaoVinho }) => {
                         <>
                             <ul className="mt-3">
                                 {vinhos.map((vinho) => (
-                                    <VinhoItem
+                                    <DeliverymanItem
                                         key={vinho.IdVinho}
                                         vinho={vinho}
                                         onDelete={handlerDeleteButton}
@@ -204,7 +204,7 @@ const Products = ({ operacaoVinho }) => {
 
             {(operacaoVinho === "add" || operacaoVinho === "edit") && (
                 <div className="vinho-form">
-                    <VinhoForm propSubmit={handleFormSaveButton} />
+                    <DeliverymanForm propSubmit={handleFormSaveButton} />
                 </div>
             )}
         </div>
@@ -213,4 +213,4 @@ const Products = ({ operacaoVinho }) => {
 
 export default connect((state) => ({
     operacaoVinho: state.vinhoState.operacaoVinho,
-}))(Products);
+}))(Deliveryman);

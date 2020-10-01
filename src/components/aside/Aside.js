@@ -30,11 +30,11 @@ const Aside = () => {
 
         <p
           onClick={() => {
-            history.push("/admin");
+            history.push("/notifications");
             return;
           }}
         >
-          Configurações
+          Notificações
         </p>
       </div>
     </aside>

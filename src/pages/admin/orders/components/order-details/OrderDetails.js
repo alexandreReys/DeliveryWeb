@@ -65,9 +65,9 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
         <DeliveryTicket ref={componentRef} />
 
         <div className="order-date-time">
-          <h5>
+          <div>
             Pedido: {order.IdOrder} - {dateTime}
-          </h5>
+          </div>
         </div>
 
         <div className="order-items-group">
