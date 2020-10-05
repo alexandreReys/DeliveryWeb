@@ -22,12 +22,15 @@ import {
     deleteVinho,
 } from "services/productService";
 
+import * as categoryService from "services/categoryService";
+
+
 import "./styles.css";
 
 const Products = ({ operacaoVinho }) => {
     const [loading, setLoading] = useState(true);
     const [loadingText] = useState(store.getState().defaultState.loadingText);
-
+    
     const [vinhos, setProducts] = useState([]);
 
     const [searching, setSearching] = useState(false);
@@ -38,20 +41,21 @@ const Products = ({ operacaoVinho }) => {
         store.dispatch(actionVinhoList());
         getProductsList();
     }, []);
-
+    
     useEffect(() => {
         if (!loading) getProductsNome(searchText);
         // eslint-disable-next-line
     }, [searchText]);
-
+    
     const handlerListAddButton = () => {
         store.dispatch(actionVinhoAdd());
     };
-
+    
     async function getProductsList() {
         async function loadProducts() {
             setSearchText("");
             setLoading(true);
+            await categoryService.get();
             const response = await getProducts();
             setLoading(false);
             setProducts(response);

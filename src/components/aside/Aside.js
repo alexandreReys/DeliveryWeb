@@ -21,11 +21,29 @@ const Aside = () => {
 
         <p
           onClick={() => {
+            history.push("/category");
+            return;
+          }}
+        >
+          Categorias
+        </p>
+
+        <p
+          onClick={() => {
             history.push("/products");
             return;
           }}
         >
           Produtos
+        </p>
+
+        <p
+          onClick={() => {
+            history.push("/deliveryman");
+            return;
+          }}
+        >
+          Entregadores
         </p>
 
         <p

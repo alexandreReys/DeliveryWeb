@@ -1,0 +1,26 @@
+.vinho-item {
+  background-color: #fff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 1);
+  border-radius: 7px;
+  padding: 10px;
+}
+.vinho-item .titulo {
+  color: rgb(0, 0, 112);
+}
+.vinho-item .span2 {
+  font-size: 0.8rem;
+  color: rgb(0, 0, 0);
+}
+.vinho-item .aaa {
+  float: right;
+  font-size: 1.1rem;
+}
+.vinho-item .edit-icon {
+  color: green;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.vinho-item .trash-icon {
+  color: red;
+  cursor: pointer;
+}

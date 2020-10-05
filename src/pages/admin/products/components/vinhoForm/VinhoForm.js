@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Select from 'react-select';
+
 import store from "store";
 import { actionVinhoList } from "store/actions";
 import { TextInputMask } from "react-web-masked-text";
 import { MoneyMaskedToStringUnmasked } from "utils";
 
-import "./vinhoForm.css";
+import "./styles.css";
 
 function VinhoForm({ propSubmit }) {
   const [IdVinho] = useState(store.getState().vinhoState.IdVinho);
@@ -17,9 +19,26 @@ function VinhoForm({ propSubmit }) {
   const [Imagem1Vinho] = useState(store.getState().vinhoState.Imagem1Vinho);
   const [Imagem1IdVinho] = useState(store.getState().vinhoState.Imagem1IdVinho);
   const [previewSource, setPreviewSource] = useState(store.getState().vinhoState.Imagem1Vinho);
-
+  
+  const [options, setOptions] = useState([]);
 
   /////////////////////////////////////////////////
+
+  useEffect( ()=>{ 
+    Options() ;
+  }, []);
+
+  function Options() {
+    let categories = store.getState().categoryState.categories;
+    const opt = categories.map( it  => {
+      return {
+        value: it.DescriptionCategory,
+        label: it.DescriptionCategory,
+      };
+    });
+    setOptions(opt);
+  };
+
   async function handleSubmit() {
     // e.preventDefault();
 
@@ -57,7 +76,6 @@ function VinhoForm({ propSubmit }) {
   /////////////////////////////////////////////////
   return (
     <div id="product-form" className="product-form-container">
-
 
 
       <div className="product-form-header">
@@ -116,7 +134,7 @@ function VinhoForm({ propSubmit }) {
             </div>
 
             {/* Tipo */}
-            <div className="input-block">
+            {/* <div className="input-block">
               <label htmlFor="TipoVinho">Tipo</label>
               <input
                 className="product-form-input-txt"
@@ -126,7 +144,31 @@ function VinhoForm({ propSubmit }) {
                 value={TipoVinho}
                 onChange={(e) => setTipoVinho(e.target.value)}
               />
+            </div> */}
+
+
+
+
+
+
+            {/* TipoVinho */}
+            <div className="input-block">
+              <label htmlFor="TipoVinho">Categoria do produto</label>
+              <Select
+                className="product-form-input-txt"
+                // name="TipoVinho"
+                // value={TipoVinho}
+                placeholder={TipoVinho}
+                onChange={ e => setTipoVinho(e.value) }
+                options={options}
+              />
             </div>
+
+
+
+
+
+
 
             {/* Código ERP */}
             <div className="input-block">
@@ -139,7 +181,7 @@ function VinhoForm({ propSubmit }) {
                 onChange={(e) => setCodigoErpVinho(e.target.value)}
               />
             </div>
-
+            
             {/* Comentário sobre o produto */}
             <div className="input-block">
               <label htmlFor="ComentarioVinho">

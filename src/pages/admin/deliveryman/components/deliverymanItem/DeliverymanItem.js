@@ -2,47 +2,39 @@ import React from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import store from "store";
-import { actionVinhoEdit } from "store/actions";
-import { moneyMask } from "utils/masks";
+import { actionDeliverymanEdit } from "store/actions";
 
 import "./styles.css";
 
-function VinhoItem({ vinho, onDelete }) {
-  const precoVinho = moneyMask(vinho.PrecoVinho);
+function DeliverymanItem({ deliveryman, onDelete }) {
 
-  const handlerEditButton = (vinho) => {
-    const dadosVinho = {
-      IdVinho: vinho.IdVinho,
-      DescricaoVinho: vinho.DescricaoVinho,
-      PrecoVinho: vinho.PrecoVinho,
-      TipoVinho: vinho.TipoVinho,
-      ClassificacaoVinho: vinho.ClassificacaoVinho,
-      PaisVinho: vinho.PaisVinho,
-      GarrafaVinho: vinho.GarrafaVinho,
-      ComentarioVinho: vinho.ComentarioVinho,
-      CodigoErpVinho: vinho.CodigoErpVinho,
-      Imagem1Vinho: vinho.Imagem1Vinho,
-      Imagem1IdVinho: vinho.Imagem1IdVinho,
+  const handlerEditButton = (deliveryman) => {
+    const dados = {
+      Id: deliveryman.Id,
+      email: deliveryman.email,
+      password: deliveryman.password,
+      name: deliveryman.name,
+
     };
-    store.dispatch(actionVinhoEdit(dadosVinho));
+    store.dispatch(actionDeliverymanEdit(dados));
   };
 
   return (
     <li className="vinho-item">
       <header>
-        <strong className="titulo">{vinho.DescricaoVinho}</strong>
+        <strong className="titulo">{deliveryman.name}</strong>
       </header>
       <content>
-        <span className="span2">Preço: {precoVinho}</span>
+        <span className="span2">Usuário: {deliveryman.email}</span>
         <div className="aaa">
           <FiEdit
             className="edit-icon ml-3"
-            onClick={() => handlerEditButton(vinho)}
+            onClick={() => handlerEditButton(deliveryman)}
           />
           <FaTrashAlt
             className="trash-icon ml-2"
             onClick={() => {
-              onDelete(vinho.IdVinho);
+              onDelete(deliveryman.Id);
             }}
           />
         </div>
@@ -51,4 +43,4 @@ function VinhoItem({ vinho, onDelete }) {
   );
 }
 
-export default VinhoItem;
+export default DeliverymanItem;

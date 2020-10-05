@@ -2,34 +2,34 @@
   padding: 20px 5px;
 }
 
-#deliveryman {
+#category {
   /* margin: 0 auto; */
   padding: 70px 10px;
 }
 
 
 
-#deliveryman .header {
+#category .header {
   background-color: steelblue;
 }
-#deliveryman .header, .buttons {
+#category .header, .buttons {
   border-left: 1px solid #90a4ae;
   border-right: 1px solid #90a4ae;
   border-bottom: 1px solid #90a4ae;
   padding: 8px 20px;
 }
-#deliveryman .header-text {
+#category .header-text {
   font-size: 1.4rem;
   color: white;
 }
-#deliveryman .buttons {
+#category .buttons {
   display: flex;
   flex-direction: row;
   background-color: blanchedalmond;
   padding-top: 15px;
   padding-bottom: 13px;
 }
-#deliveryman .button {
+#category .button {
   border: 1px solid #cecece;
   width: 160px;
   padding: 5px 0;
@@ -43,23 +43,23 @@
   margin-right: 20px;
   margin-bottom: 4px;
 }
-#deliveryman .button:hover {
+#category .button:hover {
   background-color: navy;
 }
 
 
 
-#deliveryman .btnMais {
+#category .btnMais {
   position: fixed;
   float: bottom;
   bottom: 65px;
   right: 15px;
   z-index: 100;
 }
-#deliveryman .btnMais {
+#category .btnMais {
   display: inline-block;
 }
-#deliveryman .btnCircular {
+#category .btnCircular {
   border-radius: 50%;
   box-shadow: 0 4px 4px #000;
   font-size: 20px;
@@ -67,11 +67,11 @@
   color: white;
   background-color: blue;;
 }
-#deliveryman .btnCircular:hover {
+#category .btnCircular:hover {
   background-color: #2979ff;
 }
 
-#deliveryman .deliveryman-form {
+#category .category-form {
   width: 100%;
   border: 1px solid grey;
   /* background: #fff; */
@@ -82,30 +82,30 @@
   /* color: #333; */
 }
 
-#deliveryman .deliveryman-list ul {
+#category .category-list ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   list-style: none;
 }
 
-#deliveryman #loading h5 {
+#category #loading h5 {
   color: red;
 }
 
 @media (max-width: 1000px) {
-  #deliveryman .deliveryman-list ul {
+  #category .category-list ul {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 700px) {
-  #deliveryman .deliveryman-list ul {
+  #category .category-list ul {
     grid-template-columns: 1fr;
   }
 }
 
-.deliveryman-list-header {
+.category-list-header {
   display: flex;
   justify-content: space-between;
   /* margin-bottom: 8px; */

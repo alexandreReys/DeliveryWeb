@@ -1,78 +1,41 @@
 import React, { useState } from "react";
 import store from "store";
-import { actionVinhoList } from "store/actions";
-import { TextInputMask } from "react-web-masked-text";
-import { MoneyMaskedToStringUnmasked } from "utils";
+import { actionDeliverymanList } from "store/actions";
 
 import "./styles.css";
 
-function VinhoForm({ propSubmit }) {
-  const [IdVinho] = useState(store.getState().vinhoState.IdVinho);
-  const [DescricaoVinho, setDescricaoVinho] = useState(store.getState().vinhoState.DescricaoVinho);
-  const [PrecoVinho, setPrecoVinho] = useState(store.getState().vinhoState.PrecoVinho);
-  const [TipoVinho, setTipoVinho] = useState(store.getState().vinhoState.TipoVinho);
-  const [ComentarioVinho, setComentarioVinho] = useState(store.getState().vinhoState.ComentarioVinho);
-  const [CodigoErpVinho, setCodigoErpVinho] = useState(store.getState().vinhoState.CodigoErpVinho);
-  const [fileInputState] = useState();
-  const [Imagem1Vinho] = useState(store.getState().vinhoState.Imagem1Vinho);
-  const [Imagem1IdVinho] = useState(store.getState().vinhoState.Imagem1IdVinho);
-  const [previewSource, setPreviewSource] = useState(store.getState().vinhoState.Imagem1Vinho);
-
+function DeliverymanForm({ propSubmit }) {
+  const [Id] = useState(store.getState().deliverymanState.Id);
+  const [email, setEmail] = useState(store.getState().deliverymanState.email);
+  const [password, setPassword] = useState(store.getState().deliverymanState.password);
+  const [name, setName] = useState(store.getState().deliverymanState.name);
 
   /////////////////////////////////////////////////
   async function handleSubmit() {
     // e.preventDefault();
 
-    let precoVinho = MoneyMaskedToStringUnmasked(PrecoVinho);
+    const formData = { Id, email, password, name };
 
-    const formData = {
-      IdVinho,
-      DescricaoVinho,
-      PrecoVinho: precoVinho,
-      TipoVinho,
-      ComentarioVinho,
-      CodigoErpVinho,
-      Imagem1Vinho,
-      Imagem1IdVinho,
-      base64EncodedImage: previewSource,
-    };
-
-    store.dispatch(actionVinhoList());
+    store.dispatch(actionDeliverymanList());
     await propSubmit(formData);
-  }
-
-  function handleFileInputChange(e) {
-    const file = e.target.files[0];
-    previewFile(file);
-  };
-
-  function previewFile(file) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    }
   }
 
   /////////////////////////////////////////////////
   return (
     <div id="product-form" className="product-form-container">
 
-
-
       <div className="product-form-header">
         <div className="product-form-header-text">
-          Produtos
+          Entregadores
         </div>
       </div>
       <div className="product-form-buttons">
         <button className="button" onClick={() => handleSubmit()}>
           Salvar
         </button>
-
         <button
           className="product-form-button"
-          onClick={() => store.dispatch(actionVinhoList())}
+          onClick={() => store.dispatch(actionDeliverymanList())}
         >
           Cancelar
           </button>
@@ -84,106 +47,54 @@ function VinhoForm({ propSubmit }) {
       <main>
         <form onSubmit={handleSubmit}>
           <div className="product-form-form-columns">
-            {/* Descrição */}
+
+            {/* email */}
             <div className="input-block">
-              <label htmlFor="DescricaoVinho">Descrição</label>
+              <label htmlFor="email">Usuário</label>
               <input
                 className="product-form-input-txt"
-                name="DescricaoVinho"
-                id="DescricaoVinho"
+                name="email"
+                id="email"
                 required
                 autoComplete="new-password"
-                value={DescricaoVinho}
-                onChange={(e) => setDescricaoVinho(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
-            {/* PrecoVinho */}
+            {/* password */}
             <div className="input-block">
-              <label htmlFor="PrecoVinho">Preço</label>
-              <TextInputMask
-                kind={"money"}
+              <label htmlFor="password">Senha</label>
+              <input
                 className="product-form-input-txt"
-                name="PrecoVinho"
-                id="PrecoVinho"
+                name="password"
+                id="password"
                 required
                 autoComplete="new-password"
-                value={PrecoVinho}
-                onChange={(text) => {
-                  setPrecoVinho(text);
-                }}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
-            {/* Tipo */}
+            {/* name */}
             <div className="input-block">
-              <label htmlFor="TipoVinho">Tipo</label>
+              <label htmlFor="name">Nome do entregador</label>
               <input
                 className="product-form-input-txt"
-                name="TipoVinho"
-                id="TipoVinho"
+                name="name"
+                id="name"
+                required
                 autoComplete="new-password"
-                value={TipoVinho}
-                onChange={(e) => setTipoVinho(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
 
-            {/* Código ERP */}
-            <div className="input-block">
-              <label htmlFor="CodigoErpVinho">Código ERP</label>
-              <input
-                className="product-form-input-txt"
-                name="CodigoErpVinho"
-                id="CodigoErpVinho"
-                value={CodigoErpVinho}
-                onChange={(e) => setCodigoErpVinho(e.target.value)}
-              />
-            </div>
-
-            {/* Comentário sobre o produto */}
-            <div className="input-block">
-              <label htmlFor="ComentarioVinho">
-                Comentário sobre o produto
-              </label>
-              <textarea
-                className="product-form-input-txt"
-                name="ComentarioVinho"
-                id="ComentarioVinho"
-                rows="10"
-                autoComplete="new-password"
-                value={ComentarioVinho}
-                onChange={(e) => setComentarioVinho(e.target.value)}
-              />
-            </div>
-
-            {/* Imagem 1 */}
-            <div className="input-block">
-              <label className="product-form-label-select-img" htmlFor="ImagemInput1Vinho">
-                Selecionar Imagem
-              </label>
-
-              <input
-                type="file"
-                name="ImagemInput1Vinho"
-                id="ImagemInput1Vinho"
-                onChange={handleFileInputChange}
-                value={fileInputState}
-              />
-              <div className="product-form-image-container">
-                <img
-                  src={previewSource}
-                  className="fotoProduto"
-                  alt=".  Não selecionado"
-                />
-              </div>
-            </div>
           </div>
-
-
         </form>
       </main>
     </div>
   );
 }
 
-export default VinhoForm;
+export default DeliverymanForm;

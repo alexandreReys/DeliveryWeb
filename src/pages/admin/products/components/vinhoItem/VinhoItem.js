@@ -5,7 +5,7 @@ import store from "store";
 import { actionVinhoEdit } from "store/actions";
 import { moneyMask } from "utils/masks";
 
-import "./vinhoItem.css";
+import "./styles.css";
 
 function VinhoItem({ vinho, onDelete }) {
   const precoVinho = moneyMask(vinho.PrecoVinho);

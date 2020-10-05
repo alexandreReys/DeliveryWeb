@@ -5,6 +5,8 @@ import vinhoReducer from "./reducers/vinhoReducer";
 import cartReducer from "./reducers/cartReducer";
 import deliveryAddressReducer from "./reducers/deliveryAddressReducer";
 import orderReducer from "./reducers/orderReducer";
+import deliverymanReducer from "./reducers/deliverymanReducer";
+import categoryReducer from "./reducers/categoryReducer";
 
 export default combineReducers({
   defaultState: defaultReducer,
@@ -13,4 +15,6 @@ export default combineReducers({
   cartState: cartReducer,
   deliveryAddressState: deliveryAddressReducer,
   orderState: orderReducer,
+  deliverymanState: deliverymanReducer,
+  categoryState: categoryReducer,
 });

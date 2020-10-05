@@ -71,7 +71,7 @@
   margin-left: 3px;
   font-weight: bold;
 }
-#product-form main input, select {
+#product-form main input, Select {
   height: 32px;
 }
 
@@ -111,6 +111,7 @@ select {
 
 .product-form-input-txt {
   width: 100%;
+  color: black;
 }
 
 .product-form-image-container {

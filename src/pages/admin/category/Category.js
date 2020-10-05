@@ -4,93 +4,91 @@ import { history } from "routes/history";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { DebounceInput } from "react-debounce-input";
 
-import DeliverymanForm from "./components/deliverymanForm/DeliverymanForm";
-import DeliverymanItem from "./components/deliverymanItem/DeliverymanItem";
+import CategoryForm from "./components/categoryForm/CategoryForm";
+import CategoryItem from "./components/categoryItem/CategoryItem";
 import store from "store";
 
 import {
     actionAdminModuleActivate,
-    actionDeliverymanAdd,
-    actionDeliverymanList,
+    actionCategoryAdd,
+    actionCategoryList,
 } from "store/actions";
 
-// import { get, getByName, post, put, deleteById } from "services/deliverymanService";
-import * as deliverymanService from "services/deliverymanService";
+// import { get, getByDescription, post, put, deleteById } from "services/categoryService";
+import * as categoryService from "services/categoryService";
 
 import "./styles.css";
 
-const Deliveryman = ({ operacaoDeliveryman }) => {
+const Category = ({ operacaoCategory }) => {
     const [loading, setLoading] = useState(true);
     const [loadingText] = useState(store.getState().defaultState.loadingText);
-    const [deliverymen, setDeliverymen] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [searching, setSearching] = useState(false);
     const [searchText, setSearchText] = useState("");
 
     useEffect(() => {
         store.dispatch(actionAdminModuleActivate());
-        store.dispatch(actionDeliverymanList());
+        store.dispatch(actionCategoryList());
         getList();
     }, []);
 
     useEffect(() => {
-        if (!loading) getByName(searchText);
+        if (!loading) getByDescription(searchText);
         // eslint-disable-next-line
     }, [searchText]);
 
     const handlerListAddButton = () => {
-        store.dispatch(actionDeliverymanAdd());
+        store.dispatch(actionCategoryAdd());
     };
 
     async function getList() {
-        async function loadDeliverymen() {
+        async function loadCategories() {
             setSearchText("");
             setLoading(true);
-            const response = await deliverymanService.get();
+            const response = await categoryService.get();
             setLoading(false);
-            setDeliverymen(response);
+            setCategories(response);
         }
-        loadDeliverymen();
-    }
+        loadCategories();
+    };
 
-    async function getByName(searchText) {
-        async function loadByName(searchText) {
+    async function getByDescription(searchText) {
+        async function loadByDescription(searchText) {
             setLoading(true);
-            const response = await deliverymanService.getByName(searchText);
+            const response = await categoryService.getByDescription(searchText);
             setLoading(false);
-            setDeliverymen(response);
+            setCategories(response);
         }
-        loadByName(searchText);
-    }
+        loadByDescription(searchText);
+    };
 
     async function handleFormSaveButton(formData) {
-        if (operacaoDeliveryman === "add") {
-            const dlman = deliverymen.filter((deliveryman) => {
-                return deliveryman.name === formData.name;
+
+        if (operacaoCategory === "add") {
+            const dlman = categories.filter((category) => {
+                return category.DescriptionCategory === formData.DescriptionCategory;
             });
 
             if (dlman === null || dlman.length === 0) {
-                // Inclui no BD
-                const response = await deliverymanService.post(formData);
+                const response = await categoryService.post(formData);
                 if (response.affectedRows > 0) getList();
-            }
-        }
+            };
+        };
 
-        if (operacaoDeliveryman === "edit") {
-            // Altera no BD
-            const response = await deliverymanService.put(formData);
-
-            if (!response) setDeliverymen([]);
+        if (operacaoCategory === "edit") {
+            const response = await categoryService.put(formData);
+            if (!response) setCategories([]);
             else if (response.affectedRows > 0) {
                 await getList();
-            }
-        }
-    }
+            };
+        };
+    };
 
     const handlerDeleteButton = async (id) => {
         const r = window.confirm("Confirma Exclusão ??");
         if (r === true) {
             // Deletar no BD
-            const response = await deliverymanService.deleteById(id);
+            const response = await categoryService.deleteById(id);
             if (response.affectedRows > 0) await getList();
         }
     };
@@ -100,13 +98,13 @@ const Deliveryman = ({ operacaoDeliveryman }) => {
     };
     
     return (
-        <div id="deliveryman">
-            {(operacaoDeliveryman === "list" || operacaoDeliveryman === "delete") && (
-                <div className="deliveryman-list">
+        <div id="category">
+            {(operacaoCategory === "list" || operacaoCategory === "delete") && (
+                <div className="category-list">
 
                     <div className="header">
                         <div className="header-text">
-                            Entregadores
+                            Categorias de Produto
                         </div>
                     </div>
 
@@ -120,7 +118,7 @@ const Deliveryman = ({ operacaoDeliveryman }) => {
                         </button>
                     </div>
 
-                    <div className="deliveryman-list-header">
+                    <div className="category-list-header">
 
                         <div></div>
                         <div
@@ -161,10 +159,10 @@ const Deliveryman = ({ operacaoDeliveryman }) => {
                     {!loading && (
                         <>
                             <ul className="mt-3">
-                                {deliverymen.map((deliveryman) => (
-                                    <DeliverymanItem
-                                        key={deliveryman.Id}
-                                        deliveryman={deliveryman}
+                                {categories.map((category) => (
+                                    <CategoryItem
+                                        key={category.IdCategory}
+                                        category={category}
                                         onDelete={handlerDeleteButton}
                                     />
                                 ))}
@@ -188,9 +186,9 @@ const Deliveryman = ({ operacaoDeliveryman }) => {
                 </div>
             )}
 
-            {(operacaoDeliveryman === "add" || operacaoDeliveryman === "edit") && (
-                <div className="deliveryman-form">
-                    <DeliverymanForm propSubmit={handleFormSaveButton} />
+            {(operacaoCategory === "add" || operacaoCategory === "edit") && (
+                <div className="category-form">
+                    <CategoryForm propSubmit={handleFormSaveButton} />
                 </div>
             )}
         </div>
@@ -198,5 +196,5 @@ const Deliveryman = ({ operacaoDeliveryman }) => {
 };
 
 export default connect((state) => ({
-    operacaoDeliveryman: state.deliverymanState.operacaoDeliveryman,
-}))(Deliveryman);
+    operacaoCategory: state.categoryState.operacaoCategory,
+}))(Category);

@@ -8,6 +8,7 @@ import Products from "pages/admin/products/Products";
 import Orders from "pages/admin/orders/Orders";
 import Notifications from "pages/admin/notifications/Notifications";
 import Deliveryman from "pages/admin/deliveryman/Deliveryman";
+import Category from "pages/admin/category/Category";
 
 import Main from "pages/shopping/main/Main";
 import ShoppingCart from "pages/shopping/shopping-cart/ShoppingCart";
@@ -33,6 +34,8 @@ const Routes = () => (
     <PrivateRoute path="/orders" component={Orders} />
     <PrivateRoute path="/notifications" component={Notifications} />
     <PrivateRoute path="/deliveryman" component={Deliveryman} />
+    <PrivateRoute path="/category" component={Category} />
+
     <Route path="/shopping-cart" component={ShoppingCart} />
     <Route path="/selected-product" component={SelectedProduct} />
     <Route path="/delivery-address" component={DeliveryAddress} />

@@ -78,3 +78,35 @@ export function actionGetOrderItems(orderItems) {
 export function actionGetOrderHistory(orderHistory) {
   return { type: "ACTION_GET_ORDER_HISTORY", orderHistory };
 }
+
+export function actionDeliverymanGet(data) {
+  return { type: "ACTION_DELIVERYMAN_GET", data };
+}
+export function actionDeliverymanAdd() {
+  return { type: "ACTION_DELIVERYMAN_ADD" };
+}
+export function actionDeliverymanEdit(dados) {
+  return { type: "ACTION_DELIVERYMAN_EDIT", dados };
+}
+export function actionDeliverymanDelete() {
+  return { type: "ACTION_DELIVERYMAN_DELETE" };
+}
+export function actionDeliverymanList() {
+  return { type: "ACTION_DELIVERYMAN_LIST" };
+}
+
+export function actionCategoryGet(data) {
+  return { type: "ACTION_CATEGORY_GET", data };
+}
+export function actionCategoryAdd() {
+  return { type: "ACTION_CATEGORY_ADD" };
+}
+export function actionCategoryEdit(dados) {
+  return { type: "ACTION_CATEGORY_EDIT", dados };
+}
+export function actionCategoryDelete() {
+  return { type: "ACTION_CATEGORY_DELETE" };
+}
+export function actionCategoryList() {
+  return { type: "ACTION_CATEGORY_LIST" };
+}
