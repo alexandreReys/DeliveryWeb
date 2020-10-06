@@ -32,11 +32,10 @@ class Login extends Component {
   validations = yup.object().shape({
     user: yup
       .string()
-      .email("Usuário deve ser um e-mail valido")
       .required("Digite o Nome de Usuário"),
     pwd: yup
       .string()
-      .min(8, "A Senha deve ter 8 caracteres no minimo")
+      .min(3, "A Senha deve ter 3 caracteres no minimo")
       .required("Digite a Senha"),
   });
 
