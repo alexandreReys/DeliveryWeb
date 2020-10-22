@@ -67,17 +67,19 @@ const actionAddToCart = (state, { itemToAdd }) => {
     addedItem.quantity += itemToAdd.quantity;
     return {
       ...state,
+      shipping: itemToAdd.shippingTax,
       quantityOfItems: state.quantityOfItems + itemToAdd.quantity,
       subtotal: state.subtotal + itemTotal,
-      total: state.subtotal + itemTotal + state.shipping,
+      total: (state.subtotal + itemToAdd.shippingTax) + itemTotal,
     };
   } else {
     return {
       ...state,
       addedItems: addedItems,
+      shipping: itemToAdd.shippingTax,
       quantityOfItems: state.quantityOfItems + itemToAdd.quantity,
       subtotal: state.subtotal + itemTotal,
-      total: state.subtotal + itemTotal + state.shipping,
+      total: (state.subtotal + itemToAdd.shippingTax) + itemTotal,
     };
   }
 };
@@ -95,9 +97,10 @@ const actionSubFromCart = (state, { itemToSub }) => {
     addedItem.quantity -= itemToSub.quantity;
     return {
       ...state,
+      shipping: itemToSub.shippingTax,
       quantityOfItems: state.quantityOfItems - itemToSub.quantity,
       subtotal: state.subtotal - itemTotal,
-      total: state.subtotal - itemTotal + state.shipping,
+      total: (state.subtotal + state.shipping) - itemTotal,
     };
   }
 };

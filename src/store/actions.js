@@ -4,6 +4,9 @@ export function actionAdminModuleActivate() {
 export function actionAdminModuleDeactivate() {
   return { type: "ACTION_ADMIN_MODULE_DEACTIVATE" };
 }
+export function actionGetSettings(settings) {
+  return { type: "ACTION_GET_SETTINGS", settings };
+};
 
 export function actionLogin(user) {
   return { type: "ACTION_LOGIN", user };

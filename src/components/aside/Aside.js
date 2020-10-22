@@ -54,6 +54,24 @@ const Aside = () => {
         >
           Notificações
         </p>
+
+        <p
+          onClick={() => {
+            history.push("/settings");
+            return;
+          }}
+        >
+          Settings
+        </p>
+
+        <p
+          onClick={() => {
+            history.push("/product-deactivate");
+            return;
+          }}
+        >
+          Desativar
+        </p>
       </div>
     </aside>
   );

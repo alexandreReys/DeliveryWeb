@@ -19,7 +19,7 @@ const ShoppingListCateg = () => {
   }, []);
 
   async function getProductList() {
-    const data = await productService.getProductsByCategory(
+    const data = await productService.getActiveProductsByCategory(
       store.getState().vinhoState.selectedCategory
     );
     setProducts(data);

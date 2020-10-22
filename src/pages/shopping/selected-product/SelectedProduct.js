@@ -69,6 +69,7 @@ const ProductContent = ({ selectedProduct }) => {
       quantity,
       price: selectedProduct.price,
       image: selectedProduct.image,
+      shippingTax: store.getState().defaultState.shippingTaxSettings,
     };
     store.dispatch(actionAddToCart(itemToAdd));
     history.push("/");

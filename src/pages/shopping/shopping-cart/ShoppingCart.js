@@ -53,6 +53,7 @@ const ShoppingCart = ({
                     id: item.id,
                     quantity: 1,
                     price: item.price,
+                    shippingTax: store.getState().defaultState.shippingTaxSettings,
                   };
                   store.dispatch(actionSubFromCart(itemToSub));
                 }}
@@ -69,6 +70,7 @@ const ShoppingCart = ({
                     quantity: 1,
                     price: item.price,
                     image: null,
+                    shippingTax: store.getState().defaultState.shippingTaxSettings,
                   };
                   store.dispatch(actionAddToCart(itemToAdd));
                 }}

@@ -43,21 +43,31 @@ export const getProductsByCategory = async (category) => {
     });
 };
 
+export const getActiveProductsByCategory = async (category) => {
+  const params = { params: { Category: category } };
+
+  return await api
+    .get("/products/category/actives", params)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return null;
+    });
+};
+
 export const getProductsPorNome = async (nome) => {
   const params = { params: { DescricaoVinho: nome } };
   const resp = await api.get("/products/name", params);
   return resp.data;
 };
 
-
 export const deleteVinho = async (itemId) => {
   const params = { params: { IdVinho: itemId } };
   const resp = await api.delete("/products", params);
   return resp.data;
 };
-
-
-
 
 export const postVinho = async (data) => {
   const insertData = await processImage(data);
@@ -69,15 +79,22 @@ export const postVinho = async (data) => {
   return resp.data;
 };
 
-
-
-
 export const putVinho = async (data) => {
   const updateData = await processImage(data);
   try {
     var response = await api.put("/products", updateData);
   } catch (error) {
     return console.error("ErrorMessage (putVinho): ", error);
+  }
+  return response.data;
+};
+
+export const deactivate = async (updateData) => {
+  try {
+    console.log("deactivate-updateData",updateData);
+    var response = await api.put("/products/deactivate", updateData);
+  } catch (error) {
+    return console.error("ErrorMessage (product-deactivate): ", error);
   }
   return response.data;
 };

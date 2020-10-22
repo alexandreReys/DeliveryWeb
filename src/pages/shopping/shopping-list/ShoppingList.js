@@ -6,6 +6,8 @@ import { BsArrowRight } from "react-icons/bs";
 
 import { moneyMask } from "utils/masks";
 import * as productService from "services/productService";
+import * as settingsService from "services/settingsService";
+
 import store from "store";
 import {
   actionSelectProduct,
@@ -27,9 +29,9 @@ const ShoppingList = () => {
 
   async function getProductList() {
     const data = await productService.getProductsGroupedByCategory();
-    if (data) {
-      setProducts(data);
-    }
+    if (data) { setProducts(data) };
+
+    await settingsService.get();
   }
 
   return (
