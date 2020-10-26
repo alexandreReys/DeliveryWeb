@@ -91,10 +91,27 @@ export const putVinho = async (data) => {
 
 export const deactivate = async (updateData) => {
   try {
-    console.log("deactivate-updateData",updateData);
     var response = await api.put("/products/deactivate", updateData);
   } catch (error) {
     return console.error("ErrorMessage (product-deactivate): ", error);
+  }
+  return response.data;
+};
+
+export const setPromotion = async (updateData) => {
+  try {
+    var response = await api.put("/products/promotion", updateData);
+  } catch (error) {
+    return console.error("ErrorMessage (product-promotion): ", error);
+  }
+  return response.data;
+};
+
+export const setPromotionalPrice = async (updateData) => {
+  try {
+    var response = await api.put("/products/promotional-price", updateData);
+  } catch (error) {
+    return console.error("ErrorMessage (product-promotional-price): ", error);
   }
   return response.data;
 };

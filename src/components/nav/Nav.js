@@ -71,7 +71,7 @@ const navLoggedUser = (loggedUser) => {
           loginService.logout();
         }}
       >
-        Sair
+        Logout
       </button>
     </div>
   );

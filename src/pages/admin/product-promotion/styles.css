@@ -1,0 +1,110 @@
+.product-promotion-container {
+  padding: 70px 10px;
+}
+.product-promotion-header {
+  background-color: steelblue;
+}
+.product-promotion-header,
+.product-promotion-buttons,
+.product-promotion-warning,
+.product-promotion-content {
+  border-left: 1px solid #90a4ae;
+  border-right: 1px solid #90a4ae;
+  border-bottom: 1px solid #90a4ae;
+  padding: 8px 20px;
+}
+.product-promotion-header-text {
+  font-size: 1.4rem;
+  color: white;
+}
+.product-promotion-buttons {
+  display: flex;
+  flex-direction: row;
+  background-color: blanchedalmond;
+  padding-top: 15px;
+  padding-bottom: 13px;
+}
+.product-promotion-button {
+  border: 1px solid rgb(206, 206, 206);
+  width: 160px;
+  padding: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 3px 3px #000;
+  background-color: #78909c;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-bottom: 4px;
+}
+.product-promotion-button:hover {
+  background-color: navy;
+}
+
+.product-promotion-button-price {
+  border: 1px solid rgb(206, 206, 206);
+  width: 100px;
+  padding: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 3px 3px #000;
+  background-color: #78909c;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.product-promotion-button-price:hover {
+  background-color: navy;
+}
+
+.product-promotion-warning {
+  margin-bottom: 20px;
+}
+.product-promotion-warning-text {
+  font-size: 0.8rem;
+  color: black;
+}
+.product-promotion-content .product-promotion-input-group {
+  margin: 5px 0 15px 0;
+  display: flex;
+  flex-direction: column;
+}
+.product-promotion-content
+  .product-promotion-input-group
+  .product-promotion-label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: navy;
+  margin-bottom: 0;
+}
+.product-promotion-content
+  .product-promotion-input-group
+  .product-promotion-input {
+  padding: 5px;
+  border-radius: 3px;
+  border-color: silver;
+  box-shadow: 2px 2px 0 grey;
+  background-color: #fff;
+}
+
+.product-promotion-square {
+  text-align: left;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.product-promotion-product {
+  width: 100%;
+  margin-left: 30px;
+  font-size: 0.8rem;
+}
+
+.product-promotion-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: spaceBetween;
+  margin-left: 20px;
+}

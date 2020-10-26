@@ -11,6 +11,7 @@ import Deliveryman from "pages/admin/deliveryman/Deliveryman";
 import Category from "pages/admin/category/Category";
 import Settings from "pages/admin/settings/Settings";
 import ProductDeactivate from "pages/admin/product-deactivate/ProductDeactivate";
+import ProductPromotion from "pages/admin/product-promotion/ProductPromotion";
 
 import Main from "pages/shopping/main/Main";
 import ShoppingCart from "pages/shopping/shopping-cart/ShoppingCart";
@@ -39,6 +40,7 @@ const Routes = () => (
     <PrivateRoute path="/category" component={Category} />
     <PrivateRoute path="/settings" component={Settings} />
     <PrivateRoute path="/product-deactivate" component={ProductDeactivate} />
+    <PrivateRoute path="/product-promotion" component={ProductPromotion} />
 
     <Route path="/shopping-cart" component={ShoppingCart} />
     <Route path="/selected-product" component={SelectedProduct} />

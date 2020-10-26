@@ -48,6 +48,24 @@ const Aside = () => {
 
         <p
           onClick={() => {
+            history.push("/product-deactivate");
+            return;
+          }}
+        >
+          Desativar
+        </p>
+
+        <p
+          onClick={() => {
+            history.push("/product-promotion");
+            return;
+          }}
+        >
+          Promoção
+        </p>
+
+        <p
+          onClick={() => {
             history.push("/notifications");
             return;
           }}
@@ -64,14 +82,6 @@ const Aside = () => {
           Settings
         </p>
 
-        <p
-          onClick={() => {
-            history.push("/product-deactivate");
-            return;
-          }}
-        >
-          Desativar
-        </p>
       </div>
     </aside>
   );

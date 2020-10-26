@@ -1,25 +1,25 @@
-.purchase-confirmation-container {
+.payment-confirmation-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   /* grid-template-rows: 1fr 1fr 1fr; */
   padding: 70px 20px 70px;
 }
 @media (max-width: 1100px) {
-  .purchase-confirmation-container {
+  .payment-confirmation-container {
     grid-template-columns: 1fr 2fr 1fr;
   }
 }
 @media (max-width: 800px) {
-  .purchase-confirmation-container {
+  .payment-confirmation-container {
     grid-template-columns: 1fr 3fr 1fr;
   }
 }
 @media (max-width: 600px) {
-  .purchase-confirmation-container {
+  .payment-confirmation-container {
     grid-template-columns: 1fr;
   }
 }
-#purchaseConfirmation header {
+#payment-confirmation header {
   grid-column-start: 1;
   grid-column-end: 4;
 
@@ -28,7 +28,7 @@
 }
 
 /* ///////////////////////////////////////////////////////// */
-#purchaseConfirmation content {
+#payment-confirmation content {
   grid-column-start: 2;
   grid-column-end: 3;
 
@@ -36,30 +36,30 @@
   text-align: center;
 }
 
-#purchaseConfirmation .purchase-confirmation-title {
+#payment-confirmation .payment-confirmation-title {
   text-align: left;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-#purchaseConfirmation .purchase-confirmation-buttons {
+#payment-confirmation .payment-confirmation-buttons {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 20px;
   column-gap: 20px;
 }
-#purchaseConfirmation .purchase-confirmation-button {
+#payment-confirmation .payment-confirmation-button {
   padding: 25px 0 15px;
   font-size: 0.4rem;
   cursor: pointer;
 }
-#purchaseConfirmation .button-enabled {
+#payment-confirmation .button-enabled {
   background-color: red;
   color: #fff;
   box-shadow: 0 4px 4px #000;
   font-weight: bold;
 }
-#purchaseConfirmation .button-disabled {
+#payment-confirmation .button-disabled {
   background-color: rgb(214, 214, 214);
   color: rgb(100, 100, 100);
   border-color: peru;
@@ -69,18 +69,18 @@
   border-right-style: none;
 }
 
-#purchaseConfirmation .money-change-container {
+#payment-confirmation .money-change-container {
   height: 60px;
   font-size: 1.2rem;
   font-weight: bold;
 }
-#purchaseConfirmation .money-change-display-true {
+#payment-confirmation .money-change-display-true {
   display: block;
 }
-#purchaseConfirmation .money-change-display-false {
+#payment-confirmation .money-change-display-false {
   display: none;
 }
-#purchaseConfirmation .money-change-input {
+#payment-confirmation .money-change-input {
   height: 32px;
   font-weight: bold;
   margin-left: 5px;
@@ -88,7 +88,7 @@
   border: 1 solid grey;
 }
 
-#purchaseConfirmation .purchase-confirmation-warning {
+#payment-confirmation .payment-confirmation-warning {
   text-align: left;
   margin-top: 30px;
 }
@@ -97,14 +97,14 @@
 FOOTER ////////////////////////////////////////////////////////
 */
 
-#purchaseConfirmation footer {
+#payment-confirmation footer {
   grid-column-start: 1;
   grid-column-end: 4;
 
   padding: 30px;
   text-align: center;
 }
-#purchaseConfirmation footer .button-sair {
+#payment-confirmation footer .button-sair {
   padding: 10px 100px;
 
   font-size: 1.4rem;
@@ -117,7 +117,7 @@ FOOTER ////////////////////////////////////////////////////////
   box-shadow: 0 4px 4px #000;
   cursor: pointer;
 }
-#purchaseConfirmation footer .button-sair:hover {
+#payment-confirmation footer .button-sair:hover {
   color: #fff;
   background-color: #000064;
   box-shadow: 0 4px 4px #000;

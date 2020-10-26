@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FiToggleRight, FiToggleLeft } from "react-icons/fi";
+import { FaRegSquare, FaRegCheckSquare } from "react-icons/fa";
 
 import { history } from "routes/history";
 import store from "store";
@@ -53,7 +53,7 @@ const ProductStatus = () => {
             )}
 
             {!loading && (
-                products.map((product) => <Product product={product} /> )
+                products.map((product) => <Product product={product} />)
             )}
         </div >
     );
@@ -63,34 +63,42 @@ const Product = ({ product }) => {
     const [active, setActive] = useState(product.StatusVinho);
     return (
         <>
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "spaceBetween", marginLeft: 20 }}>
+            <div 
+                style={{ 
+                    display: "flex", 
+                    flexDirection: "row", 
+                    justifyContent: "spaceBetween", 
+                    marginLeft: 20,
+                    cursor: "pointer",
+                }}
+                onClick={() => {
+                    setActive(!active);
+                    productService.deactivate({
+                        StatusVinho: !active ? 1 : 0,
+                        IdVinho: product.IdVinho,
+                    });
+                }}
+            >
 
-                { !!active && (
-                    <FiToggleRight
-                        style={{fontSize: 30, color: "green", cursor: "pointer"}}
-                        onClick={() => {
-                            setActive( !active );
-                            productService.deactivate({
-                                StatusVinho: !active ? 1 : 0, 
-                                IdVinho: product.IdVinho,
-                            });                        }}
+                {!!active && (
+                    <FaRegCheckSquare
+                        style={{ fontSize: "1.4rem", color: "blue", cursor: "pointer" }}
                     />
                 )}
 
-                { !active && (
-                    <FiToggleLeft
-                        style={{fontSize: 30, color: "red", cursor: "pointer"}}
-                        onClick={() => {
-                            setActive( !active );
-                            productService.deactivate({
-                                StatusVinho: !active ? 1 : 0, 
-                                IdVinho: product.IdVinho,
-                            });
-                        }}
+                {!active && (
+                    <FaRegSquare
+                        style={{ fontSize: "1.4rem", color: "grey", cursor: "pointer" }}
                     />
                 )}
 
-                <div style={{ marginLeft: 30, width: "70%", color: active ? "black" : "silver" }}>
+                <div style={{
+                    marginLeft: 30,
+                    width: "100%",
+                    color: active ? "black" : "silver",
+                    fontSize: "0.8rem",
+                    fontWeight: active ? "bold" : "normal",
+                }}>
                     {product.DescricaoVinho}
                 </div>
 

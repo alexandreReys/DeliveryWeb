@@ -1,3 +1,24 @@
+import Sweetalert2 from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const Swal = withReactContent(Sweetalert2);
+
+export const requestPromotionalPrice = () => {
+  const inputValue = 0;
+  
+  Swal.fire({
+    title: 'Enter your IP address',
+    input: 'number',
+    inputLabel: 'Preço Promocional',
+    inputValue: inputValue,
+    showCancelButton: true,
+    inputValidator: (value) => {
+      if (!value) {
+        return 'You need to write something!'
+      }
+    }
+  })
+};
+
 export const estadosList = [
   { estado: "AC", estadoNome: "Acre" },
   { estado: "AL", estadoNome: "Alagoas" },
