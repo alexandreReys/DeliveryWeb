@@ -1,6 +1,56 @@
 import { api } from "./api";
 import store from "store";
 import { actionVinhoGetProducts } from "store/actions";
+import * as imageService from "../services/imageService";
+
+export const postVinho = async (data) => {
+  const insertData = await processImage(data);
+  try {
+    var resp = await api.post("/products", insertData);
+  } catch (error) {
+    return console.error("ErrorMessage (postVinho): ", error);
+  }
+  return resp.data;
+};
+
+const processImage = async (data) => {
+  if (data.base64EncodedImage !== data.Imagem1Vinho) {
+    if (data.Imagem1IdVinho) {
+      try {
+        await imageService.del(data.Imagem1IdVinho);
+      } catch (error) {
+        console.log("Error Message (processImage/delete)", error);
+      }
+    };
+
+    if (data.base64EncodedImage) {
+      try {
+        const imageUploadResponse = await imageService.post(data.base64EncodedImage);
+        data.Imagem1Vinho = imageUploadResponse.url;
+        data.Imagem1IdVinho = imageUploadResponse.public_id;
+      } catch (error) {
+        console.log("Error Message (processImage/post)", error);
+      }
+    };
+  };
+  
+  const response = {
+    DescricaoVinho: data.DescricaoVinho,
+    PrecoVinho: data.PrecoVinho,
+    TipoVinho: data.TipoVinho,
+    ClassificacaoVinho: data.ClassificacaoVinho,
+    PaisVinho: data.PaisVinho,
+    GarrafaVinho: data.GarrafaVinho,
+    ComentarioVinho: data.ComentarioVinho,
+    CodigoErpVinho: data.CodigoErpVinho,
+    Imagem1Vinho: data.Imagem1Vinho,
+    Imagem1IdVinho: data.Imagem1IdVinho,
+    Imagem2Vinho: null,
+    Imagem3Vinho: null,
+    IdVinho: data.IdVinho,
+  };
+  return response;
+};
 
 export const getProducts = async () => {
   const resp = await api.get("/products");
@@ -69,16 +119,6 @@ export const deleteVinho = async (itemId) => {
   return resp.data;
 };
 
-export const postVinho = async (data) => {
-  const insertData = await processImage(data);
-  try {
-    var resp = await api.post("/products", insertData);
-  } catch (error) {
-    return console.error("ErrorMessage (postVinho): ", error);
-  }
-  return resp.data;
-};
-
 export const putVinho = async (data) => {
   const updateData = await processImage(data);
   try {
@@ -116,66 +156,3 @@ export const setPromotionalPrice = async (updateData) => {
   return response.data;
 };
 
-const processImage = async (data) => {
-  // console.log("pré Imagem1IdVinho", data.Imagem1IdVinho);
-  // console.log("pré base64EncodedImage", data.base64EncodedImage);
-
-  if (data.base64EncodedImage !== data.Imagem1Vinho) {
-    if (data.Imagem1IdVinho) {
-      try {
-        await deleteProductImage(data.Imagem1IdVinho);
-      } catch (error) {
-        console.log("Error Message (processImage/delete)", error);
-      }
-    };
-
-    if (data.base64EncodedImage) {
-      try {
-        const imageUploadResponse = await postProductImage(data.base64EncodedImage);
-        data.Imagem1Vinho = imageUploadResponse.url;
-        data.Imagem1IdVinho = imageUploadResponse.public_id;
-      } catch (error) {
-        console.log("Error Message (processImage/post)", error);
-      }
-    };
-  };
-  
-  const response = {
-    DescricaoVinho: data.DescricaoVinho,
-    PrecoVinho: data.PrecoVinho,
-    TipoVinho: data.TipoVinho,
-    ClassificacaoVinho: data.ClassificacaoVinho,
-    PaisVinho: data.PaisVinho,
-    GarrafaVinho: data.GarrafaVinho,
-    ComentarioVinho: data.ComentarioVinho,
-    CodigoErpVinho: data.CodigoErpVinho,
-    Imagem1Vinho: data.Imagem1Vinho,
-    Imagem1IdVinho: data.Imagem1IdVinho,
-    Imagem2Vinho: null,
-    Imagem3Vinho: null,
-    IdVinho: data.IdVinho,
-  };
-  return response;
-};
-
-export const postProductImage = async (base64EncodedImage) => {
-  const body = { data: base64EncodedImage };
-  const headers = { headers: { "content-type": "application/json" } };
-  try {
-    var response = await api.post("/products/img", body, headers);
-  } catch (error) {
-    return console.log("postProductImage", error);
-  }
-  return response.data;
-};
-
-export const deleteProductImage = async (publicId) => {
-  const params = { params: { Imagem1IdVinho: publicId } };
-  const headers = { headers: { "content-type": "application/json" } };
-  try {
-    var response = await api.delete("/products/img", params, headers);
-  } catch (error) {
-    return console.log("deleteProductImage", error);
-  }
-  return response.data;
-};

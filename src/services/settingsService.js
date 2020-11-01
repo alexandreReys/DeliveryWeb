@@ -1,6 +1,7 @@
 import { api } from "./api";
 import store from "../store";
 import { actionGetSettings } from "../store/actions";
+import * as imageService from "../services/imageService";
 
 export const get = async () => {
     try {
@@ -14,7 +15,8 @@ export const get = async () => {
     return settings;
 };
 
-export const put = async (updateData) => {
+export const put = async (data) => {
+    const updateData = await processImage(data);
     try {
         var resp = await api.put("/delivery-settings", updateData);
     } catch (error) {
@@ -23,4 +25,38 @@ export const put = async (updateData) => {
     }
     store.dispatch(actionGetSettings(updateData));
     return resp.data;
+};
+
+const processImage = async (data) => {
+    // if updated
+    if (data.AppBannerB64 !== data.AppBannerSettings) {
+        
+        // delete image
+        if (data.AppBannerPublicIdSettings) {
+            try {
+                await imageService.del(data.AppBannerPublicIdSettings);
+            } catch (error) {
+                console.error("Error => processImage/deleteImage", error);
+            }
+        };
+
+        // post image
+        if (data.AppBannerB64) {
+            try {
+                const imageUploadResponse = await imageService.post(data.AppBannerB64);
+                data.AppBannerSettings = imageUploadResponse.url;
+                data.AppBannerPublicIdSettings = imageUploadResponse.public_id;
+            } catch (error) {
+                console.log("Error => processImage/postImage", error);
+            }
+        };
+    };
+
+    return {
+        IdSettings: data.IdSettings,
+        AddressSellerSettings: data.AddressSellerSettings,
+        ShippingTaxSettings: data.ShippingTaxSettings,
+        AppBannerSettings: data.AppBannerSettings,
+        AppBannerPublicIdSettings: data.AppBannerPublicIdSettings,
+    };
 };

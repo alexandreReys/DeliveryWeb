@@ -8,13 +8,14 @@ import { MoneyMaskedToStringUnmasked } from "utils";
 
 import "./styles.css";
 
-function VinhoForm({ propSubmit }) {
+function ProductForm({ propSubmit }) {
   const [IdVinho] = useState(store.getState().vinhoState.IdVinho);
   const [DescricaoVinho, setDescricaoVinho] = useState(store.getState().vinhoState.DescricaoVinho);
   const [PrecoVinho, setPrecoVinho] = useState(store.getState().vinhoState.PrecoVinho);
   const [TipoVinho, setTipoVinho] = useState(store.getState().vinhoState.TipoVinho);
   const [ComentarioVinho, setComentarioVinho] = useState(store.getState().vinhoState.ComentarioVinho);
   const [CodigoErpVinho, setCodigoErpVinho] = useState(store.getState().vinhoState.CodigoErpVinho);
+
   const [fileInputState] = useState();
   const [Imagem1Vinho] = useState(store.getState().vinhoState.Imagem1Vinho);
   const [Imagem1IdVinho] = useState(store.getState().vinhoState.Imagem1IdVinho);
@@ -133,24 +134,6 @@ function VinhoForm({ propSubmit }) {
               />
             </div>
 
-            {/* Tipo */}
-            {/* <div className="input-block">
-              <label htmlFor="TipoVinho">Tipo</label>
-              <input
-                className="product-form-input-txt"
-                name="TipoVinho"
-                id="TipoVinho"
-                autoComplete="new-password"
-                value={TipoVinho}
-                onChange={(e) => setTipoVinho(e.target.value)}
-              />
-            </div> */}
-
-
-
-
-
-
             {/* TipoVinho */}
             <div className="input-block">
               <label htmlFor="TipoVinho">Categoria do produto</label>
@@ -163,12 +146,6 @@ function VinhoForm({ propSubmit }) {
                 options={options}
               />
             </div>
-
-
-
-
-
-
 
             {/* Código ERP */}
             <div className="input-block">
@@ -200,7 +177,10 @@ function VinhoForm({ propSubmit }) {
 
             {/* Imagem 1 */}
             <div className="input-block">
-              <label className="product-form-label-select-img" htmlFor="ImagemInput1Vinho">
+              <label 
+                className="product-form-label-select-img" 
+                htmlFor="ImagemInput1Vinho"
+              >
                 Selecionar Imagem
               </label>
 
@@ -228,4 +208,4 @@ function VinhoForm({ propSubmit }) {
   );
 }
 
-export default VinhoForm;
+export default ProductForm;

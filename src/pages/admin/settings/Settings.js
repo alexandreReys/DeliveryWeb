@@ -14,53 +14,100 @@ import "./styles.css";
 
 const Swal = withReactContent(Sweetalert2);
 
-//////////////////////////////////////////////////////////////////////////////
 const Settings = () => {
     const [idSettings, setIdSettings] = useState(0);
     const [addressSellerSettings, setAddressSellerSettings] = useState("");
     const [shippingTaxSettings, setShippingTaxSettings] = useState(0);
 
+    const [fileInputState] = useState();
+    const [appBannerSettings, setAppBannerSettings] = useState("");
+    const [appBannerPublicIdSettings, setAppBannerPublicIdSettings] = useState("");
+    const [appBannerPreview, setAppBannerPreview] = useState("");
+
+    
+    function handleFileInputChange(e) {
+        const file = e.target.files[0];
+        previewFile(file);
+    };
+    
+    function previewFile(file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setAppBannerPreview(reader.result);
+        };
+    };
+    
     useEffect(() => {
         store.dispatch(actions.actionAdminModuleActivate());
 
-        const getSettings = async () => {
+        ( async function getSettings() {
             const response = await settingsService.get()
             setIdSettings(response.IdSettings);
             setAddressSellerSettings(response.AddressSellerSettings);
             setShippingTaxSettings(response.ShippingTaxSettings);
-        };
-        getSettings();
+            setAppBannerSettings(response.AppBannerSettings);
+            setAppBannerPublicIdSettings(response.AppBannerPublicIdSettings);
+            setAppBannerPreview(response.AppBannerSettings);
+        } )();
+
     }, []);
 
-
     const handleSubmit = () => {
-        if (!validateFields({ addressSellerSettings, shippingTaxSettings })) return false;
-        confirmAndExit();
+        if ( validateFields({ addressSellerSettings }) ) confirmAndExit();
 
+        function validateFields(values) {
+            if (!values.addressSellerSettings) {
+                showErrorMessage("Campo Endereço do Estabelecimento é obrigatório !!");
+                return false;
+            }
+            return true;
+
+            function showErrorMessage(message) {
+                Swal.fire({
+                    icon: "error",
+                    title: message,
+                    text: "Oops ...",
+                    position: "top-end",
+                    background: "yellow",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                });
+            };
+        };
         async function confirmAndExit() {
-            Swal.fire({
-                title: 'Confirma ?',
-                // text: "Esta notificação irá para todos os clientes com o app !!",
-                icon: 'warning',
-                position: "top-end",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sim',
-                cancelButtonText: 'Cancelar',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let shippingTaxValue = MoneyMaskedToStringUnmasked(shippingTaxSettings);
+            if (await confirmUpdates()) {
+                updateSettingsInformation();
+                history.push("orders");
+            };
 
-                    settingsService.put({
-                        AddressSellerSettings: addressSellerSettings,
-                        ShippingTaxSettings: shippingTaxValue,
-                        IdSettings: idSettings,
-                    });
-                    history.push("orders");
-                    return true;
-                }
-            });
+            function confirmUpdates() {
+                const confirmationOptions = {
+                    title: 'Confirma ?',
+                    icon: 'warning',
+                    position: "top-end",
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sim',
+                    cancelButtonText: 'Cancelar',
+                };
+                return Swal
+                    .fire(confirmationOptions)
+                    .then(result => result.isConfirmed);
+            };
+            function updateSettingsInformation() {
+                const shippingTaxValue = MoneyMaskedToStringUnmasked(shippingTaxSettings);
+                settingsService.put({
+                    AddressSellerSettings: addressSellerSettings,
+                    ShippingTaxSettings: shippingTaxValue,
+                    IdSettings: idSettings,
+                    AppBannerSettings: appBannerSettings,
+                    AppBannerPublicIdSettings: appBannerPublicIdSettings,
+                    AppBannerB64: appBannerPreview,
+                });
+            };
         };
     };
 
@@ -69,7 +116,7 @@ const Settings = () => {
     };
 
     return (
-        <div id="notifications" className="notifications-container">
+        <div id="settings" className="notifications-container">
             <div className="notifications-header">
                 <div className="notifications-header-text">
                     Settings
@@ -124,29 +171,45 @@ const Settings = () => {
                     />
                 </div>
 
+                {/* appBanner */}
+                <div style={{ marginTop: 40, width: "10%", minWidth: 260 }}>
+                    <label
+                        className="product-form-label-select-img"
+                        htmlFor="ImagemInput1Vinho"
+                    >
+                        Selecionar Imagem para o Baner do Aplicativo
+                    </label>
+                    <input className="input-file-invisible"
+                        style={{display: "none"}}
+                        type="file"
+                        name="ImagemInput1Vinho"
+                        id="ImagemInput1Vinho"
+                        onChange={handleFileInputChange}
+                        value={fileInputState}
+                    >
+                    </input>
+                    <div className="settings-app-banner-container">
+                        <img
+                            src={appBannerPreview}
+                            style={ {width: 200, borderRadius: 10} }
+                            alt="selecionar imagem"
+                        />
+                    </div>
+                </div>
+
             </div>
         </div>
     );
 };
 
-const validateFields = (values) => {
-    if (!values.addressSellerSettings) {
-        validateErrorMessage("Campo Endereço do Estabelecimento é obrigatório !!");
-        return false;
-    }
-    return true;
-};
-const validateErrorMessage = (message) => {
-    Swal.fire({
-        icon: "error",
-        title: message,
-        text: "Oops ...",
-        position: "top-end",
-        background: "yellow",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-    });
-};
-
 export default Settings;
+
+// .settings-app-banner-img {
+//     margin-top: 10px;
+//     margin-bottom: 30px;
+//     padding-top: 20px;
+//     padding-bottom: 20px;
+//     text-align: center;
+//     border: 1px solid silver;
+//     font-size: 0.8rem;
+//   }

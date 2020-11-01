@@ -4,8 +4,8 @@ import { history } from "routes/history";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { DebounceInput } from "react-debounce-input";
 
-import VinhoForm from "./components/vinhoForm/VinhoForm";
-import VinhoItem from "./components/vinhoItem/VinhoItem";
+import ProductForm from "./components/product-form/ProductForm";
+import ProductListItem from "./components/product-list-item/ProductListItem";
 import store from "store";
 
 import {
@@ -180,7 +180,7 @@ const Products = ({ operacaoVinho }) => {
                         <>
                             <ul className="mt-3">
                                 {vinhos.map((vinho) => (
-                                    <VinhoItem
+                                    <ProductListItem
                                         key={vinho.IdVinho}
                                         vinho={vinho}
                                         onDelete={handlerDeleteButton}
@@ -208,7 +208,7 @@ const Products = ({ operacaoVinho }) => {
 
             {(operacaoVinho === "add" || operacaoVinho === "edit") && (
                 <div className="vinho-form">
-                    <VinhoForm propSubmit={handleFormSaveButton} />
+                    <ProductForm propSubmit={handleFormSaveButton} />
                 </div>
             )}
         </div>

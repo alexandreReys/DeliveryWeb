@@ -7,7 +7,7 @@ import { moneyMask } from "utils/masks";
 
 import "./styles.css";
 
-function VinhoItem({ vinho, onDelete }) {
+function ProductListItem({ vinho, onDelete }) {
   const precoVinho = moneyMask(vinho.PrecoVinho);
 
   const handlerEditButton = (vinho) => {
@@ -51,4 +51,4 @@ function VinhoItem({ vinho, onDelete }) {
   );
 }
 
-export default VinhoItem;
+export default ProductListItem;
