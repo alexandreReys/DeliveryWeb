@@ -7,6 +7,7 @@ import { moneyMask } from "utils/masks";
 import store from "store";
 import * as productService from "services/productService";
 import * as actions from "store/actions";
+import * as utils from "utils";
 
 import "./styles.css";
 
@@ -66,6 +67,8 @@ const MainContent = ({ products }) => {
 };
 
 const Product = ({ product }) => {
+  product = utils.adjustPromotionalPrice(product);
+
   const precoVinho = moneyMask(product.PrecoVinho);
 
   return (

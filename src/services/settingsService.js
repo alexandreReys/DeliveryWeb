@@ -28,7 +28,7 @@ export const put = async (data) => {
 };
 
 const processImage = async (data) => {
-    // if updated
+    // if AppBanner updated
     if (data.AppBannerB64 !== data.AppBannerSettings) {
         
         // delete image
@@ -52,11 +52,37 @@ const processImage = async (data) => {
         };
     };
 
+    // if WebBanner updated
+    if (data.WebBannerB64 !== data.WebBannerSettings) {
+        
+        // delete image
+        if (data.WebBannerPublicIdSettings) {
+            try {
+                await imageService.del(data.WebBannerPublicIdSettings);
+            } catch (error) {
+                console.error("Error => processImage/deleteImage", error);
+            }
+        };
+
+        // post image
+        if (data.WebBannerB64) {
+            try {
+                const imageUploadResponse = await imageService.post(data.WebBannerB64);
+                data.WebBannerSettings = imageUploadResponse.url;
+                data.WebBannerPublicIdSettings = imageUploadResponse.public_id;
+            } catch (error) {
+                console.log("Error => processImage/postImage", error);
+            }
+        };
+    };
+
     return {
         IdSettings: data.IdSettings,
         AddressSellerSettings: data.AddressSellerSettings,
         ShippingTaxSettings: data.ShippingTaxSettings,
         AppBannerSettings: data.AppBannerSettings,
         AppBannerPublicIdSettings: data.AppBannerPublicIdSettings,
+        WebBannerSettings: data.WebBannerSettings,
+        WebBannerPublicIdSettings: data.WebBannerPublicIdSettings,
     };
 };
