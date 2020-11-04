@@ -2,7 +2,7 @@
   /* display: flex;
   flex-direction: column;
   align-items: center; */
-  padding: 67px 20px;
+  padding: 69px 20px;
   background-color: white;
 }
 #shopping-list .img-container {
@@ -10,8 +10,8 @@
   background-color: white;
   box-shadow: 1px 2px 4px #000;
   border-radius: 5px;
-  max-width: 1240px;
-  min-width: 1240px;
+  max-width: 1280px;
+  min-width: 1280px;
 }
 #shopping-list .img-container img {
   display: inline-block;
@@ -24,14 +24,14 @@
 #shopping-list .category-row {
   overflow-x: auto;
   margin-bottom: 10px;
-  max-inline-size: 1100px;
+  max-inline-size: 1280px;
   margin: 0 0 20px;
 }
 #shopping-list .products-container {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  max-inline-size: 1100px;
+  max-inline-size: 1280px;
   margin: 0 auto;
 }
 #shopping-list .product {
