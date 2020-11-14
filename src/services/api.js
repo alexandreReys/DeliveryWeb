@@ -15,9 +15,9 @@ export const api = axios.create({
     baseURL: mysqlBaseUrl,
 });
 
-console.log("envJson.REACT_APP_BASE_URL", envJson.REACT_APP_BASE_URL);
-console.log("process.env.NODE_ENV ", process.env.NODE_ENV);
-console.log("process.env.REACT_APP_BASE_URL", process.env.REACT_APP_BASE_URL);
+// console.log("envJson.REACT_APP_BASE_URL", envJson.REACT_APP_BASE_URL);
+// console.log("process.env.NODE_ENV ", process.env.NODE_ENV);
+// console.log("process.env.REACT_APP_BASE_URL", process.env.REACT_APP_BASE_URL);
 console.log("mysqlBaseUrl", mysqlBaseUrl);
 
 api.interceptors.request.use(async (config) => {
