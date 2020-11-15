@@ -25,6 +25,11 @@ const Settings = () => {
     const [appBannerPublicIdSettings, setAppBannerPublicIdSettings] = useState("");
     const [appBannerPreview, setAppBannerPreview] = useState("");
 
+    const [appLogoPFileInputState] = useState();
+    const [appLogoPSettings, setAppLogoPSettings] = useState("");
+    const [appLogoPPublicIdSettings, setAppLogoPPublicIdSettings] = useState("");
+    const [appLogoPPreview, setAppLogoPPreview] = useState("");
+
     const [webBannerFileInputState] = useState();
     const [webBannerSettings, setWebBannerSettings] = useState("");
     const [webBannerPublicIdSettings, setWebBannerPublicIdSettings] = useState("");
@@ -38,9 +43,15 @@ const Settings = () => {
             setIdSettings(response.IdSettings);
             setAddressSellerSettings(response.AddressSellerSettings);
             setShippingTaxSettings(response.ShippingTaxSettings);
+
             setAppBannerSettings(response.AppBannerSettings);
             setAppBannerPublicIdSettings(response.AppBannerPublicIdSettings);
             setAppBannerPreview(response.AppBannerSettings);
+
+            setAppLogoPSettings(response.AppLogoPSettings);
+            setAppLogoPPublicIdSettings(response.AppLogoPPublicIdSettings);
+            setAppLogoPPreview(response.AppLogoPSettings);
+
             setWebBannerSettings(response.WebBannerSettings);
             setWebBannerPublicIdSettings(response.WebBannerPublicIdSettings);
             setWebBannerPreview(response.WebBannerSettings);
@@ -57,6 +68,18 @@ const Settings = () => {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             setAppBannerPreview(reader.result);
+        };
+    };
+
+    function appLogoPHandleFileInputChange(e) {
+        const file = e.target.files[0];
+        appLogoPPreviewFile(file);
+    };
+    function appLogoPPreviewFile(file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setAppLogoPPreview(reader.result);
         };
     };
 
@@ -135,9 +158,15 @@ const Settings = () => {
                         AddressSellerSettings: addressSellerSettings,
                         ShippingTaxSettings: shippingTaxValue,
                         IdSettings: idSettings,
+
                         AppBannerSettings: appBannerSettings,
                         AppBannerPublicIdSettings: appBannerPublicIdSettings,
                         AppBannerB64: appBannerPreview,
+
+                        AppLogoPSettings: appLogoPSettings,
+                        AppLogoPPublicIdSettings: appLogoPPublicIdSettings,
+                        AppLogoPB64: appLogoPPreview,
+
                         WebBannerSettings: webBannerSettings,
                         WebBannerPublicIdSettings: webBannerPublicIdSettings,
                         WebBannerB64: webBannerPreview,
@@ -242,6 +271,32 @@ const Settings = () => {
                         </div>
                     </div>
 
+                    {/* appLogoPSettings */}
+                    <div style={{ marginTop: 40, marginRight: 80, width: "10%", minWidth: 260 }}>
+                        <label
+                            className="product-form-label-select-img"
+                            htmlFor="appLogoPSettings"
+                        >
+                            Selecionar Imagem para o Logotipo do App
+                        </label>
+                        <input className="input-file-invisible"
+                            style={{ display: "none" }}
+                            type="file"
+                            name="appLogoPSettings"
+                            id="appLogoPSettings"
+                            onChange={appLogoPHandleFileInputChange}
+                            value={appLogoPFileInputState}
+                        >
+                        </input>
+                        <div className="settings-app-banner-container">
+                            <img
+                                src={appLogoPPreview}
+                                style={{ width: 200, borderRadius: 10 }}
+                                alt="selecionar imagem"
+                            />
+                        </div>
+                    </div>
+                    
                     {/* webBannerSettings */}
                     <div style={{ marginTop: 40, width: "10%", minWidth: 520 }}>
                         <label
@@ -270,6 +325,7 @@ const Settings = () => {
                     </div>
                     
                 </div>
+
 
             </div>
         </div>

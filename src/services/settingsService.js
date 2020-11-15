@@ -52,6 +52,29 @@ const processImage = async (data) => {
         };
     };
 
+    if (data.AppLogoPB64 !== data.AppLogoPSettings) {
+        
+        // delete image
+        if (data.AppLogoPPublicIdSettings) {
+            try {
+                await imageService.del(data.AppLogoPPublicIdSettings);
+            } catch (error) {
+                console.error("Error => processImage/deleteImage", error);
+            }
+        };
+
+        // post image
+        if (data.AppLogoPB64) {
+            try {
+                const imageUploadResponse = await imageService.post(data.AppLogoPB64);
+                data.AppLogoPSettings = imageUploadResponse.url;
+                data.AppLogoPPublicIdSettings = imageUploadResponse.public_id;
+            } catch (error) {
+                console.log("Error => processImage/postImage", error);
+            }
+        };
+    };
+
     // if WebBanner updated
     if (data.WebBannerB64 !== data.WebBannerSettings) {
         
@@ -82,6 +105,8 @@ const processImage = async (data) => {
         ShippingTaxSettings: data.ShippingTaxSettings,
         AppBannerSettings: data.AppBannerSettings,
         AppBannerPublicIdSettings: data.AppBannerPublicIdSettings,
+        AppLogoPSettings: data.AppLogoPSettings,
+        AppLogoPPublicIdSettings: data.AppLogoPPublicIdSettings,
         WebBannerSettings: data.WebBannerSettings,
         WebBannerPublicIdSettings: data.WebBannerPublicIdSettings,
     };
