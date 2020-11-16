@@ -17,6 +17,7 @@ export const get = async () => {
 
 export const put = async (data) => {
     const updateData = await processImage(data);
+
     try {
         var resp = await api.put("/delivery-settings", updateData);
     } catch (error) {
