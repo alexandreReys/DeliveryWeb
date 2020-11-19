@@ -88,9 +88,10 @@ const actionAddToCart = (state, { itemToAdd }) => {
     };
     
     function getPrice( stateAddedItems, itemToAdd ) {
+        const promotionalQtty = process.env.NODE_ENV === "development" ? 3 : 333333;  // TESTE
         const stateAddedItem = stateAddedItems.find((item) => item.id === itemToAdd.id);
         const qtty = !stateAddedItem ? itemToAdd.quantity : itemToAdd.quantity + stateAddedItem.quantity;
-        const price =  qtty >= 3 ? 2 : itemToAdd.price;
+        const price =  qtty >= promotionalQtty ? itemToAdd.price / 4 : itemToAdd.price;
     
         return { price, stateAddedItem };
     };
