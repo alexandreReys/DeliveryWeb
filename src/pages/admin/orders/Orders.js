@@ -206,7 +206,7 @@ const OrdersTable = ({ orders }) => {
           <tr>
             <th>Pedido</th>
             <th>Nome</th>
-            <th>Avaliaçao</th>
+            {/* <th>Avaliaçao</th> */}
             <th>Data</th>
             <th>Status</th>
             <th>Entregador</th>
@@ -230,7 +230,7 @@ const OrdersTable = ({ orders }) => {
               >
                 <td>{order.IdOrder}</td>
                 <td>{order.CustomerNameOrder}</td>
-                <td>{order.EvaluationOrder}</td>
+                {/* <td>{order.EvaluationOrder}</td> */}
                 <td>
                   {utils.formattedDateTime(order.DateOrder, order.TimeOrder)}
                 </td>

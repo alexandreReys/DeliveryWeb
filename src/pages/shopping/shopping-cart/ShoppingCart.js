@@ -35,7 +35,7 @@ const ShoppingCart = ({
           <div className="c2"> </div>
           <div className="t3">Qtde</div>
           <div className="c4"> </div>
-          <div className="c5">Preço</div>
+          <div className="c5">Total</div>
           <div className="c6"> </div>
         </div>
 

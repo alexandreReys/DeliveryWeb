@@ -4,7 +4,6 @@ import MainItem from "pages/shopping/main/components/mainItem/MainItem";
 import { actionVinhoList } from "store/actions";
 import { DebounceInput } from "react-debounce-input";
 import { getProducts } from "services/productService";
-import banner from "assets/img/banner1.png";
 import store from "store";
 import {
   actionAdminModuleDeactivate,
@@ -18,6 +17,7 @@ const App = ({ operacaoVinho }) => {
   const [loading, setLoading] = useState(true);
   const [loadingText] = useState(store.getState().defaultState.loadingText);
   const [searchText, setSearchText] = useState("");
+  const [banner] = useState(store.getState().defaultState.webBannerSettings);
 
   useEffect(() => {
     store.dispatch(actionGetDeliveryAddress());

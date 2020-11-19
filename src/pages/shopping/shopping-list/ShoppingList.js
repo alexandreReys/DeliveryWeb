@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import banner from "assets/img/banner1.png";
-import logo from "assets/img/logo.png";
+import noImage from "assets/img/no-image.png";
 import { history } from "routes/history";
 import { BsArrowRight } from "react-icons/bs";
 
@@ -120,7 +119,7 @@ const ProductRow = ({ categoryProducts }) => {
                     {!!product.Imagem1Vinho && (
                         <img src={product.Imagem1Vinho} alt="loading ..." />
                     )}
-                    {!product.Imagem1Vinho && <img src={logo} alt="loading ..." />}
+                    {!product.Imagem1Vinho && <img src={noImage} alt="loading ..." />}
                 </div>
 
                 <hr />

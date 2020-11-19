@@ -1,6 +1,6 @@
 import React from "react";
 import store from "store";
-import logo from "assets/img/logo.png";
+import noImage from "assets/img/no-image.png";
 import { actionSelectProduct } from "store/actions";
 import { history } from "routes/history";
 import { moneyMask } from "utils/masks";
@@ -34,7 +34,7 @@ function MainItem({ vinho, onDelete }) {
         {!!vinho.Imagem1Vinho && (
           <img src={vinho.Imagem1Vinho} alt="loading ..." />
         )}
-        {!vinho.Imagem1Vinho && <img src={logo} alt="loading ..." />}
+        {!vinho.Imagem1Vinho && <img src={noImage} alt="loading ..." />}
       </header>
       <hr />
       <div>

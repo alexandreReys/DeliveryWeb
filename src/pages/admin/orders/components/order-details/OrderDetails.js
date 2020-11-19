@@ -138,11 +138,16 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
       <aside>
         <div className="order-details">
           <div className="order-details-left">
+
             <b>Pedido por</b>
             <br />
             {order.CustomerNameOrder}
             <br />
-            {`Doc: ${order.CustomerDocumentOrder}`}
+            Doc:
+            { !order.CustomerDocumentOrder
+                ? " Não informado"
+                : order.CustomerDocumentOrder
+            }
             <br />
             {`Tel: ${order.CustomerPhoneNumberOrder}`}
             <br />
@@ -154,14 +159,20 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
             <br />
             <b>Comentários</b>
             <br />
-            {!order.CommentsOrder ? "N/A" : order.CommentsOrder}
+            {!order.CommentsOrder ? "( Não informado )" : order.CommentsOrder}
+
+            {/* <br />
+            <br />
+            <b>Avaliação</b> */}
+            {/* <br />
+            {order.EvaluationOrder} */}
+
+          {/* </div> */}
+          {/* <div className="order-details-right"> */}
+
+            
             <br />
             <br />
-            <b>Avaliação</b>
-            <br />
-            {order.EvaluationOrder}
-          </div>
-          <div className="order-details-right">
             <b>Endereço de entrega</b>
             <br />
             {`${order.CustomerStreetOrder}, ${order.CustomerNumberOrder}`}
@@ -182,6 +193,9 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
             <b>Forma de pagamento</b>
             <br />
             {order.PaymantTypeOrder}
+            <br />
+            <br />
+
           </div>
         </div>
 

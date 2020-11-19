@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import banner from "assets/img/banner1.png";
-import logo from "assets/img/logo.png";
+// import banner from "assets/img/banner1.png";
+import noImage from "assets/img/no-image.png";
 import { history } from "routes/history";
 
 import { moneyMask } from "utils/masks";
@@ -36,6 +36,8 @@ const ShoppingListCateg = () => {
 };
 
 const BannerTop = () => {
+  const [banner] = useState(store.getState().defaultState.webBannerSettings);
+
   return (
     <div className="img-container">
       <img className="img-fluid" src={banner} alt="" />
@@ -91,7 +93,7 @@ const Product = ({ product }) => {
         {!!product.Imagem1Vinho && (
           <img src={product.Imagem1Vinho} alt="loading ..." />
         )}
-        {!product.Imagem1Vinho && <img src={logo} alt="loading ..." />}
+        {!product.Imagem1Vinho && <img src={noImage} alt="loading ..." />}
       </div>
       <hr />
       <div className="title">{product.DescricaoVinho}</div>

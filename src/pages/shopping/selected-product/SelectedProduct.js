@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo2 from "assets/img/logo2.png";
+import noImage from "assets/img/no-image.png";
 import { BsArrowLeft } from "react-icons/bs";
 import store from "store";
 import { actionAddToCart } from "store/actions";
@@ -44,7 +44,7 @@ const ProductImage = ({ selectedProduct }) => {
   return (
     <aside>
       {!!selectedProduct.image && <img src={selectedProduct.image} alt="" />}
-      {!selectedProduct.image && <img src={logo2} alt="loading ..." />}
+      {!selectedProduct.image && <img src={noImage} alt="loading ..." />}
     </aside>
   );
 };

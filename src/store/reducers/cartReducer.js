@@ -59,46 +59,46 @@ const actionSelectProduct = (state, { product }) => {
 
 // itemToAdd = id:  description:  quantity:  price:  image:
 const actionAddToCart = (state, { itemToAdd }) => {
-    // console.log("state.addedItems", state.addedItems);
-    // console.log("state.addedItems.length", state.addedItems.length);
-    // console.log("itemToAdd", itemToAdd);
-    // console.log("state.item", state.item);
-
-    // if (state.addedItems.length > 0) {
-    // //   console.log("state.addedItems.quantity", state.addedItems[0].quantity);
-
-    //     if (state.addedItems[0].quantity + itemToAdd.quantity >= 3) {
-    //         itemToAdd.price = 2;
-    //         console.log("itemToAdd.price", itemToAdd.price);
-
-    //         state.addedItems[0].price = itemToAdd.price;
-    //     };
-    // };
-
-    const addedItems2 = [...state.addedItems, itemToAdd];
-    const addedItem = state.addedItems.find((item) => item.id === itemToAdd.id);
-
-    let itemTotal = itemToAdd.price * itemToAdd.quantity;
-
-    if (addedItem) {
-        addedItem.quantity += itemToAdd.quantity;
+    const { price, stateAddedItem } = getPrice( state.addedItems, itemToAdd );
+    
+    if (stateAddedItem) {
+        stateAddedItem.quantity += itemToAdd.quantity;
+        stateAddedItem.price = price;
+        const subt = getSubtotal( state.addedItems );
+    
         return {
             ...state,
             shipping: itemToAdd.shippingTax,
             quantityOfItems: state.quantityOfItems + itemToAdd.quantity,
-            subtotal: state.subtotal + itemTotal,
-            total: (state.subtotal + itemToAdd.shippingTax) + itemTotal,
+            subtotal: subt,
+            total: (subt + itemToAdd.shippingTax),
         };
     } else {
+        const itemToAddTotal = price * itemToAdd.quantity;
+        itemToAdd.price = price;
+    
         return {
             ...state,
-            addedItems: addedItems2,
+            addedItems: [...state.addedItems, itemToAdd],
             shipping: itemToAdd.shippingTax,
             quantityOfItems: state.quantityOfItems + itemToAdd.quantity,
-            subtotal: state.subtotal + itemTotal,
-            total: (state.subtotal + itemToAdd.shippingTax) + itemTotal,
+            subtotal: state.subtotal + itemToAddTotal,
+            total: (state.subtotal + itemToAdd.shippingTax) + itemToAddTotal,
         };
-    }
+    };
+    
+    function getPrice( stateAddedItems, itemToAdd ) {
+        const stateAddedItem = stateAddedItems.find((item) => item.id === itemToAdd.id);
+        const qtty = !stateAddedItem ? itemToAdd.quantity : itemToAdd.quantity + stateAddedItem.quantity;
+        const price =  qtty >= 3 ? 2 : itemToAdd.price;
+    
+        return { price, stateAddedItem };
+    };
+    function getSubtotal( stateAddedItems ) {
+        return stateAddedItems.reduce( 
+            (acc, it) => acc + (it.price * it.quantity), 0 
+        );
+    };
 };
 
 // itemToSub = id:  quantity:  price:
@@ -149,3 +149,4 @@ const actionSelectPaymentType = (state, { paymentTypeData }) => {
         changeValue: paymentTypeData.changeValue,
     };
 };
+

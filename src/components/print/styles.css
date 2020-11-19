@@ -16,7 +16,7 @@
 }
 
 .print-content {
-  width: 430px;
+  width: 400px;
 }
 #DeliveryTicket .ticket-content {
   margin: 20px;
@@ -31,19 +31,18 @@
 }
 
 #DeliveryTicket .qtty-persons,
-#DeliveryTicket .table-item,
 #DeliveryTicket .total {
   display: flex;
   font-size: 1rem;
 }
 
-#DeliveryTicket .table-item span,
-#DeliveryTicket .total span {
-  width: 200px;
+#DeliveryTicket .table-item {
+  display: flex;
+  font-size: 0.9rem;
 }
 
-#DeliveryTicket .product-description {
-  font-weight: bold;
+#DeliveryTicket .total span {
+  width: 200px;
 }
 
 .total {
