@@ -92,7 +92,7 @@ const Header = ({ handleRefresh }) => {
             }}
           >
             P
-          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+            <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
           </div>
 
           <div
@@ -106,7 +106,7 @@ const Header = ({ handleRefresh }) => {
             }}
           >
             S
-          <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
+            <ReactTooltip place="bottom" effect="solid" className="tool-tip" />
           </div>
 
           <div

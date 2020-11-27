@@ -33,6 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "postinstall": "react-scripts build",
     "dev": "SET REACT_APP_ENV=development& react-scripts start",
     "prod": "react-scripts start",
     "build": "react-scripts build",

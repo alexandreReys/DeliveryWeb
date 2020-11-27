@@ -7,7 +7,7 @@ export const get = async () => {
     try {
         var resp = await api.get("/delivery-settings");
     } catch (error) {
-        console.error("ErrorMessage (settingsServuce.get): ", error);
+        console.error("ErrorMessage (settingsService.get): ", error);
         return null;
     }
     const settings = resp.data[0];
@@ -21,7 +21,7 @@ export const put = async (data) => {
     try {
         var resp = await api.put("/delivery-settings", updateData);
     } catch (error) {
-        console.error("ErrorMessage (settingsServuce.put): ", error);
+        console.error("ErrorMessage (settingsService.put): ", error);
         return null;
     }
     store.dispatch(actionGetSettings(updateData));
