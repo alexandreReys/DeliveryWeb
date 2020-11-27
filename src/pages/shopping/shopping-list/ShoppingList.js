@@ -62,7 +62,7 @@ const ShoppingList = () => {
 const MainContent = ({ products }) => {
     return (
         <main>
-            {products.map((it) => (
+            {products.length > 0 && products.map((it) => (
                 <div className="category-row" key={it.category}>
                     <h4>{it.category}</h4>
                     <ProductRow categoryProducts={it.products} />
@@ -75,7 +75,7 @@ const MainContent = ({ products }) => {
 const ProductRow = ({ categoryProducts }) => {
     return (
         <div className="products-container">
-            {categoryProducts.map((product) => (
+            {!!categoryProducts && categoryProducts.map((product) => (
                 <Product product={product} key={product.IdVinho} />
             ))}
             <SeeAll category={categoryProducts[0].TipoVinho} />
