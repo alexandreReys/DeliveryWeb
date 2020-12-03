@@ -5,14 +5,13 @@ import * as envJson from "../.env.json";
 console.log("============================================================");
 console.log("process.env.NODE_ENV ", process.env.NODE_ENV);
 
-// const mysqlBaseUrl =
-//     process.env.NODE_ENV === "development"
-//         ? envJson.REACT_APP_BASE_URL
-//         : process.env.REACT_APP_BASE_URL;
+let mysqlBaseUrl =
+    process.env.NODE_ENV === "development"
+        ? envJson.REACT_APP_BASE_URL
+        : process.env.REACT_APP_BASE_URL;
 
-const mysqlBaseUrl = "https://apidavillaadega.herokuapp.com";
-    
-
+// const mysqlBaseUrl = "https://apidavillaadega.herokuapp.com";
+// const mysqlBaseUrl = "http://adegaweb-api-com.umbler.net";
 
 console.log("============================================================");
 console.log("envJson.REACT_APP_BASE_URL", envJson.REACT_APP_BASE_URL);
