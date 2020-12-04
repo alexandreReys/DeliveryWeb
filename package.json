@@ -35,7 +35,6 @@
   },
   "scripts": {
     "start": "node server",
-    "postinstall": "yarn build",
     "dev": "SET REACT_APP_ENV=development& react-scripts start",
     "prod": "react-scripts start",
     "build": "react-scripts build",
