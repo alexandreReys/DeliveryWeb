@@ -11,7 +11,7 @@ let mysqlBaseUrl =
         : process.env.REACT_APP_BASE_URL;
 
 if (!mysqlBaseUrl) {
-    mysqlBaseUrl = "https://adegaweb-api-com.umbler.net";
+    mysqlBaseUrl = "http://adegaweb-api-com.umbler.net";
     // mysqlBaseUrl = "https://apidavillaadega.herokuapp.com";
 };
 
