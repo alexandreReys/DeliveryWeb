@@ -10,11 +10,13 @@ let mysqlBaseUrl =
         ? envJson.REACT_APP_BASE_URL
         : process.env.REACT_APP_BASE_URL;
 
-// const mysqlBaseUrl = "https://apidavillaadega.herokuapp.com";
-// const mysqlBaseUrl = "http://adegaweb-api-com.umbler.net";
+if (!mysqlBaseUrl) {
+    mysqlBaseUrl = "https://adegaweb-api-com.umbler.net";
+    // mysqlBaseUrl = "https://apidavillaadega.herokuapp.com";
+};
 
 console.log("============================================================");
-console.log("envJson.REACT_APP_BASE_URL", envJson.REACT_APP_BASE_URL);
+console.log("process.env.REACT_APP_TITLE", process.env.REACT_APP_TITLE);
 console.log("============================================================");
 console.log("process.env.REACT_APP_BASE_URL", process.env.REACT_APP_BASE_URL);
 
