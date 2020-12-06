@@ -6,12 +6,14 @@ import * as settings from "../.settings.json";
 
 let mysqlBaseUrl;
 
-console.log(process.env.NODE_ENV);
+
+console.log("============================================================");
+console.log("   " + process.env.NODE_ENV);
+
 
 if (process.env.NODE_ENV === "develop___ment") {
     mysqlBaseUrl = envJson.dev.REACT_APP_BASE_URL;
 } else {
-
     if (!!process.env.REACT_APP_BASE_URL) {
         mysqlBaseUrl = process.env.REACT_APP_BASE_URL;
     } else {
@@ -19,6 +21,8 @@ if (process.env.NODE_ENV === "develop___ment") {
     };
 };
 
+console.log("============================================================");
+console.log("   " + settings.client);
 console.log("============================================================");
 console.log("mysqlBaseUrl", mysqlBaseUrl);
 console.log("============================================================");

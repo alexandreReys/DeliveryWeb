@@ -23,10 +23,5 @@ app.get("*", (req, res) => {// O wildcard '*' serve para servir o mesmo index.ht
 });
 
 app.listen(configs.port, () => {
-    console.log(
-        `Escutando na ${configs.port} !
-         REACT_APP_TITLE : ${process.env.REACT_APP_TITLE}
-         REACT_APP_BASE_URL : ${process.env.REACT_APP_BASE_URL}
-         `
-    );
+    console.log( `Escutando na ${configs.port} !` );
 });

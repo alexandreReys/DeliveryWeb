@@ -194,13 +194,5 @@ export const clientSettings = (id, envJson) => {
         mysqlBaseUrl = envJson.default.barbaros.REACT_APP_BASE_URL;
     };
 
-
-
-
-
-
-
-    
-
     return mysqlBaseUrl;
 };
