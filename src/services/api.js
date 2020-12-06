@@ -1,34 +1,31 @@
 import axios from "axios";
+import * as utils from "../utils";
 import * as loginService from "./loginService";
 import * as envJson from "../.env.json";
+import * as settings from "../.settings.json";
 
-console.log("============================================================");
-console.log("process.env.NODE_ENV ", process.env.NODE_ENV);
+let mysqlBaseUrl;
 
-let mysqlBaseUrl =
-    process.env.NODE_ENV === "development"
-        ? envJson.REACT_APP_BASE_URL
-        : process.env.REACT_APP_BASE_URL;
+console.log(process.env.NODE_ENV);
 
-if (!mysqlBaseUrl) {
-    // mysqlBaseUrl = "http://adegaweb-api-com.umbler.net";
-    //mysqlBaseUrl = "https://apidavillaadega.herokuapp.com";
+if (process.env.NODE_ENV === "develop___ment") {
+    mysqlBaseUrl = envJson.dev.REACT_APP_BASE_URL;
+} else {
 
-    mysqlBaseUrl = "http://adega-api-com.umbler.net/";
+    if (!!process.env.REACT_APP_BASE_URL) {
+        mysqlBaseUrl = process.env.REACT_APP_BASE_URL;
+    } else {
+        mysqlBaseUrl = utils.clientSettings(settings.client, envJson);
+    };
 };
-
-console.log("============================================================");
-console.log("process.env.REACT_APP_TITLE", process.env.REACT_APP_TITLE);
-console.log("============================================================");
-console.log("process.env.REACT_APP_BASE_URL", process.env.REACT_APP_BASE_URL);
-
-export const api = axios.create({
-    baseURL: mysqlBaseUrl,
-});
 
 console.log("============================================================");
 console.log("mysqlBaseUrl", mysqlBaseUrl);
 console.log("============================================================");
+
+export const api = axios.create({
+    baseURL: mysqlBaseUrl,
+});
 
 api.interceptors.request.use(async (config) => {
     const token = loginService.getToken();

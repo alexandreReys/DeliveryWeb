@@ -11,6 +11,7 @@
     "bootstrap": "^4.4.1",
     "express": "^4.17.1",
     "formik": "^2.1.4",
+    "fs": "^0.0.1-security",
     "history": "^4.10.1",
     "jquery": "^3.4.1",
     "normalize.css": "^8.0.1",
@@ -36,7 +37,7 @@
   "scripts": {
     "start": "react-scripts start",
     "prod": "node server",
-    "dev": "SET REACT_APP_ENV=development& react-scripts start",
+    "dev": "SET REACT_APP_NODE_ENV=development& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

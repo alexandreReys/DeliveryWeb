@@ -1,7 +1,7 @@
 import * as envJson from "../../.env.json";
 
 const INITIAL_STATE = {
-  appTitle:  process.env.NODE_ENV === "development"? envJson.REACT_APP_TITLE: process.env.REACT_APP_TITLE,
+  appTitle:  process.env.NODE_ENV === "development"? envJson.dev.REACT_APP_TITLE: process.env.REACT_APP_TITLE,
   loadingText: "Acessando dados ...",
   errorMsgText: "Verificando ...",
   adminModule: false,
