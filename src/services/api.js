@@ -9,6 +9,7 @@ let mysqlBaseUrl;
 
 console.log("============================================================");
 console.log("   " + process.env.NODE_ENV);
+console.log("============================================================");
 
 
 if (process.env.NODE_ENV === "develop___ment") {
