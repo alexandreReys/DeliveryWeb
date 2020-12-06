@@ -35,8 +35,8 @@
     "yup": "^0.28.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "prod": "node server",
+    "start": "node server",
+    "prod": "react-scripts start",
     "dev": "SET REACT_APP_NODE_ENV=development& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
