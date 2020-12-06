@@ -7,9 +7,9 @@ import * as settings from "../.settings.json";
 let mysqlBaseUrl;
 
 
-console.log("============================================================");
+console.log("===================================================");
 console.log("   " + process.env.NODE_ENV);
-console.log("============================================================");
+console.log("");
 
 
 if (process.env.NODE_ENV === "develop___ment") {
@@ -22,11 +22,10 @@ if (process.env.NODE_ENV === "develop___ment") {
     };
 };
 
-console.log("============================================================");
 console.log("   " + settings.client);
-console.log("============================================================");
+console.log("");
 console.log("mysqlBaseUrl", mysqlBaseUrl);
-console.log("============================================================");
+console.log("===================================================");
 
 export const api = axios.create({
     baseURL: mysqlBaseUrl,
