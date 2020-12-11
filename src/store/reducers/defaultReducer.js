@@ -19,6 +19,8 @@ export default function defaultReducer(state = INITIAL_STATE, action) {
       return { ...state, adminModule: false };
     case "ACTION_GET_SETTINGS":
       return functionGetSettings(state, action);
+    case "ACTION_SET_TITLE":
+      return functionSetTitle(state, action);
     default:
       return state;
   }
@@ -31,5 +33,12 @@ const functionGetSettings = (state, { settings }) => {
     shippingTaxSettings: settings.ShippingTaxSettings,
     webBannerSettings: settings.WebBannerSettings,
     webBannerPublicIdSettings: settings.WebBannerPublicIdSettings,
+  };
+};
+
+const functionSetTitle = (state, { title }) => {
+  return {
+    ...state,
+    appTitle: title,
   };
 };

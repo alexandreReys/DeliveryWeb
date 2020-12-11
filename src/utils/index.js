@@ -174,25 +174,32 @@ export const formatttedCurrentTime = () => {
 export const clientSettings = (id, envJson) => {
 
     let mysqlBaseUrl;
+    let appTitle;
 
     if (id === "adegaweb") {
         mysqlBaseUrl = envJson.default.adegaweb.REACT_APP_BASE_URL;
+        appTitle     = envJson.default.adegaweb.REACT_APP_TITLE;
     };
     if (id === "davillaadegaliveiro") {
         mysqlBaseUrl = envJson.default.davillaadegaliveiro.REACT_APP_BASE_URL;
+        appTitle     = envJson.default.davillaadegaliveiro.REACT_APP_TITLE;
     };
     if (id === "davillaadegajordanopolis") {
         mysqlBaseUrl = envJson.default.davillaadegajordanopolis.REACT_APP_BASE_URL;
+        appTitle     = envJson.default.davillaadegajordanopolis.REACT_APP_TITLE;
     };
     if (id === "davillaadega") {
         mysqlBaseUrl = envJson.default.davillaadega.REACT_APP_BASE_URL;
+        appTitle     = envJson.default.davillaadega.REACT_APP_TITLE;
     };
     if (id === "deliveryweb") {
         mysqlBaseUrl = envJson.default.deliveryweb.REACT_APP_BASE_URL;
+        appTitle     = envJson.default.deliveryweb.REACT_APP_TITLE;
     };
     if (id === "barbaros") {
         mysqlBaseUrl = envJson.default.barbaros.REACT_APP_BASE_URL;
+        appTitle     = envJson.default.barbaros.REACT_APP_TITLE;
     };
 
-    return mysqlBaseUrl;
+    return { mysqlBaseUrl, appTitle };
 };

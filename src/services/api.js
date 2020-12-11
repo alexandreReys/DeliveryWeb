@@ -3,8 +3,11 @@ import * as utils from "../utils";
 import * as loginService from "./loginService";
 import * as envJson from "../.env.json";
 import * as settings from "../.settings.json";
+import * as actions from "../store/actions";
+import store from "store";
 
 let mysqlBaseUrl;
+let appTitle;
 
 
 console.log("===================================================");
@@ -12,18 +15,25 @@ console.log("   " + process.env.NODE_ENV);
 console.log("");
 
 
-if (process.env.NODE_ENV === "develop___ment") {
+if (process.env.NODE_ENV === "development") {
     mysqlBaseUrl = envJson.dev.REACT_APP_BASE_URL;
+    appTitle = envJson.dev.REACT_APP_TITLE;
 } else {
     if (!!process.env.REACT_APP_BASE_URL) {
         mysqlBaseUrl = process.env.REACT_APP_BASE_URL;
+        appTitle = process.env.REACT_APP_TITLE;
     } else {
-        mysqlBaseUrl = utils.clientSettings(settings.client, envJson);
+        const resp = utils.clientSettings(settings.client, envJson);
+        mysqlBaseUrl = resp.mysqlBaseUrl;
+        appTitle     = resp.appTitle;
     };
 };
 
+store.dispatch(actions.actionSetTitle(appTitle));
+
 console.log("   " + settings.client);
 console.log("");
+console.log("appTitle", appTitle);
 console.log("mysqlBaseUrl", mysqlBaseUrl);
 console.log("===================================================");
 
