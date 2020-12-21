@@ -15,6 +15,9 @@ const ShoppingListCateg = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    if (!store.getState().vinhoState.selectedCategory) {
+      history.push("/");
+    }
     store.dispatch(actions.actionAdminModuleDeactivate());
     getProductList();
   }, []);
@@ -35,7 +38,10 @@ const ShoppingListCateg = () => {
   );
 };
 
-const BannerTop = () => {
+
+
+
+function BannerTop () {
   const [banner] = useState(store.getState().defaultState.webBannerSettings);
 
   return (
@@ -45,30 +51,32 @@ const BannerTop = () => {
   );
 };
 
-const HeaderTop = () => {
+function HeaderTop () {
   return (
-    <header>
+    <header style={{ marginTop: 20 }}>
       <h4>Faça sua escolha :</h4>
-      <h3>{store.getState().vinhoState.selectedCategory}</h3>
+      <div style={{ marginTop: 20 }}>
+        <h3>{store.getState().vinhoState.selectedCategory}</h3>
+      </div>
     </header>
   );
 };
 
-const MainContent = ({ products }) => {
+function MainContent ({ products }) {
   return (
     <main>
       <div className="products-container">
-        {products.map((product) => (
+        { products.map((product) => (
           <div key={product.IdVinho}>
             <Product product={product} />
           </div>
-        ))}
+        )) }
       </div>
     </main>
   );
 };
 
-const Product = ({ product }) => {
+function Product ({ product }) {
   product = utils.adjustPromotionalPrice(product);
 
   const precoVinho = moneyMask(product.PrecoVinho);

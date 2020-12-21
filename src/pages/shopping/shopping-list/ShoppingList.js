@@ -21,15 +21,25 @@ const ShoppingList = () => {
         store.dispatch(actions.actionGetDeliveryAddress());
         store.dispatch(actions.actionAdminModuleDeactivate());
 
-        (async function getProductList() {
-            const data = await productService.getProductsGroupedByCategory();
-            if (data) { setProducts(data) };
-
-            await settingsService.get();
-            setBaner(store.getState().defaultState.webBannerSettings);
+        ( async function getSettings () {
+            if ( !baner ) {
+                if ( !store.getState().defaultState.webBannerSettings ) {
+                    await settingsService.get();
+                };
+                setBaner( store.getState().defaultState.webBannerSettings );
+            };
         })();
 
-    }, []);
+        (async function getProductList() {
+            if ( products.length < 1 ) {
+                if ( store.getState().vinhoState.products.length < 1 ) {
+                    await productService.getProductsGroupedByCategory();
+                };
+                setProducts( store.getState().vinhoState.products );
+            };
+        })();
+
+    }, [ products, baner ]);
 
     const BannerTop = () => {
         return (
@@ -58,13 +68,12 @@ const ShoppingList = () => {
 
 
 //////////////////////////////////////////////////////////////////////////////////////
-
 const MainContent = ({ products }) => {
     return (
         <main>
             {products.length > 0 && products.map((it) => (
                 <div className="category-row" key={it.category}>
-                    <h4>{it.category}</h4>
+                    <h3>{it.category}</h3>
                     <ProductRow categoryProducts={it.products} />
                 </div>
             ))}

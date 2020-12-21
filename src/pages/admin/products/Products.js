@@ -16,7 +16,7 @@ import {
 
 import {
     getProducts,
-    getProductsPorNome,
+    getProductsByName,
     postVinho,
     putVinho,
     deleteVinho,
@@ -66,7 +66,7 @@ const Products = ({ operacaoVinho }) => {
     async function getProductsNome(searchText) {
         async function loadProductsNome(searchText) {
             setLoading(true);
-            const response = await getProductsPorNome(searchText);
+            const response = await getProductsByName(searchText);
             setLoading(false);
             setProducts(response);
         }

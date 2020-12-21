@@ -13,7 +13,6 @@ import Settings from "pages/admin/settings/Settings";
 import ProductDeactivate from "pages/admin/product-deactivate/ProductDeactivate";
 import ProductPromotion from "pages/admin/product-promotion/ProductPromotion";
 
-import Main from "pages/shopping/main/Main";
 import ShoppingCart from "pages/shopping/shopping-cart/ShoppingCart";
 import SelectedProduct from "pages/shopping/selected-product/SelectedProduct";
 import DeliveryAddress from "pages/shopping/delivery-address/DeliveryAddress";
@@ -30,6 +29,7 @@ const Routes = () => (
   <Switch>
     <Route exact path="/" component={ShoppingList} />
     <Route exact path="/shopping-list-categ" component={ShoppingListCateg} />
+    
     <Route path="/home" component={Home} />
     <Route exact path="/login" component={Login} />
     <PrivateRoute path="/admin" component={Orders} />
@@ -52,8 +52,7 @@ const Routes = () => (
 
     <Route path="/test-modal" component={TestModal} />
     <Route path="/test-print" component={TestPrint} />
-    <Route path="/main" component={Main} />
-    <Route component={Main} />
+    <Route component={ShoppingList} />
   </Switch>
 );
 

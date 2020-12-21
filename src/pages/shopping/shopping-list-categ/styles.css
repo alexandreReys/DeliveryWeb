@@ -1,13 +1,15 @@
 .container-shopping-list-categ {
-  padding: 65px 20px;
+  padding: 69px 20px;
 }
 #shopping-list-categ .img-container {
-  text-align: center;
-  background-color: darkcyan;
+  border: 1px solid grey;
+  background-color: white;
+  box-shadow: 1px 2px 4px #000;
+  border-radius: 5px;
+  width: 100%;
 }
 #shopping-list-categ .img-container img {
   display: inline-block;
-  height: 200px;
 }
 #shopping-list-categ header {
   height: 90px;
@@ -17,7 +19,7 @@
 #shopping-list-categ .products-container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
+  gap: 15px;
   list-style: none;
   margin-bottom: 20px;
 }
@@ -27,9 +29,6 @@
   }
 }
 @media (max-width: 850px) {
-  #shopping-list-categ .img-container img {
-    height: 150px;
-  }
   #shopping-list-categ .products-container {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -46,13 +45,15 @@
 }
 
 #shopping-list-categ .product {
-  height: 100%;
+  height: 200px;
+  max-width: 180px;
+  min-width: 180px;
   padding: 10px;
-  margin-right: 15px;
   border: 1px solid grey;
   border-radius: 8px;
   font-size: 0.8rem;
   cursor: pointer;
+  margin-bottom: 5px;
   box-shadow: 1px 2px 4px #000;
 }
 #shopping-list-categ .product .header {
@@ -71,6 +72,11 @@
   font-size: 0.8rem;
   font-weight: bold;
   color: #000070;
+}
+#shopping-list-categ .product .price-line {
+  font-size: 0.8rem;
+  text-decoration: line-through;
+  color: red;
 }
 #shopping-list-categ .product .price {
   font-size: 0.8rem;

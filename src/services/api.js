@@ -11,9 +11,7 @@ let appTitle;
 
 
 console.log("===================================================");
-console.log("   " + process.env.NODE_ENV);
-console.log("");
-
+console.log(process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === "development") {
     mysqlBaseUrl = envJson.dev.REACT_APP_BASE_URL;
@@ -31,10 +29,9 @@ if (process.env.NODE_ENV === "development") {
 
 store.dispatch(actions.actionSetTitle(appTitle));
 
-console.log("   " + settings.client);
-console.log("");
-console.log("appTitle", appTitle);
-console.log("mysqlBaseUrl", mysqlBaseUrl);
+console.log("client:", settings.client);
+console.log("appTitle:", appTitle);
+console.log("mysqlBaseUrl:", mysqlBaseUrl);
 console.log("===================================================");
 
 export const api = axios.create({

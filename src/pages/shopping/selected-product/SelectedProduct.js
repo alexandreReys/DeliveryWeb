@@ -35,7 +35,7 @@ const HeaderTop = () => {
       <BsArrowLeft
         className="arrow-back-abs"
         onClick={() => {
-          history.goBack();
+          history.push("/");
         }}
       />
     </header>

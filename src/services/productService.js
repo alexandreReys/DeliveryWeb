@@ -52,10 +52,12 @@ const processImage = async (data) => {
   return response;
 };
 
-export const getProducts = async () => {
-  const resp = await api.get("/products");
-  const products = resp.data;
-  store.dispatch(actionVinhoGetProducts(products));
+export const getProducts = async ( id = null ) => {
+  let products = [];
+  if ( !id ) {
+    const resp = await api.get("/products");
+    products = resp.data;
+  }
   return products;
 };
 
@@ -75,7 +77,9 @@ export const getProductsGroupedByCategory = async () => {
     categs.map((categ) => {
       return response.push({ category: categ, products: products[categ] });
     });
-  }
+  };
+
+  store.dispatch(actionVinhoGetProducts(response));
   return response;
 };
 
@@ -107,7 +111,7 @@ export const getActiveProductsByCategory = async (category) => {
     });
 };
 
-export const getProductsPorNome = async (nome) => {
+export const getProductsByName = async (nome) => {
   const params = { params: { DescricaoVinho: nome } };
   const resp = await api.get("/products/name", params);
   return resp.data;
