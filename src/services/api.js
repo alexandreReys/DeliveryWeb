@@ -9,7 +9,6 @@ import store from "store";
 let mysqlBaseUrl;
 let appTitle;
 
-
 console.log("===================================================");
 console.log(process.env.NODE_ENV);
 
