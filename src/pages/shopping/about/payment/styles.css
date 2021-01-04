@@ -1,0 +1,30 @@
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 70px 20px 350px;
+}
+
+#payment header {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#payment .title {
+  color: #800040;
+  margin-bottom: 30px;
+}
+
+#payment .page-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 15px 0;
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  height: 240px;
+  background-color: silver;
+}

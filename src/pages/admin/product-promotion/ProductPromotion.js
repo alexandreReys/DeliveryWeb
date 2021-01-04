@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { FaRegSquare, FaRegCheckSquare } from "react-icons/fa";
 import { FiChevronDown } from "react-icons/fi";
 
-
 import { history } from "routes/history";
 import store from "store";
 import * as actions from "store/actions";
@@ -18,6 +17,7 @@ import "./styles.css";
 
 const ProductPromotion = () => {
     const [loading, setLoading] = useState(true);
+    const [loadingText] = useState(store.getState().defaultState.loadingText);
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -57,7 +57,9 @@ const ProductPromotion = () => {
             </div>
 
             {!!loading && (
-                <h4>Loading ...</h4>
+                <div style={{ color: "red" }}>
+                    <h5>{loadingText}</h5>
+                </div>
             )}
 
             {!loading && (

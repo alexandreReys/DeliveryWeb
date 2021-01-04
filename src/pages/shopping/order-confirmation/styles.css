@@ -108,6 +108,7 @@ FOOTER ////////////////////////////////////////////////////////
   padding: 30px;
   text-align: center;
   border: 1px solid grey;
+  margin-bottom: 200px;
 }
 
 #orderConfirmation footer .button-sair {

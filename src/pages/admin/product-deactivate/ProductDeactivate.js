@@ -10,6 +10,7 @@ import "./styles.css";
 
 const ProductStatus = () => {
     const [loading, setLoading] = useState(true);
+    const [loadingText] = useState(store.getState().defaultState.loadingText);
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -49,7 +50,9 @@ const ProductStatus = () => {
             </div>
 
             {!!loading && (
-                <h4>Loading ...</h4>
+                <div style={{ color: "red" }}>
+                    <h5>{loadingText}</h5>
+                </div>
             )}
 
             {!loading && (
@@ -63,11 +66,11 @@ const Product = ({ product }) => {
     const [active, setActive] = useState(product.StatusVinho);
     return (
         <>
-            <div 
-                style={{ 
-                    display: "flex", 
-                    flexDirection: "row", 
-                    justifyContent: "spaceBetween", 
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "spaceBetween",
                     marginLeft: 20,
                     cursor: "pointer",
                 }}

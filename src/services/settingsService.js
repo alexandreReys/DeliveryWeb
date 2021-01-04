@@ -11,7 +11,7 @@ export const get = async () => {
         return null;
     }
     const settings = resp.data[0];
-    store.dispatch(actionGetSettings(settings));
+    store.dispatch( actionGetSettings(settings) );
     return settings;
 };
 
@@ -110,5 +110,11 @@ const processImage = async (data) => {
         AppLogoPPublicIdSettings: data.AppLogoPPublicIdSettings,
         WebBannerSettings: data.WebBannerSettings,
         WebBannerPublicIdSettings: data.WebBannerPublicIdSettings,
+        DeliveryAreaDistance: data.DeliveryAreaDistance,
+        UrlDeliveryMap: data.UrlDeliveryMap,
+        UrlGooglePlay: data.UrlGooglePlay,
+        ContactPhone: data.ContactPhone,
+        ContactEmail: data.ContactEmail,
+        ContactWhatsapp: data.ContactWhatsapp,
     };
 };

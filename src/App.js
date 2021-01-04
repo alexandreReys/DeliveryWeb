@@ -22,7 +22,12 @@ const App = ({ adminModule }) => {
       <Router history={history}>
         <Nav />
 
-        {!adminModule && <Routes />}
+        {!adminModule && (
+            <>
+                <Routes />
+                <Footer />
+            </>
+        )}
 
         {adminModule && (
           <content className="app-content">
@@ -30,8 +35,6 @@ const App = ({ adminModule }) => {
             <Routes />
           </content>
         )}
-
-        <Footer />
       </Router>
     </div>
   );

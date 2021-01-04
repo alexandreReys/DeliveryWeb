@@ -19,8 +19,12 @@ import DeliveryAddress from "pages/shopping/delivery-address/DeliveryAddress";
 import PurchaseConfirmation from "pages/shopping/payment-confirmation/PaymentConfirmation";
 import OrderConfirmation from "pages/shopping/order-confirmation/OrderConfirmation";
 import ShoppingList from "pages/shopping/shopping-list/ShoppingList";
-import PrivacyPolicy from "pages/shopping/privacy-policiy/PrivacyPolicy";
 import ShoppingListCateg from "pages/shopping/shopping-list-categ/ShoppingListCateg";
+
+import PrivacyPolicy from "pages/shopping/about/privacy-policiy/PrivacyPolicy";
+import Payment from "pages/shopping/about/payment/Payment";
+import Delivery from "pages/shopping/about/delivery/Delivery";
+import Employment from "pages/shopping/about/employment/Employment";
 
 import TestModal from "components/modal/testModal";
 import TestPrint from "components/print/TestPrint";
@@ -47,8 +51,12 @@ const Routes = () => (
     <Route path="/delivery-address" component={DeliveryAddress} />
     <Route path="/purchase-confirmation" component={PurchaseConfirmation} />
     <Route path="/order-confirmation" component={OrderConfirmation} />
-    
+
     <Route path="/privacy-policy" component={PrivacyPolicy} />
+    <Route path="/about-privacy-policy" component={PrivacyPolicy} />
+    <Route path="/about-payment" component={Payment} />
+    <Route path="/about-delivery" component={Delivery} />
+    <Route path="/about-employment" component={Employment} />
 
     <Route path="/test-modal" component={TestModal} />
     <Route path="/test-print" component={TestPrint} />

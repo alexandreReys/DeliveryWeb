@@ -13,6 +13,7 @@
 #selectedProduct .container-product {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 260px;
 }
 
 #selectedProduct aside {
