@@ -142,9 +142,7 @@ export const getCep = async (postalCode) => {
   return address.data;
 };
 
-//////////////////////////////////////////////////////////////
-
-const getAddress = (addr) => {
+export const getAddress = (addr) => {
   let address = addr.street;
 
   address += addr.number ? ", " + addr.number : "";
@@ -154,4 +152,14 @@ const getAddress = (addr) => {
   address += addr.complement ? ", " + addr.complement : "";
 
   return address;
+};
+
+export const updateRatingOrder = async (id, rating) => {
+  try {
+    await api.put(`/delivery-order/rating/${id}/${rating}`);
+  } catch (error) {
+    console.error("ErrorMessage: updateRatingOrder error:", error);
+    return null;
+  }
+  return;
 };

@@ -32,6 +32,24 @@ export function processingWait(seconds) {
     });
 };
 
+export function message(title, seconds) {
+    return new Promise((resolve) => {
+        Swal
+            .fire({
+                icon: "info",
+                title: title,
+                position: "top-end",
+                background: "#lime",
+                showConfirmButton: false,
+                timer: seconds * 1000,
+                timerProgressBar: true,
+            })
+            .then(() => {
+                resolve();
+            });
+    });
+};
+
 export const requestPromotionalPrice = () => {
     const inputValue = 0;
 

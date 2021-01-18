@@ -1,103 +1,150 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { BsArrowLeft } from "react-icons/bs";
 import store from "store";
 import { history } from "routes/history";
 import { moneyMask } from "utils/masks";
+import * as orderServices from "../../../services/orderService";
+import StarRatings from 'react-star-ratings';
 import "./styles.css";
 
 const OrderConfirmation = () => {
-  const [orderId, setOrderId] = useState(0);
-  const [customerNameOrder, setCustomerNameOrder] = useState("");
-  const [paymantTypeOrder, setPaymantTypeOrder] = useState("");
-  const [quantityItemsOrder, setQuantityItemsOrder] = useState(0);
-  const [totalProductsOrder, setTotalProductsOrder] = useState(0);
-  const [shippingAmountOrder, setShippingAmountOrder] = useState(0);
-  const [totalOrder, setTotalOrder] = useState(0);
+    const [orderId, setOrderId] = useState(0);
+    const [customerNameOrder, setCustomerNameOrder] = useState("");
+    const [paymantTypeOrder, setPaymantTypeOrder] = useState("");
+    const [quantityItemsOrder, setQuantityItemsOrder] = useState(0);
+    const [totalProductsOrder, setTotalProductsOrder] = useState(0);
+    const [shippingAmountOrder, setShippingAmountOrder] = useState(0);
+    const [totalOrder, setTotalOrder] = useState(0);
+    const [rating, setRating] = useState(0);
 
-  const deliveryAddress = store.getState().deliveryAddressState;
+    const deliveryAddress = useMemo(() => {
+        return store.getState().deliveryAddressState
+    }, []);
 
-  useEffect(() => {
-    setOrderId(store.getState().orderState.orderId);
-    setCustomerNameOrder(store.getState().orderState.customerNameOrder);
-    setPaymantTypeOrder(store.getState().orderState.paymantTypeOrder);
-    setQuantityItemsOrder(store.getState().orderState.quantityItemsOrder);
-    setTotalProductsOrder(store.getState().orderState.totalProductsOrder);
-    setShippingAmountOrder(store.getState().orderState.shippingAmountOrder);
-    setTotalOrder(store.getState().orderState.totalOrder);
-  }, []);
+    const deliveryAddressCompact = useMemo( () => {
+        return orderServices.getAddress(store.getState().deliveryAddressState);
+    }, []);
 
-  return (
-    <div id="orderConfirmation" className="order-confirmation-container">
-      <header>
-        <div className="title1">
-          <span>Pedido Confirmado !!!</span>
-        </div>
-      </header>
+    useEffect(() => {
+        setOrderId(store.getState().orderState.orderId);
+        setCustomerNameOrder(store.getState().orderState.customerNameOrder);
+        setPaymantTypeOrder(store.getState().orderState.paymantTypeOrder);
+        setQuantityItemsOrder(store.getState().orderState.quantityItemsOrder);
+        setTotalProductsOrder(store.getState().orderState.totalProductsOrder);
+        setShippingAmountOrder(store.getState().orderState.shippingAmountOrder);
+        setTotalOrder(store.getState().orderState.totalOrder);
+    }, []);
 
-      <aside>
-        <div className="title2">
-          <span>Endereço de Entrega</span>
-        </div>
-        <div className="delivery-address">
-          <span>Tipo de Entrega : {deliveryAddress.addressType}</span>
-          <br />
-          <span>
-            Endereço : {deliveryAddress.street}, {deliveryAddress.number}
-          </span>
-          <br />
-          <span>Complemento : {deliveryAddress.complement}</span>
-          <br />
-          <span>Bairro : {deliveryAddress.neighborhood}</span>
-          <br />
-          <span>Cidade : {deliveryAddress.city}</span>
-          <br />
-          <span>Estado : {deliveryAddress.state}</span>
-          <br />
-          <span>Ponto de referencia : {deliveryAddress.info}</span>
-          <br />
-        </div>
-      </aside>
+    return (
+        <div id="orderConfirmation" className="order-confirmation-container">
+            <div className="header-container">
+                <BsArrowLeft 
+                    className="back-button" 
+                    onClick={() => {
+                        orderServices.updateRatingOrder(orderId, rating);
+                        history.push("/");
+                    }}
+                />
+                <div className="header-title-box">
+                    <div className="header-title">
+                        Pedido Confirmado !!!
+                    </div>
+                </div>
+            </div>
 
-      <content>
-        <div className="title2">
-          <span>Informações do Pedido</span>
-        </div>
-        <div className="orderInfo">
-          <span>Numero do Pedido : {orderId}</span>
-          <br />
-          <br />
-          <span>Nome : {customerNameOrder}</span>
-          <br />
-          <br />
-          <span>Tipo de Pagamento : {paymantTypeOrder}</span>
-          <br />
-          <br />
-          <span>Quantidade de Itens Pedidos : {quantityItemsOrder}</span>
-          <br />
-          <span>Total dos Produtos : {moneyMask(totalProductsOrder)}</span>
-          <br />
-          <span>Frete : {moneyMask(shippingAmountOrder)}</span>
-          <br />
-          <span>
-            <b> Total do Pedido : {moneyMask(totalOrder)} </b>
-          </span>
-          <br />
-        </div>
-      </content>
+            <main className="boxes-container">
 
-      <footer>
-        <div className="button-container">
-          <span
-            className="button-sair"
-            onClick={() => {
-              history.push("/");
-            }}
-          >
-            Sair
-          </span>
+                <section className="info box">
+                    <div className="box-title">
+                        <span>Informações do Pedido</span>
+                    </div>
+
+                    <div className="box-content">
+                        <div style={{ marginBottom: 5 }}>
+                            <span>
+                                <b>Pedido :</b> {orderId}
+                            </span>
+
+                            <span style={{ marginLeft: 40 }}>
+                                <b>Pagamento :</b> {paymantTypeOrder}
+                            </span>
+                        </div>
+
+                        <div style={{ marginBottom: 5 }}>
+                            <b>Itens :</b> {quantityItemsOrder}
+                        </div>
+
+                        <div style={{ marginBottom: 5 }}>
+                            <b>Total dos Produtos :</b> {moneyMask(totalProductsOrder)}
+                        </div>
+
+                        <div style={{ marginBottom: 5 }}>
+                            <b>Frete :</b> {moneyMask(shippingAmountOrder)}
+                        </div>
+
+                        <div>
+                            <b> Total a Pagar : {moneyMask(totalOrder)} </b>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="address box">
+                    <div className="box-title">
+                        <span>Entrega</span>
+                    </div>
+                    <div className="box-content">
+                        <div style={{ marginBottom: 5 }}>
+                            <b>Nome :</b> {customerNameOrder}
+                        </div>
+
+                        <div style={{ marginBottom: 5 }}>
+                            {deliveryAddressCompact}
+                        </div>
+
+                        <div>
+                            <b>Ponto de referencia :</b> {deliveryAddress.info}
+                        </div>
+                    </div>
+                </section>
+
+                <section className="rating box">
+                    <div className="box-title">
+                        <span>Avaliação</span>
+                    </div>
+                    <div className="box-content">
+                        <div>
+                            Mostre o quanto foi agradavel sua compra !!
+                        </div>
+
+                        <div style={{ marginTop: 25 }}>
+                            <Stars/>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
         </div>
-      </footer>
-    </div>
-  );
+    );
+    
+    function Stars() {
+        function changeRating(newRating, name) {
+            setRating(newRating);
+        };
+    
+        return (
+            <StarRatings
+                rating={rating}
+                changeRating={changeRating}
+                numberOfStars={5}
+                starRatedColor="blue"
+                starEmptyColor="grey"
+                starHoverColor="blue"
+                isAggregateRating="true"
+                name='rating'
+            />
+        );
+    };
 };
+
 
 export default OrderConfirmation;
