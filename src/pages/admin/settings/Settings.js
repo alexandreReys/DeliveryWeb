@@ -28,6 +28,16 @@ const Settings = () => {
     const [appBannerPublicIdSettings, setAppBannerPublicIdSettings] = useState("");
     const [appBannerPreview, setAppBannerPreview] = useState("");
 
+    const [appBanner2FileInputState] = useState();
+    const [appBanner2Settings, setAppBanner2Settings] = useState("");
+    const [appBanner2PublicIdSettings, setAppBanner2PublicIdSettings] = useState("");
+    const [appBanner2Preview, setAppBanner2Preview] = useState("");
+
+    const [appBanner3FileInputState] = useState();
+    const [appBanner3Settings, setAppBanner3Settings] = useState("");
+    const [appBanner3PublicIdSettings, setAppBanner3PublicIdSettings] = useState("");
+    const [appBanner3Preview, setAppBanner3Preview] = useState("");
+
     const [appLogoPFileInputState] = useState();
     const [appLogoPSettings, setAppLogoPSettings] = useState("");
     const [appLogoPPublicIdSettings, setAppLogoPPublicIdSettings] = useState("");
@@ -63,6 +73,14 @@ const Settings = () => {
                 setAppBannerPublicIdSettings(response.AppBannerPublicIdSettings);
                 setAppBannerPreview(response.AppBannerSettings);
 
+                setAppBanner2Settings(response.AppBanner2Settings);
+                setAppBanner2PublicIdSettings(response.AppBanner2PublicIdSettings);
+                setAppBanner2Preview(response.AppBanner2Settings);
+
+                setAppBanner3Settings(response.AppBanner3Settings);
+                setAppBanner3PublicIdSettings(response.AppBanner3PublicIdSettings);
+                setAppBanner3Preview(response.AppBanner3Settings);
+
                 setAppLogoPSettings(response.AppLogoPSettings);
                 setAppLogoPPublicIdSettings(response.AppLogoPPublicIdSettings);
                 setAppLogoPPreview(response.AppLogoPSettings);
@@ -93,6 +111,30 @@ const Settings = () => {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             setAppBannerPreview(reader.result);
+        };
+    };
+
+    function appBanner2HandleFileInputChange(e) {
+        const file = e.target.files[0];
+        appBanner2PreviewFile(file);
+    };
+    function appBanner2PreviewFile(file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setAppBanner2Preview(reader.result);
+        };
+    };
+    
+    function appBanner3HandleFileInputChange(e) {
+        const file = e.target.files[0];
+        appBanner3PreviewFile(file);
+    };
+    function appBanner3PreviewFile(file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setAppBanner3Preview(reader.result);
         };
     };
 
@@ -188,6 +230,14 @@ const Settings = () => {
                         AppBannerPublicIdSettings: appBannerPublicIdSettings,
                         AppBannerB64: appBannerPreview,
 
+                        AppBanner2Settings: appBanner2Settings,
+                        AppBanner2PublicIdSettings: appBanner2PublicIdSettings,
+                        AppBanner2B64: appBanner2Preview,
+
+                        AppBanner3Settings: appBanner3Settings,
+                        AppBanner3PublicIdSettings: appBanner3PublicIdSettings,
+                        AppBanner3B64: appBanner3Preview,
+
                         AppLogoPSettings: appLogoPSettings,
                         AppLogoPPublicIdSettings: appLogoPPublicIdSettings,
                         AppLogoPB64: appLogoPPreview,
@@ -257,6 +307,7 @@ const Settings = () => {
                             </label>
                             <input
                                 className="notifications-input"
+                                style={{ minWidth: 300 }}
                                 name="addressSellerSettings"
                                 id="addressSellerSettings"
                                 required
@@ -385,7 +436,71 @@ const Settings = () => {
                             />
                         </div>
 
-                        {/* appBannerSettings && appLogoPSettings && webBannerSettings */}
+                        {/* webBannerSettings */}
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+
+                            {/* webBannerSettings */}
+                            <div style={{ marginTop: 40, maxWidth: 1000 }}>
+                                <label
+                                    className="product-form-label-select-img"
+                                    style={{ width: "10%", minWidth: 260 }}
+                                    htmlFor="webBannerSettings"
+                                >
+                                    Clique para Selecionar Imagem para o Baner do Site
+                                </label>
+                                <input className="input-file-invisible"
+                                    style={{ display: "none" }}
+                                    type="file"
+                                    name="webBannerSettings"
+                                    id="webBannerSettings"
+                                    onChange={webBannerHandleFileInputChange}
+                                    value={webBannerFileInputState}
+                                />
+                                
+                                <div className="settings-app-banner-container">
+                                    <img
+                                        src={webBannerPreview}
+                                        // style={{ width: 460, borderRadius: 10 }}
+                                        style={{ width: "100%", borderRadius: 10, paddingLeft: 20, paddingRight: 20 }}
+                                        alt="selecionar imagem"
+                                    />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {/* appLogoPSettings */}
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+
+                            {/* appLogoPSettings */}
+                            <div style={{ marginTop: 40, marginRight: 80, width: "10%", minWidth: 260 }}>
+                                <label
+                                    className="product-form-label-select-img"
+                                    htmlFor="appLogoPSettings"
+                                >
+                                    Selecionar Imagem para o Logotipo do App
+                                </label>
+                                <input className="input-file-invisible"
+                                    style={{ display: "none" }}
+                                    type="file"
+                                    name="appLogoPSettings"
+                                    id="appLogoPSettings"
+                                    onChange={appLogoPHandleFileInputChange}
+                                    value={appLogoPFileInputState}
+                                >
+                                </input>
+                                <div className="settings-app-banner-container">
+                                    <img
+                                        src={appLogoPPreview}
+                                        style={{ width: 200, borderRadius: 10 }}
+                                        alt="selecionar imagem"
+                                    />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {/* appBannerSettings */}
                         <div style={{ display: "flex", flexDirection: "row" }}>
 
                             {/* appBannerSettings */}
@@ -414,60 +529,64 @@ const Settings = () => {
                                 </div>
                             </div>
 
-                            {/* appLogoPSettings */}
+
+                            {/* appBanner2Settings */}
                             <div style={{ marginTop: 40, marginRight: 80, width: "10%", minWidth: 260 }}>
                                 <label
                                     className="product-form-label-select-img"
-                                    htmlFor="appLogoPSettings"
+                                    htmlFor="appBanner2Settings"
                                 >
-                                    Selecionar Imagem para o Logotipo do App
+                                    Selecionar Imagem para o Baner do App
                                 </label>
                                 <input className="input-file-invisible"
                                     style={{ display: "none" }}
                                     type="file"
-                                    name="appLogoPSettings"
-                                    id="appLogoPSettings"
-                                    onChange={appLogoPHandleFileInputChange}
-                                    value={appLogoPFileInputState}
+                                    name="appBanner2Settings"
+                                    id="appBanner2Settings"
+                                    onChange={appBanner2HandleFileInputChange}
+                                    value={appBanner2FileInputState}
                                 >
                                 </input>
                                 <div className="settings-app-banner-container">
                                     <img
-                                        src={appLogoPPreview}
+                                        src={appBanner2Preview}
                                         style={{ width: 200, borderRadius: 10 }}
                                         alt="selecionar imagem"
                                     />
                                 </div>
                             </div>
 
-                            {/* webBannerSettings */}
-                            <div style={{ marginTop: 40, width: "10%", minWidth: 520 }}>
+
+                            {/* appBanner3Settings */}
+                            <div style={{ marginTop: 40, marginRight: 80, width: "10%", minWidth: 260 }}>
                                 <label
                                     className="product-form-label-select-img"
-                                    style={{ width: "10%", minWidth: 260 }}
-                                    htmlFor="webBannerSettings"
+                                    htmlFor="appBanner3Settings"
                                 >
-                                    Clique para Selecionar Imagem para o Baner do Site
+                                    Selecionar Imagem para o Baner do App
                                 </label>
                                 <input className="input-file-invisible"
                                     style={{ display: "none" }}
                                     type="file"
-                                    name="webBannerSettings"
-                                    id="webBannerSettings"
-                                    onChange={webBannerHandleFileInputChange}
-                                    value={webBannerFileInputState}
+                                    name="appBanner3Settings"
+                                    id="appBanner3Settings"
+                                    onChange={appBanner3HandleFileInputChange}
+                                    value={appBanner3FileInputState}
                                 >
                                 </input>
                                 <div className="settings-app-banner-container">
                                     <img
-                                        src={webBannerPreview}
-                                        style={{ width: 460, borderRadius: 10 }}
+                                        src={appBanner3Preview}
+                                        style={{ width: 200, borderRadius: 10 }}
                                         alt="selecionar imagem"
                                     />
                                 </div>
                             </div>
 
                         </div>
+
+
+
                     </>
                 )}
 

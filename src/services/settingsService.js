@@ -29,6 +29,7 @@ export const put = async (data) => {
 };
 
 const processImage = async (data) => {
+
     // if AppBanner updated
     if (data.AppBannerB64 !== data.AppBannerSettings) {
         
@@ -53,6 +54,55 @@ const processImage = async (data) => {
         };
     };
 
+    // if AppBanner2 updated
+    if (data.AppBanner2B64 !== data.AppBanner2Settings) {
+        
+        // delete image
+        if (data.AppBanner2PublicIdSettings) {
+            try {
+                await imageService.del(data.AppBanner2PublicIdSettings);
+            } catch (error) {
+                console.error("Error => processImage/deleteImage", error);
+            }
+        };
+
+        // post image
+        if (data.AppBanner2B64) {
+            try {
+                const imageUploadResponse = await imageService.post(data.AppBanner2B64);
+                data.AppBanner2Settings = imageUploadResponse.url;
+                data.AppBanner2PublicIdSettings = imageUploadResponse.public_id;
+            } catch (error) {
+                console.log("Error => processImage/postImage", error);
+            }
+        };
+    };
+
+    // if AppBanner3 updated
+    if (data.AppBanner3B64 !== data.AppBanner3Settings) {
+        
+        // delete image
+        if (data.AppBanner3PublicIdSettings) {
+            try {
+                await imageService.del(data.AppBanner3PublicIdSettings);
+            } catch (error) {
+                console.error("Error => processImage/deleteImage", error);
+            }
+        };
+
+        // post image
+        if (data.AppBanner3B64) {
+            try {
+                const imageUploadResponse = await imageService.post(data.AppBanner3B64);
+                data.AppBanner3Settings = imageUploadResponse.url;
+                data.AppBanner3PublicIdSettings = imageUploadResponse.public_id;
+            } catch (error) {
+                console.log("Error => processImage/postImage", error);
+            }
+        };
+    };
+
+    // if AppLogo updated
     if (data.AppLogoPB64 !== data.AppLogoPSettings) {
         
         // delete image
@@ -104,17 +154,21 @@ const processImage = async (data) => {
         IdSettings: data.IdSettings,
         AddressSellerSettings: data.AddressSellerSettings,
         ShippingTaxSettings: data.ShippingTaxSettings,
-        AppBannerSettings: data.AppBannerSettings,
-        AppBannerPublicIdSettings: data.AppBannerPublicIdSettings,
-        AppLogoPSettings: data.AppLogoPSettings,
-        AppLogoPPublicIdSettings: data.AppLogoPPublicIdSettings,
-        WebBannerSettings: data.WebBannerSettings,
-        WebBannerPublicIdSettings: data.WebBannerPublicIdSettings,
         DeliveryAreaDistance: data.DeliveryAreaDistance,
         UrlDeliveryMap: data.UrlDeliveryMap,
         UrlGooglePlay: data.UrlGooglePlay,
         ContactPhone: data.ContactPhone,
         ContactEmail: data.ContactEmail,
         ContactWhatsapp: data.ContactWhatsapp,
+        AppBannerSettings: data.AppBannerSettings,
+        AppBannerPublicIdSettings: data.AppBannerPublicIdSettings,
+        AppLogoPSettings: data.AppLogoPSettings,
+        AppLogoPPublicIdSettings: data.AppLogoPPublicIdSettings,
+        WebBannerSettings: data.WebBannerSettings,
+        WebBannerPublicIdSettings: data.WebBannerPublicIdSettings,
+        AppBanner2Settings: data.AppBanner2Settings,
+        AppBanner2PublicIdSettings: data.AppBanner2PublicIdSettings, 
+        AppBanner3Settings: data.AppBanner3Settings,
+        AppBanner3PublicIdSettings: data.AppBanner3PublicIdSettings,
     };
 };

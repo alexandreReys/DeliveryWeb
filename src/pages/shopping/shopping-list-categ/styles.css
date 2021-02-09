@@ -1,16 +1,20 @@
 .container-shopping-list-categ {
-  padding: 69px 20px;
+  padding: 69px 20px 250px;
 }
 #shopping-list-categ .img-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   border: 1px solid grey;
   background-color: white;
   box-shadow: 1px 2px 4px #000;
   border-radius: 5px;
-  width: 100%;
+  /* width: 70%; */
 }
 #shopping-list-categ .img-container img {
-  display: inline-block;
+  display: inline-block
 }
+
 #shopping-list-categ header {
   height: 90px;
   width: 100%;

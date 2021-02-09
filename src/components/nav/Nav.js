@@ -25,10 +25,7 @@ const Nav = ({ loggedUser, quantityOfItems, deliveryAddress, adminModule }) => {
 
             {navButtonCollapse()}
 
-            <div
-                className="collapse navbar-collapse"
-                id="deliveryNavibar"
-            >
+            <div className="collapse navbar-collapse" id="deliveryNavibar">
                 <div className="navbar-address">
                     {!adminModule && navDeliveryAddress(deliveryAddress)}
                 </div>

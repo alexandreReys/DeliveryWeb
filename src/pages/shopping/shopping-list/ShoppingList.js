@@ -3,13 +3,15 @@ import noImage from "assets/img/no-image.png";
 import { history } from "routes/history";
 import { BsArrowRight } from "react-icons/bs";
 
+import store from "store";
+import BannerTop from "components/banner-top/BannerTop";
+
 import * as categoryService from "services/categoryService";
 import * as productService from "services/productService";
 import * as settingsService from "services/settingsService";
 import * as actions from "store/actions";
 import * as utils from "utils";
 import * as masks from "utils/masks";
-import store from "store";
 
 import "./styles.css";
 
@@ -17,18 +19,18 @@ import "./styles.css";
 const ShoppingList = () => {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
-    const [baner, setBaner] = useState("");
+    const [banner, setBanner] = useState("");
 
     useEffect(() => {
         store.dispatch(actions.actionGetDeliveryAddress());
         store.dispatch(actions.actionAdminModuleDeactivate());
 
         (async function getSettings() {
-            if (!baner) {
+            if (!banner) {
                 if (!store.getState().defaultState.webBannerSettings) {
                     await settingsService.get();
                 };
-                setBaner(store.getState().defaultState.webBannerSettings);
+                setBanner(store.getState().defaultState.webBannerSettings);
             };
         })();
 
@@ -50,26 +52,18 @@ const ShoppingList = () => {
             };
         })();
 
-    }, [categories, products, baner]);
+    }, [categories, products, banner]);
 
     ///////////////////////////////
     return (
         <div id="shopping-list" className="container-shopping-list">
-            <BannerTop />
+            <BannerTop banner={banner}/>
             <Categories categories={categories}/>
             <HeaderTop />
             <MainContent products={products} />
             <PageFooter />
         </div>
     );
-
-    function BannerTop () {
-        return (
-            <div className="img-container">
-                <img className="img-fluid" src={baner} alt="" />
-            </div>
-        );
-    };
 
     function HeaderTop () {
         return (

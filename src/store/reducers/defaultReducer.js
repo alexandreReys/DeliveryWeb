@@ -15,6 +15,12 @@ const INITIAL_STATE = {
   appBannerSettings: "",
   appBannerPublicIdSettings: "",
   
+  appBanner2Settings: "",
+  appBanner2PublicIdSettings: "",
+  
+  appBanner3Settings: "",
+  appBanner3PublicIdSettings: "",
+  
   appLogoPSettings: "",
   appLogoPPublicIdSettings: "",
   
@@ -51,6 +57,10 @@ const functionGetSettings = (state, { settings }) => {
     webBannerPublicIdSettings: settings.WebBannerPublicIdSettings,
     appBannerSettings: settings.AppBannerSettings,
     appBannerPublicIdSettings: settings.AppBannerPublicIdSettings,
+    appBanner2Settings: settings.AppBanner2Settings,
+    appBanner2PublicIdSettings: settings.AppBanner2PublicIdSettings,
+    appBanner3Settings: settings.AppBanner3Settings,
+    appBanner3PublicIdSettings: settings.AppBanner3PublicIdSettings,
     appLogoPSettings: settings.AppLogoPSettings,
     appLogoPPublicIdSettings: settings.AppLogoPPublicIdSettings,
     deliveryAreaDistance: settings.DeliveryAreaDistance,
