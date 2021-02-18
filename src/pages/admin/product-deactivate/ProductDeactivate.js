@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaRegSquare, FaRegCheckSquare } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
+import { DebounceInput } from "react-debounce-input";
 
 import { history } from "routes/history";
 import store from "store";
@@ -12,11 +14,18 @@ const ProductStatus = () => {
     const [loading, setLoading] = useState(true);
     const [loadingText] = useState(store.getState().defaultState.loadingText);
     const [products, setProducts] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
     useEffect(() => {
         store.dispatch(actions.actionAdminModuleActivate());
         getProductsList();
     }, []);
+
+
+    useEffect(() => {
+        if (!loading) getProductsNome(searchText);
+        // eslint-disable-next-line
+    }, [searchText]);
 
     const getProductsList = async () => {
         async function loadProducts() {
@@ -27,25 +36,68 @@ const ProductStatus = () => {
         }
         loadProducts();
     };
+
+    async function getProductsNome(searchText) {
+        async function loadProductsNome(searchText) {
+            setLoading(true);
+            const response = await productService.getProductsByName(searchText);
+            setLoading(false);
+            setProducts(response);
+        }
+        loadProductsNome(searchText);
+    }
+
     const handleExit = () => {
         history.push("orders");
     };
 
     return (
         <div id="product-status" className="product-deactivate-container">
+
             <div className="product-deactivate-header">
                 <div className="product-deactivate-header-text">
                     Desativar / Ativar produtos
                 </div>
             </div>
+
             <div className="product-deactivate-buttons">
                 <button className="product-deactivate-button" onClick={handleExit}>
                     Sair
                 </button>
             </div>
+
             <div className="product-deactivate-warning">
                 <div className="product-deactivate-warning-text">
                     Os produtos desativados não serão apresentados para vendas nos aplicativos Web e Mobile
+                </div>
+            </div>
+
+            <div className="product-deactivate-search">
+                <div></div>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+
+                    <div className="product-deactivate-search-container">
+                        
+                        <DebounceInput
+                            className="product-deactivate-search-input"
+                            value={searchText}
+                            minLength={2}
+                            debounceTimeout={800}
+                            onChange={(e) => setSearchText(e.target.value)}
+                        />
+                        
+                        <div
+                            className="product-deactivate-search-cancel"
+                            onClick={() => setSearchText("")}
+                        >
+                            X
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <FaSearch className="product-deactivate-search-button" size={22} />
+                    </div>
+
                 </div>
             </div>
 
@@ -109,8 +161,5 @@ const Product = ({ product }) => {
         </>
     )
 }
-
-
-
 
 export default ProductStatus;

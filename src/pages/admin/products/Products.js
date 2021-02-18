@@ -135,38 +135,42 @@ const Products = ({ operacaoVinho }) => {
                         </button>
                     </div>
 
-
-
-
                     <div className="vinho-list-header">
-
                         <div></div>
-                        <div
-                            className="search-bar"
-                            onClick={() => {
-                                setSearching(!searching);
-                                if (searching === true) setSearchText("");
-                            }}
-                        >
-                            <FaSearch className="button-search" size={22} />
-                            {/* Search */}
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+
+                            {searching && (
+                                <div className="product-search-container">
+                                    
+                                    <DebounceInput
+                                        className="product-search-input"
+                                        value={searchText}
+                                        minLength={2}
+                                        debounceTimeout={800}
+                                        onChange={(e) => setSearchText(e.target.value)}
+                                    />
+                                    
+                                    <div
+                                        className="product-search-cancel"
+                                        onClick={() => setSearchText("")}
+                                    >
+                                        X
+                                    </div>
+                                </div>
+                            )}
+                            
+                            <div
+                                className="search-bar"
+                                onClick={() => {
+                                    setSearching(!searching);
+                                    if (searching === true) setSearchText("");
+                                }}
+                            >
+                                <FaSearch className="button-search" size={22} />
+                            </div>
+
                         </div>
                     </div>
-
-                    {searching && (
-                        <div className="search-input">
-                            <DebounceInput
-                                className="input"
-                                value={searchText}
-                                minLength={2}
-                                debounceTimeout={800}
-                                onChange={(e) => setSearchText(e.target.value)}
-                            />
-                            <div className="search-cancel" onClick={() => setSearchText("")}>
-                                X
-                            </div>
-                        </div>
-                    )}
 
                     {/* loading text */}
                     {loading && (
@@ -175,7 +179,7 @@ const Products = ({ operacaoVinho }) => {
                         </div>
                     )}
 
-                    {/* add button */}
+                    {/* list and add button */}
                     {!loading && (
                         <>
                             <ul className="mt-3">

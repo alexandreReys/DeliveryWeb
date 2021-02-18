@@ -1,76 +1,128 @@
 .product-deactivate-container {
     padding: 70px 10px;
   }
-  .product-deactivate-header {
-    background-color: steelblue;
-  }
-  .product-deactivate-header, 
-  .product-deactivate-buttons, 
-  .product-deactivate-warning, 
-  .product-deactivate-content {
-    border-left: 1px solid #90a4ae;
-    border-right: 1px solid #90a4ae;
-    border-bottom: 1px solid #90a4ae;
-    padding: 8px 20px;
-  }
-  .product-deactivate-header-text {
-    font-size: 1.4rem;
-    color: white;
-  }
-  .product-deactivate-buttons {
-    display: flex;
-    flex-direction: row;
-    background-color: blanchedalmond;
-    padding-top: 15px;
-    padding-bottom: 13px;
-  }
-  .product-deactivate-button {
-    border: 1px solid rgb(206, 206, 206);
-    width: 160px;
-    padding: 5px 0;
-    border-radius: 5px;
-    box-shadow: 0 3px 3px #000;
-    background-color: #78909c;
-    color: #fff;
-    font-size: 1rem;
-    text-align: center;
-    cursor: pointer;
-    margin-right: 20px;
-    margin-bottom: 4px;
-  }
-  .product-deactivate-button:hover {
-    background-color: navy;
-  }
+.product-deactivate-header {
+  background-color: steelblue;
+}
+.product-deactivate-header, 
+.product-deactivate-buttons, 
+.product-deactivate-warning, 
+.product-deactivate-content {
+  border-left: 1px solid #90a4ae;
+  border-right: 1px solid #90a4ae;
+  border-bottom: 1px solid #90a4ae;
+  padding: 8px 20px;
+}
+.product-deactivate-header-text {
+  font-size: 1.4rem;
+  color: white;
+}
+.product-deactivate-buttons {
+  display: flex;
+  flex-direction: row;
+  background-color: blanchedalmond;
+  padding-top: 15px;
+  padding-bottom: 13px;
+}
+.product-deactivate-button {
+  border: 1px solid rgb(206, 206, 206);
+  width: 160px;
+  padding: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 3px 3px #000;
+  background-color: #78909c;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-bottom: 4px;
+}
+.product-deactivate-button:hover {
+  background-color: navy;
+}
 
-  .product-deactivate-warning {
-    margin-bottom: 20px;
-  }
-  .product-deactivate-warning-text {
-    font-size: 0.8rem;
-    color: black;
-  }
-  .product-deactivate-content 
-  .product-deactivate-input-group {
-    margin: 5px 0 15px 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .product-deactivate-content 
-  .product-deactivate-input-group 
-  .product-deactivate-label {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: navy;
-    margin-bottom: 0;
-  }
-  .product-deactivate-content 
-  .product-deactivate-input-group 
-  .product-deactivate-input {
-    padding: 5px;
-    border-radius: 3px;
-    border-color: silver;
-    box-shadow: 2px 2px 0 grey;
-    background-color: #fff;
+.product-deactivate-warning-text {
+  font-size: 0.8rem;
+  color: black;
+}
+.product-deactivate-content 
+.product-deactivate-input-group {
+  margin: 5px 0 15px 0;
+  display: flex;
+  flex-direction: column;
+}
+.product-deactivate-content 
+.product-deactivate-input-group 
+.product-deactivate-label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: navy;
+  margin-bottom: 0;
+}
+.product-deactivate-content 
+.product-deactivate-input-group 
+.product-deactivate-input {
+  padding: 5px;
+  border-radius: 3px;
+  border-color: silver;
+  box-shadow: 2px 2px 0 grey;
+  background-color: #fff;
+
+}
+
   
-  }
+.product-deactivate-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-left: 1px solid #90a4ae;
+  border-right: 1px solid #90a4ae;
+  border-bottom: 1px solid #90a4ae;
+  margin-bottom: 20px;
+}
+
+.product-deactivate-search-container {
+  display: flex;
+  flex-direction: row;
+
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.product-deactivate-search-input {
+  width: 350px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-style: none;
+}
+
+.product-deactivate-search-cancel {
+  color: blue;
+  background-color: #eeeeee;
+  cursor: pointer;
   
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.product-deactivate-search-button {
+  margin-top: 20px;
+  margin-right: 18px;
+  margin-bottom: 17px;
+  color: green;
+}

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaRegSquare, FaRegCheckSquare } from "react-icons/fa";
 import { FiChevronDown } from "react-icons/fi";
+import { FaSearch } from "react-icons/fa";
+import { DebounceInput } from "react-debounce-input";
 
 import { history } from "routes/history";
 import store from "store";
@@ -19,11 +21,18 @@ const ProductPromotion = () => {
     const [loading, setLoading] = useState(true);
     const [loadingText] = useState(store.getState().defaultState.loadingText);
     const [products, setProducts] = useState([]);
+    const [searchText, setSearchText] = useState("");
+
 
     useEffect(() => {
         store.dispatch(actions.actionAdminModuleActivate());
         getProductsList();
     }, []);
+
+    useEffect(() => {
+        if (!loading) getProductsNome(searchText);
+        // eslint-disable-next-line
+    }, [searchText]);
 
     const getProductsList = async () => {
         async function loadProducts() {
@@ -34,25 +43,68 @@ const ProductPromotion = () => {
         }
         loadProducts();
     };
+
+    async function getProductsNome(searchText) {
+        async function loadProductsNome(searchText) {
+            setLoading(true);
+            const response = await productService.getProductsByName(searchText);
+            setLoading(false);
+            setProducts(response);
+        }
+        loadProductsNome(searchText);
+    }
+
     const handleExit = () => {
         history.push("orders");
     };
 
     return (
         <div id="product-in-promotion" className="product-promotion-container">
+
             <div className="product-promotion-header">
                 <div className="product-promotion-header-text">
                     Colocar / Tirar Produtos em Promoção
                 </div>
             </div>
+
             <div className="product-promotion-buttons">
                 <button className="product-promotion-button" onClick={handleExit}>
                     Sair
                 </button>
             </div>
+
             <div className="product-promotion-warning">
                 <div className="product-promotion-warning-text">
                     Os produtos ativados serão apresentados em promoção para vendas nos aplicativos Web e Mobile
+                </div>
+            </div>
+
+            <div className="product-promotion-search">
+                <div></div>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+
+                    <div className="product-promotion-search-container">
+                        
+                        <DebounceInput
+                            className="product-promotion-search-input"
+                            value={searchText}
+                            minLength={2}
+                            debounceTimeout={800}
+                            onChange={(e) => setSearchText(e.target.value)}
+                        />
+                        
+                        <div
+                            className="product-promotion-search-cancel"
+                            onClick={() => setSearchText("")}
+                        >
+                            X
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <FaSearch className="product-promotion-search-button" size={22} />
+                    </div>
+
                 </div>
             </div>
 
@@ -115,8 +167,8 @@ const Product = ({ product, handleRefresh }) => {
 
                 <div
                     className="product-promotion-product"
-                    style={{ 
-                        color: inPromotion ? "navy" : "grey", 
+                    style={{
+                        color: inPromotion ? "navy" : "grey",
                         fontWeight: inPromotion ? "bold" : "normal",
                     }}
                 >
@@ -151,10 +203,6 @@ const Product = ({ product, handleRefresh }) => {
         </>
     );
 };
-
-
-
-
 
 function PromotionalPriceContent({ normalPrice, promotionalPrice, handleSub }) {
     const [priceMasked, setPriceMasked] = useState(masks.moneyMask(promotionalPrice));

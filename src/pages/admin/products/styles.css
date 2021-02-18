@@ -7,12 +7,11 @@
   padding: 70px 10px;
 }
 
-
-
 #vinhos .header {
   background-color: steelblue;
 }
-#vinhos .header, .buttons {
+#vinhos .header,
+.buttons {
   border-left: 1px solid #90a4ae;
   border-right: 1px solid #90a4ae;
   border-bottom: 1px solid #90a4ae;
@@ -35,7 +34,7 @@
   padding: 5px 0;
   border-radius: 5px;
   box-shadow: 0 3px 3px #000;
-  background-color:#78909c;
+  background-color: #78909c;
   color: #fff;
   font-size: 1rem;
   text-align: center;
@@ -46,8 +45,6 @@
 #vinhos .button:hover {
   background-color: navy;
 }
-
-
 
 #vinhos .btnMais {
   position: fixed;
@@ -65,7 +62,7 @@
   font-size: 20px;
   padding: 15px;
   color: white;
-  background-color: blue;;
+  background-color: blue;
 }
 #vinhos .btnCircular:hover {
   background-color: #2979ff;
@@ -113,32 +110,51 @@
   border: 1px solid grey;
 }
 
+.vinho-list-header .product-search-container {
+  display: flex;
+  flex-direction: row;
+
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.vinho-list-header .product-search-container .product-search-input {
+  width: 350px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-style: none;
+}
+
+.vinho-list-header .product-search-container .product-search-cancel {
+  color: blue;
+  background-color: #eeeeee;
+  cursor: pointer;
+  
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 .search-bar {
   cursor: pointer;
 }
 
 .search-bar .button-search {
+  margin-top: 20px;
   margin-right: 18px;
-}
-
-/* .search-input { */
-  /* display: flex; */
-  /* justify-content: flex-end; */
-  /* height: 38px; */
-  /* margin-bottom: 20px; */
-  /* border: 1px solid grey; */
-/* } */
-
-.search-input .input {
-  width: 350px;
-  border-radius: 10px;
-  font-weight: bold;
-}
-
-.search-cancel {
-  margin-left: 15px;
-  margin-top: 7px;
-  cursor: pointer;
-  color: white;
-  font-weight: bold;
+  margin-bottom: 17px;
+  color: green;
 }

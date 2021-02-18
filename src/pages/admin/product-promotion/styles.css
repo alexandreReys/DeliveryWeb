@@ -13,6 +13,7 @@
   border-bottom: 1px solid #90a4ae;
   padding: 8px 20px;
 }
+
 .product-promotion-header-text {
   font-size: 1.4rem;
   color: white;
@@ -60,14 +61,12 @@
   background-color: navy;
 }
 
-.product-promotion-warning {
-  margin-bottom: 20px;
-}
 .product-promotion-warning-text {
   font-size: 0.8rem;
   color: black;
 }
-.product-promotion-content .product-promotion-input-group {
+.product-promotion-content 
+  .product-promotion-input-group {
   margin: 5px 0 15px 0;
   display: flex;
   flex-direction: column;
@@ -107,4 +106,60 @@
   flex-direction: row;
   justify-content: spaceBetween;
   margin-left: 20px;
+}
+
+
+.product-promotion-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-left: 1px solid #90a4ae;
+  border-right: 1px solid #90a4ae;
+  border-bottom: 1px solid #90a4ae;
+  margin-bottom: 20px;
+}
+
+.product-promotion-search-container {
+  display: flex;
+  flex-direction: row;
+
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.product-promotion-search-input {
+  width: 350px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-style: none;
+}
+
+.product-promotion-search-cancel {
+  color: blue;
+  background-color: #eeeeee;
+  cursor: pointer;
+  
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.product-promotion-search-button {
+  margin-top: 20px;
+  margin-right: 18px;
+  margin-bottom: 17px;
+  color: green;
 }
