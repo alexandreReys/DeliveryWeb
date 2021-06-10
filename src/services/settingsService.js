@@ -16,6 +16,7 @@ export const get = async () => {
 };
 
 export const put = async (data) => {
+
     const updateData = await processImage(data);
 
     try {
@@ -153,8 +154,6 @@ const processImage = async (data) => {
     return {
         IdSettings: data.IdSettings,
         AddressSellerSettings: data.AddressSellerSettings,
-        ShippingTaxSettings: data.ShippingTaxSettings,
-        DeliveryAreaDistance: data.DeliveryAreaDistance,
         UrlDeliveryMap: data.UrlDeliveryMap,
         UrlGooglePlay: data.UrlGooglePlay,
         ContactPhone: data.ContactPhone,
@@ -170,5 +169,9 @@ const processImage = async (data) => {
         AppBanner2PublicIdSettings: data.AppBanner2PublicIdSettings, 
         AppBanner3Settings: data.AppBanner3Settings,
         AppBanner3PublicIdSettings: data.AppBanner3PublicIdSettings,
+        DeliveryAreaDistance: data.DeliveryAreaDistance,
+        ShippingTaxSettings: data.ShippingTaxSettings,
+        DeliveryAreaDistance2: data.DeliveryAreaDistance2,
+        ShippingTax2Settings: data.ShippingTax2Settings,
     };
 };

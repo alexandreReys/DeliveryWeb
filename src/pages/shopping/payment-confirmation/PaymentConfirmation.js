@@ -142,7 +142,7 @@ const PaymentConfirmation = () => {
                     <p>
                         Evite o pagamento com dinheiro em espécie. É mais seguro para você e
                         para o empregador.
-          </p>
+                    </p>
                 </div>
             </content>
 
@@ -150,7 +150,7 @@ const PaymentConfirmation = () => {
                 <div className="button-container">
                     <span className="button-sair" onClick={handleOrderConfirmation}>
                         Confirmar
-          </span>
+                    </span>
                 </div>
             </footer>
         </div>

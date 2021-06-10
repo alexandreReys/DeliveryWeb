@@ -9,7 +9,7 @@ import store from "store";
 let mysqlBaseUrl;
 let appTitle;
 
-console.log("===================================================");
+console.log("=====================================");
 console.log(process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === "development") {
@@ -31,7 +31,7 @@ store.dispatch(actions.actionSetTitle(appTitle));
 console.log("client:", settings.client);
 console.log("appTitle:", appTitle);
 console.log("mysqlBaseUrl:", mysqlBaseUrl);
-console.log("===================================================");
+console.log("=====================================");
 
 export const api = axios.create({
     baseURL: mysqlBaseUrl,

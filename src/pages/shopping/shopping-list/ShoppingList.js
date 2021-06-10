@@ -92,7 +92,7 @@ function Categories ({ categories }) {
                     history.push("/shopping-list-categ");
                 }}
             >
-                {category.DescriptionCategory}
+                {utils.firstUpper(category.DescriptionCategory)}
             </div>
         )
     };
@@ -148,6 +148,9 @@ function MainContent ({ products }) {
                             quantity: 1,
                             price: product.PrecoVinho,
                             image: product.Imagem1Vinho,
+                            quantityProductVariation: product.QuantityProductVariation,
+                            priceProductVariation: product.PriceProductVariation,
+                            productPrice: product.PrecoVinho,
                         };
                         store.dispatch(actions.actionSelectProduct(param));
                         history.push("/selected-product");
@@ -220,7 +223,7 @@ function PageFooter () {
                 Voltar ao topo
             </a>
         </div>
-    )
-}
+    );
+};
 
 export default ShoppingList;

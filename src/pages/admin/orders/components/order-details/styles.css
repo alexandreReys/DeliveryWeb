@@ -97,27 +97,47 @@
   flex-direction: row;
   justify-content: space-between;
 }
-.container-order-details .status-button-40 {
-  width: 40%;
+
+
+.container-order-details .btn-aceitar-active {
+  background-color: green;
 }
-.container-order-details .status-button-20 {
+.container-order-details .btn-aceitar-disabled {
+  background-color: grey;
+}
+.container-order-details .btn-aceitar {
   width: 25%;
 }
 
+
+.container-order-details .btn-rejeitar-active {
+  background-color: #a20303;
+}
+.container-order-details .btn-rejeitar-disabled {
+  background-color: grey;
+}
+.container-order-details .btn-rejeitar {
+  width: 25%;
+}
+
+
+.container-order-details .btn-imprimir {
+  background-color: #0000ff;
+  width: 40%;
+}
 .container-order-details .status-button {
   border: 1px solid rgb(206, 206, 206);
   margin: 8px 0 0 0;
   padding: 10px 0;
   border-radius: 5px;
   box-shadow: 0 4px 4px #000;
-  background-color: #0000ff;
   color: #fff;
   font-size: 1rem;
   text-align: center;
   cursor: pointer;
 }
 .container-order-details .status-button:hover {
-  background-color: navy;
+  background-color: black;
 }
 
 /* ////////////////////////////////////////////////////////////////////////// */
@@ -155,6 +175,7 @@
   /* background-color: #e0dbdb; */
   background-color: #fff;
   font-size: 0.8rem;
+  margin-bottom: 20px;
 }
 
 #order-details .order-details b {

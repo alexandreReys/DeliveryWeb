@@ -21,8 +21,7 @@ const Settings = () => {
 
     const [idSettings, setIdSettings] = useState(0);
     const [addressSellerSettings, setAddressSellerSettings] = useState("");
-    const [shippingTaxSettings, setShippingTaxSettings] = useState(0);
-
+ 
     const [appBannerFileInputState] = useState();
     const [appBannerSettings, setAppBannerSettings] = useState("");
     const [appBannerPublicIdSettings, setAppBannerPublicIdSettings] = useState("");
@@ -48,12 +47,16 @@ const Settings = () => {
     const [webBannerPublicIdSettings, setWebBannerPublicIdSettings] = useState("");
     const [webBannerPreview, setWebBannerPreview] = useState("");
 
-    const [deliveryAreaDistance, setDeliveryAreaDistance] = useState(0);
     const [urlDeliveryMap, setUrlDeliveryMap] = useState("");
     const [urlGooglePlay, setUrlGooglePlay] = useState("");
     const [contactPhone, setContactPhone] = useState("");
     const [contactEmail, setContactEmail] = useState("");
     const [contactWhatsapp, setContactWhatsapp] = useState("");
+
+    const [deliveryAreaDistance, setDeliveryAreaDistance] = useState(0);
+    const [shippingTaxSettings, setShippingTaxSettings] = useState(0);
+    const [deliveryAreaDistance2, setDeliveryAreaDistance2] = useState(0);
+    const [shippingTax2Settings, setShippingTax2Settings] = useState(0);
 
 
     useEffect(() => {
@@ -67,34 +70,37 @@ const Settings = () => {
                 const response = await settingsService.get()
                 setIdSettings(response.IdSettings);
                 setAddressSellerSettings(response.AddressSellerSettings);
-                setShippingTaxSettings(response.ShippingTaxSettings);
-
+                
                 setAppBannerSettings(response.AppBannerSettings);
                 setAppBannerPublicIdSettings(response.AppBannerPublicIdSettings);
                 setAppBannerPreview(response.AppBannerSettings);
-
+                
                 setAppBanner2Settings(response.AppBanner2Settings);
                 setAppBanner2PublicIdSettings(response.AppBanner2PublicIdSettings);
                 setAppBanner2Preview(response.AppBanner2Settings);
-
+                
                 setAppBanner3Settings(response.AppBanner3Settings);
                 setAppBanner3PublicIdSettings(response.AppBanner3PublicIdSettings);
                 setAppBanner3Preview(response.AppBanner3Settings);
-
+                
                 setAppLogoPSettings(response.AppLogoPSettings);
                 setAppLogoPPublicIdSettings(response.AppLogoPPublicIdSettings);
                 setAppLogoPPreview(response.AppLogoPSettings);
-
+                
                 setWebBannerSettings(response.WebBannerSettings);
                 setWebBannerPublicIdSettings(response.WebBannerPublicIdSettings);
                 setWebBannerPreview(response.WebBannerSettings);
-
-                setDeliveryAreaDistance(response.DeliveryAreaDistance);
+                
                 setUrlDeliveryMap(response.UrlDeliveryMap);
                 setUrlGooglePlay(response.UrlGooglePlay);
                 setContactPhone(response.ContactPhone);
                 setContactEmail(response.ContactEmail);
                 setContactWhatsapp(response.ContactWhatsapp);
+                
+                setDeliveryAreaDistance(response.DeliveryAreaDistance);
+                setShippingTaxSettings(response.ShippingTaxSettings);
+                setDeliveryAreaDistance2(response.DeliveryAreaDistance2);
+                setShippingTax2Settings(response.ShippingTax2Settings);
 
                 setLoading(false);
             };
@@ -195,6 +201,7 @@ const Settings = () => {
                     });
                 };
             };
+
             async function confirmAndExit() {
                 if (await confirmUpdates()) {
                     updateSettingsInformation();
@@ -219,40 +226,46 @@ const Settings = () => {
                         .fire(confirmationOptions)
                         .then(result => result.isConfirmed);
                 };
+
                 function updateSettingsInformation() {
                     const shippingTaxValue = MoneyMaskedToStringUnmasked(shippingTaxSettings);
+                    const shippingTax2Value = MoneyMaskedToStringUnmasked(shippingTax2Settings);
+                    
                     settingsService.put({
                         AddressSellerSettings: addressSellerSettings,
-                        ShippingTaxSettings: shippingTaxValue,
                         IdSettings: idSettings,
-
+                        
                         AppBannerSettings: appBannerSettings,
                         AppBannerPublicIdSettings: appBannerPublicIdSettings,
                         AppBannerB64: appBannerPreview,
-
+                        
                         AppBanner2Settings: appBanner2Settings,
                         AppBanner2PublicIdSettings: appBanner2PublicIdSettings,
                         AppBanner2B64: appBanner2Preview,
-
+                        
                         AppBanner3Settings: appBanner3Settings,
                         AppBanner3PublicIdSettings: appBanner3PublicIdSettings,
                         AppBanner3B64: appBanner3Preview,
-
+                        
                         AppLogoPSettings: appLogoPSettings,
                         AppLogoPPublicIdSettings: appLogoPPublicIdSettings,
                         AppLogoPB64: appLogoPPreview,
-
+                        
                         WebBannerSettings: webBannerSettings,
                         WebBannerPublicIdSettings: webBannerPublicIdSettings,
                         WebBannerB64: webBannerPreview,
-
-                        DeliveryAreaDistance: deliveryAreaDistance,
+                        
                         UrlDeliveryMap: urlDeliveryMap,
                         UrlGooglePlay: urlGooglePlay,
-
+                        
                         ContactPhone: contactPhone,
                         ContactEmail: contactEmail,
                         ContactWhatsapp: contactWhatsapp,
+                        
+                        DeliveryAreaDistance: deliveryAreaDistance,
+                        ShippingTaxSettings: shippingTaxValue,
+                        DeliveryAreaDistance2: deliveryAreaDistance2,
+                        ShippingTax2Settings: shippingTax2Value,
                     });
                 };
             };
@@ -368,6 +381,7 @@ const Settings = () => {
 
                         {/* shippingTaxSettings && deliveryAreaDistance */}
                         <div style={{ display: "flex", flexDirection: "row", gap: 15, flexWrap: "wrap"}}>
+                            {/* Frete */}
                             <div className="notifications-input-group">
                                 <label className="notifications-label" htmlFor="shippingTaxSettings">
                                     Valor do Frete
@@ -384,6 +398,7 @@ const Settings = () => {
                                     onChange={(text) => setShippingTaxSettings(text)}
                                 />
                             </div>
+                            {/* Distancia */}
                             <div className="notifications-input-group">
                                 <label className="notifications-label" htmlFor="deliveryAreaDistance">
                                     Área de entrega em Kms
@@ -401,7 +416,42 @@ const Settings = () => {
                                     onChange={(text) => setDeliveryAreaDistance(text)}
                                 />
                             </div>
-
+                            
+                            {/* Frete 2 */}
+                            <div className="notifications-input-group">
+                                <label className="notifications-label" htmlFor="shippingTax2Settings">
+                                    Valor do Frete 2
+                                </label>
+                                <TextInputMask
+                                    kind={"money"}
+                                    className="notifications-input"
+                                    style={{ width: 200 }}
+                                    name="shippingTax2Settings"
+                                    id="shippingTax2Settings"
+                                    required
+                                    autoComplete="new-password"
+                                    value={shippingTax2Settings}
+                                    onChange={(text) => setShippingTax2Settings(text)}
+                                />
+                            </div>
+                            {/* Distancia 2 */}
+                            <div className="notifications-input-group">
+                                <label className="notifications-label" htmlFor="deliveryAreaDistance2">
+                                    Área para frete 2 reduzido
+                                </label>
+                                <TextInputMask
+                                    kind={"only-numbers"}
+                                    className="notifications-input"
+                                    style={{ width: 200 }}
+                                    name="deliveryAreaDistance2"
+                                    id="deliveryAreaDistance2"
+                                    required
+                                    maxLength={2}
+                                    autoComplete="new-password"
+                                    value={deliveryAreaDistance2}
+                                    onChange={(text) => setDeliveryAreaDistance2(text)}
+                                />
+                            </div>
                         </div>
 
                         {/* urlDeliveryMap */}
@@ -584,8 +634,6 @@ const Settings = () => {
                             </div>
 
                         </div>
-
-
 
                     </>
                 )}

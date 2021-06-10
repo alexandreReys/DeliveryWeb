@@ -44,19 +44,22 @@ const Delivery = () => {
                     Area de Atendimento
                 </b></h3>
 
-                <p>
+                <p style={{marginTop: 30}}>
                     • Entregamos em uma area de { deliveryAreaDistance } KM
-                </p>                
-                <div style={{marginTop: 50, marginBottom: 20 }}>
-                    • Clique para ver no mapa :
-                    <a 
-                        href={ urlDeliveryMap }
-                        style={{marginLeft: 30, fontSize: 16, fontWeight: "bold", cursor: "pointer", textDecoration: "underline"}}
-                        target="_blank" rel="noopener noreferrer"
-                    >
-                        Mapa da Area de Atendimento
-                    </a>
-                </div>                
+                </p>
+
+                { !!urlDeliveryMap && (
+                    <div style={{marginTop: 50, marginBottom: 20 }}>
+                        • Clique para ver no mapa :
+                        <a 
+                            href={ urlDeliveryMap }
+                            style={{marginLeft: 30, fontSize: 16, fontWeight: "bold", cursor: "pointer", textDecoration: "underline"}}
+                            target="_blank" rel="noopener noreferrer"
+                        >
+                            Mapa da Area de Atendimento
+                        </a>
+                    </div>                
+                )}
             </section>
 
             <PageFooter />

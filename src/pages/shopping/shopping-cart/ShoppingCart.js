@@ -15,11 +15,7 @@ import {
 import "./styles.css";
 
 const ShoppingCart = ({
-  addedItems,
-  quantityOfItems,
-  subtotal,
-  shipping,
-  total,
+  addedItems, quantityOfItems, subtotal, shipping, total,
 }) => {
   const cartSubtotal = moneyMask(subtotal);
   const cartShipping = moneyMask(shipping);
@@ -53,6 +49,9 @@ const ShoppingCart = ({
                     id: item.id,
                     quantity: 1,
                     price: item.price,
+                    productPrice: item.productPrice,
+                    quantityProductVariation: item.quantityProductVariation,
+                    priceProductVariation: item.priceProductVariation,
                     shippingTax: store.getState().defaultState.shippingTaxSettings,
                   };
                   store.dispatch(actionSubFromCart(itemToSub));
@@ -69,7 +68,10 @@ const ShoppingCart = ({
                     description: item.description,
                     quantity: 1,
                     price: item.price,
+                    productPrice: item.productPrice,
                     image: null,
+                    quantityProductVariation: item.quantityProductVariation,
+                    priceProductVariation: item.priceProductVariation,
                     shippingTax: store.getState().defaultState.shippingTaxSettings,
                   };
                   store.dispatch(actionAddToCart(itemToAdd));

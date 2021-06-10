@@ -59,7 +59,6 @@ const actionSelectProduct = (state, { product }) => {
 
 // TESTE PROMOÇÃO POR QUANTIDADE
 const actionAddToCart = (state, { itemToAdd }) => {
-    // itemToAdd = id:  description:  quantity:  price:  image:
     const { price, stateAddedItem } = getPrice( state.addedItems, itemToAdd );
     
     if (stateAddedItem) {
@@ -89,11 +88,15 @@ const actionAddToCart = (state, { itemToAdd }) => {
     };
     
     function getPrice( stateAddedItems, itemToAdd ) {
-        const promotionalQtty = process.env.NODE_ENV === "development" ? 15 : 333333;  // TESTE PROMOÇÃO POR QUANTIDADE
+        const promotionalQtty = itemToAdd.quantityProductVariation;
 
         const stateAddedItem = stateAddedItems.find((item) => item.id === itemToAdd.id);
         const qtty = !stateAddedItem ? itemToAdd.quantity : itemToAdd.quantity + stateAddedItem.quantity;
-        const price =  qtty >= promotionalQtty ? itemToAdd.price / 4 : itemToAdd.price;
+
+        const price = promotionalQtty > 0 && qtty > 1 && qtty >= promotionalQtty 
+            ? itemToAdd.priceProductVariation 
+            : itemToAdd.productPrice
+        ;
     
         return { price, stateAddedItem };
     };
@@ -106,24 +109,38 @@ const actionAddToCart = (state, { itemToAdd }) => {
 };
 
 const actionSubFromCart = (state, { itemToSub }) => {
-    // itemToSub = id:  quantity:  price:
-    const addedItem = state.addedItems.find((item) => item.id === itemToSub.id);
-    let itemTotal = itemToSub.price * itemToSub.quantity;
+    const promotionalQtty = itemToSub.quantityProductVariation;
 
-    if (addedItem) {
-        if (addedItem.quantity === 1) {
-            return { ...state };
-        }
+    const stateAddedItem = state.addedItems.find((item) => item.id === itemToSub.id);
 
-        addedItem.quantity -= itemToSub.quantity;
+    if (stateAddedItem) {
+        if (stateAddedItem.quantity === 1) return { ...state };
+
+        const totalQtty = stateAddedItem.quantity - itemToSub.quantity;
+        const price = promotionalQtty > 0 && totalQtty > 1 && totalQtty >= promotionalQtty 
+            ? itemToSub.priceProductVariation 
+            : itemToSub.productPrice
+        ;
+
+        stateAddedItem.quantity -= itemToSub.quantity;
+        stateAddedItem.price = price;
+
+        const subt = getSubtotal( state.addedItems );
+
         return {
             ...state,
             shipping: itemToSub.shippingTax,
             quantityOfItems: state.quantityOfItems - itemToSub.quantity,
-            subtotal: state.subtotal - itemTotal,
-            total: (state.subtotal + state.shipping) - itemTotal,
+            subtotal: subt,
+            total: subt + itemToSub.shippingTax,
         };
-    }
+    };
+
+    function getSubtotal( stateAddedItems ) {
+        return stateAddedItems.reduce( 
+            (acc, it) => acc + (it.price * it.quantity), 0 
+        );
+    };
 };
 
 const actionRemoveFromCart = (state, { itemToRemove }) => {

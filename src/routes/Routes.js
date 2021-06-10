@@ -25,6 +25,7 @@ import PrivacyPolicy from "pages/shopping/about/privacy-policiy/PrivacyPolicy";
 import Payment from "pages/shopping/about/payment/Payment";
 import Delivery from "pages/shopping/about/delivery/Delivery";
 import Employment from "pages/shopping/about/employment/Employment";
+import CategoryListPosition from "pages/admin/category-list-position/CategoryListPosition"
 
 import TestModal from "components/modal/testModal";
 import TestPrint from "components/print/TestPrint";
@@ -45,6 +46,7 @@ const Routes = () => (
     <PrivateRoute path="/settings" component={Settings} />
     <PrivateRoute path="/product-deactivate" component={ProductDeactivate} />
     <PrivateRoute path="/product-promotion" component={ProductPromotion} />
+    <PrivateRoute path="/category-list-position" component={CategoryListPosition} />
 
     <Route path="/shopping-cart" component={ShoppingCart} />
     <Route path="/selected-product" component={SelectedProduct} />

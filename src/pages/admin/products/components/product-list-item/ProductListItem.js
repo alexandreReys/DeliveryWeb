@@ -23,6 +23,10 @@ function ProductListItem({ vinho, onDelete }) {
       CodigoErpVinho: vinho.CodigoErpVinho,
       Imagem1Vinho: vinho.Imagem1Vinho,
       Imagem1IdVinho: vinho.Imagem1IdVinho,
+      IdProductVariation: vinho.IdProductVariation,
+      QuantityProductVariation: vinho.QuantityProductVariation,
+      DescriptionProductVariation: vinho.DescriptionProductVariation,
+      PriceProductVariation: vinho.PriceProductVariation,
     };
     store.dispatch(actionVinhoEdit(dadosVinho));
   };
@@ -41,8 +45,7 @@ function ProductListItem({ vinho, onDelete }) {
           />
           <FaTrashAlt
             className="trash-icon ml-2"
-            onClick={() => {
-              onDelete(vinho.IdVinho);
+            onClick={() => {onDelete(vinho.IdVinho);
             }}
           />
         </div>

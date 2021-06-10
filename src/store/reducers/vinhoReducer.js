@@ -11,6 +11,10 @@ const INITIAL_STATE = {
   CodigoErpVinho: "",
   Imagem1Vinho: "",
   Imagem1IdVinho: "",
+  IdProductVariation: "",
+  QuantityProductVariation: 0,
+  DescriptionProductVariation: "",
+  PriceProductVariation: 0,
   operacaoVinho: "list",
   selectedCategory: "",
 };
@@ -61,6 +65,10 @@ const functionList = (state) => ({
   CodigoErpVinho: "",
   Imagem1Vinho: "",
   Imagem1IdVinho: "",
+  IdProductVariation: "",
+  QuantityProductVariation: 0,
+  DescriptionProductVariation: "",
+  PriceProductVariation: 0,
   operacaoVinho: "list",
 });
 
@@ -77,6 +85,10 @@ const functionAdd = (state) => ({
   CodigoErpVinho: "",
   Imagem1Vinho: "",
   Imagem1IdVinho: "",
+  IdProductVariation: "",
+  QuantityProductVariation: 0,
+  DescriptionProductVariation: "",
+  PriceProductVariation: 0,
   operacaoVinho: "add",
 });
 
@@ -94,6 +106,10 @@ const functionEdit = (state, { dadosVinho }) => {
     CodigoErpVinho: dadosVinho.CodigoErpVinho,
     Imagem1Vinho: dadosVinho.Imagem1Vinho,
     Imagem1IdVinho: dadosVinho.Imagem1IdVinho,
+    IdProductVariation: dadosVinho.IdProductVariation,
+    QuantityProductVariation: dadosVinho.QuantityProductVariation,
+    DescriptionProductVariation: dadosVinho.DescriptionProductVariation,
+    PriceProductVariation: dadosVinho.PriceProductVariation,
     operacaoVinho: "edit",
   };
 };

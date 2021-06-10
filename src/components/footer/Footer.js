@@ -86,8 +86,6 @@ const Footer = () => {
                             alt="loading ..."
                         />
                     </a>
-
-
                 </div>
             </div>
 

@@ -48,6 +48,10 @@ const processImage = async (data) => {
     Imagem2Vinho: null,
     Imagem3Vinho: null,
     IdVinho: data.IdVinho,
+    IdProductVariation: data.IdProductVariation,
+    QuantityProductVariation: data.QuantityProductVariation,
+    DescriptionProductVariation: data.DescriptionProductVariation,
+    PriceProductVariation: data.PriceProductVariation,
   };
   return response;
 };

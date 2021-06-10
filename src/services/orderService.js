@@ -37,7 +37,7 @@ export const postOrder = async () => {
     evaluationOrder: 0,
     evaluationReasonOrder: "",
     commentsOrder: "",
-    statusOrder: "Pendente",
+    statusOrder: "Novo",
 
     orderItems: shoppingCart.addedItems,
   };
@@ -98,6 +98,16 @@ export const getOrderHistory = async (id) => {
 
   store.dispatch(actionGetOrderHistory(orderHistory.data));
   return orderHistory.data;
+};
+
+export const acceptOrder = async (id) => {
+  try {
+    await api.put(`/delivery-order/accept/${id}`);
+  } catch (error) {
+    console.error("ErrorMessage: ", error);
+    return null;
+  };
+  return;
 };
 
 export const rejectOrder = async (id) => {

@@ -162,6 +162,13 @@ export const firstWord = (phrase) => {
     return phrase;
 };
 
+export const firstUpper = (string, separator = ' ') => {
+    return string
+      .split(separator)
+      .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
+      .join(separator);
+};
+
 // dd/mm/yyyy
 export const formatttedToday = () => {
     const today = new Date();

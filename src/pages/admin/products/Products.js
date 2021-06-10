@@ -31,7 +31,7 @@ const Products = ({ operacaoVinho }) => {
     const [loading, setLoading] = useState(true);
     const [loadingText] = useState(store.getState().defaultState.loadingText);
     
-    const [vinhos, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
 
     const [searching, setSearching] = useState(false);
     const [searchText, setSearchText] = useState("");
@@ -75,13 +75,16 @@ const Products = ({ operacaoVinho }) => {
 
     async function handleFormSaveButton(formData) {
         if (operacaoVinho === "add") {
-            const VinhoArray = vinhos.filter((vinho) => {
+            const VinhoArray = products.filter((vinho) => {
                 return vinho.DescricaoVinho === formData.DescricaoVinho;
             });
 
             if (VinhoArray === null || VinhoArray.length === 0) {
                 // Inclui no BD
                 const response = await postVinho(formData);
+
+                store.dispatch(actionVinhoList());
+
                 if (response.affectedRows > 0) {
                     getProductsList();
                 }
@@ -91,6 +94,8 @@ const Products = ({ operacaoVinho }) => {
         if (operacaoVinho === "edit") {
             // Altera no BD
             const response = await putVinho(formData);
+
+            store.dispatch(actionVinhoList());
 
             if (!response) setProducts([]);
             else if (response.affectedRows > 0) {
@@ -183,10 +188,10 @@ const Products = ({ operacaoVinho }) => {
                     {!loading && (
                         <>
                             <ul className="mt-3">
-                                {vinhos.map((vinho) => (
+                                {products.map((product) => (
                                     <ProductListItem
-                                        key={vinho.IdVinho}
-                                        vinho={vinho}
+                                        key={product.IdVinho}
+                                        vinho={product}
                                         onDelete={handlerDeleteButton}
                                     />
                                 ))}
