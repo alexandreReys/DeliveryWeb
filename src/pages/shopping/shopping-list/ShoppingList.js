@@ -11,7 +11,7 @@ import * as productService from "services/productService";
 import * as settingsService from "services/settingsService";
 import * as actions from "store/actions";
 import * as utils from "utils";
-import * as masks from "utils/masks";
+// import * as masks from "utils/masks";
 
 import "./styles.css";
 
@@ -122,39 +122,14 @@ function MainContent ({ products }) {
     
         function Product({ product }) {
             product = utils.adjustPromotionalPrice(product);
-    
-            var precoVinho, precoAnterVinho;
-    
-            if (product.EmPromocaoVinho && product.PrecoVinho >= 100) {
-                precoVinho = masks.numberMask(product.PrecoVinho)
-            } else {
-                precoVinho = masks.moneyMask(product.PrecoVinho)
-            };
-    
-            if (product.EmPromocaoVinho && product.PrecoPromocionalVinho >= 100) {
-                precoAnterVinho = masks.moneyMaskSpaceless(product.PrecoAnterVinho)
-            } else {
-                precoAnterVinho = masks.moneyMask(product.PrecoAnterVinho)
-            };
+           
+            const { precoVinho, precoAnterVinho } = utils.getPrice(product);
     
             return (
                 <div
                     className="product"
                     key={product.IdVinho}
-                    onClick={() => {
-                        const param = {
-                            id: product.IdVinho,
-                            description: product.DescricaoVinho,
-                            quantity: 1,
-                            price: product.PrecoVinho,
-                            image: product.Imagem1Vinho,
-                            quantityProductVariation: product.QuantityProductVariation,
-                            priceProductVariation: product.PriceProductVariation,
-                            productPrice: product.PrecoVinho,
-                        };
-                        store.dispatch(actions.actionSelectProduct(param));
-                        history.push("/selected-product");
-                    }}
+                    onClick={ () => productClick() }
                 >
                     <div className="header">
                         {!!product.Imagem1Vinho && (
@@ -169,26 +144,73 @@ function MainContent ({ products }) {
                         {utils.filterStringSize(35, product.DescricaoVinho)}
                     </div>
     
-                    <content>
-    
-                        {!!product.EmPromocaoVinho &&
-                            <>
-                                <div className="price-line">{precoAnterVinho}</div>
-                                <div className="price">{precoVinho}</div>
-                            </>
-                        }
-    
-                        {!product.EmPromocaoVinho &&
-                            <>
-                                <div className="price" style={{ marginTop: 4 }}>{precoVinho}</div>
-                            </>
-                        }
-    
-                    </content>
+                    <PriceContainer product={product} precoAnterVinho={precoAnterVinho} precoVinho={precoVinho} />
                 </div>
             );
+
+            function productClick() {
+                const param = {
+                    id: product.IdVinho,
+                    description: product.DescricaoVinho,
+                    quantity: 1,
+                    price: product.PrecoVinho,
+                    image: product.Imagem1Vinho,
+
+                    productPrice: product.PrecoVinho,
+                    priceProductVariation: product.PriceProductVariation ? product.PriceProductVariation : 0,
+                    quantityProductVariation: product.QuantityProductVariation ? product.QuantityProductVariation : 0,
+                    descriptionVariation: product.DescriptionProductVariation,
+                };
+
+                store.dispatch(actions.actionSelectProduct(param));
+                history.push("/selected-product");
+            };
         };
+
+        function PriceContainer({ product, precoAnterVinho, precoVinho }) {
+            return (
+                <div style={{ flexDirection: "row", marginTop: 6 }}>
+
+                    <PromotionalText product={product} />
+
+                    <DiscardedPrice price={precoAnterVinho} emPromocao={product.EmPromocaoVinho} />
+
+                    <EffectivePrice price={precoVinho} />
+
+                </div>
+            );
+            
+            function PromotionalText({ product }) {
+                if ( product.QuantityProductVariation > 0 ) {
+                    return (
+                        <div style={{ fontSize: "0.8rem", color: "red" }}>
+                            {product.DescriptionProductVariation}
+                        </div>
+                    );
+                };
+        
+                return null;
+            };
+            
+            function DiscardedPrice({ price, emPromocao }) {
+                if (!emPromocao) return null;
+                
+                return (
+                    <div className="price-line">
+                        {price}
+                    </div>
+                );
+            };
     
+            function EffectivePrice({ price }) {
+                return (
+                    <div className="price">
+                        {price}
+                    </div>
+                );
+            };
+        };
+
         function SeeAll({ category }) {
             return (
                 <div className="arrow-all">

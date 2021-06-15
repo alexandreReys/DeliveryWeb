@@ -68,7 +68,7 @@ export const getProducts = async ( id = null ) => {
 export const getProductsGroupedByCategory = async () => {
   let resp = [];
   await api
-    .get("/products/category/grouped")
+    .get("/products/category/grouped/selected")
     .then((response) => {
       resp = response;
     })

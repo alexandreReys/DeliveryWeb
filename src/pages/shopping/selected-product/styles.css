@@ -9,13 +9,11 @@
   margin: 0 !important;
   padding: 0 !important;
 }
-
 #selectedProduct .container-product {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-bottom: 260px;
 }
-
 #selectedProduct aside {
   padding-bottom: 20px;
   text-align: right;
@@ -28,6 +26,57 @@
   padding-right: 15px;
   padding-bottom: 20px;
 }
+#selectedProduct .qtty-box {
+  /* margin-top: 40px; */
+  padding: 0;
+  border: 1px solid orange;
+  border-radius: 16px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 1px 2px 4px #000;
+}
+#selectedProduct .qtty-minus {
+  padding: 0 !important;
+  display: inline-block;
+  width: 20%;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: blue;
+}
+#selectedProduct .qtty {
+  display: inline-block;
+  width: 60%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+#selectedProduct .qtty-plus {
+  padding: 0 !important;
+  display: inline-block;
+  width: 20%;
+  font-size: 2rem;
+  cursor: pointer;
+  color: blue;
+}
+
+#selectedProduct .button-add {
+  margin-top: 40px;
+  padding: 16px;
+  border: 1px solid grey;
+  border-radius: 25px;
+  width: 250px;
+  text-align: center;
+  font-weight: bolder;
+  background-color: #f5bd56;
+  cursor: pointer;
+  box-shadow: 1px 2px 4px #000;
+}
+#selectedProduct .button-add:hover {
+  background-color: orange;
+  color: #fff;
+}
+
+
+
 @media (max-width: 700px) {
   #selectedProduct .container-product {
     grid-template-columns: 1fr;
@@ -54,50 +103,4 @@
   #selectedProduct .button-add {
     margin-top: 30px !important;
   }
-}
-
-#selectedProduct .qtty-box {
-  margin-top: 40px;
-  padding: 0;
-  border: 1px solid orange;
-  border-radius: 16px;
-  width: 250px;
-  text-align: center;
-  box-shadow: 1px 2px 4px #000;
-}
-#selectedProduct .qtty-minus {
-  display: inline-block;
-  width: 20%;
-  font-size: 2rem;
-  cursor: pointer;
-  color: blue;
-}
-#selectedProduct .qtty {
-  display: inline-block;
-  width: 60%;
-  font-size: 2.5rem;
-}
-#selectedProduct .qtty-plus {
-  display: inline-block;
-  width: 20%;
-  font-size: 2rem;
-  cursor: pointer;
-  color: blue !important;
-}
-
-#selectedProduct .button-add {
-  margin-top: 40px;
-  padding: 16px;
-  border: 1px solid grey;
-  border-radius: 25px;
-  width: 250px;
-  text-align: center;
-  font-weight: bolder;
-  background-color: #f5bd56;
-  cursor: pointer;
-  box-shadow: 1px 2px 4px #000;
-}
-#selectedProduct .button-add:hover {
-  background-color: orange;
-  color: #fff;
 }

@@ -1,5 +1,8 @@
 import Sweetalert2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import * as masks from "./masks";
+
+
 const Swal = withReactContent(Sweetalert2);
 
 export const filterStringSize = (size, desc) => {
@@ -12,6 +15,44 @@ export const adjustPromotionalPrice = (list) => {
     list = { ...list, PrecoAnterVinho: list.PrecoVinho };
     if (list.EmPromocaoVinho) list.PrecoVinho = list.PrecoPromocionalVinho;
     return list;
+};
+
+export const getPrice = (product) => {
+    let precoVinho, precoAnterVinho;
+
+    if (
+        !!product.DescriptionProductVariation && 
+        product.QuantityProductVariation > 0 &&
+        product.PriceProductVariation > 0
+    ) {
+
+        precoVinho = masks.moneyMask(product.PriceProductVariation);
+        precoAnterVinho = masks.moneyMask(product.PriceProductVariation);
+
+    } else {
+        if (!product.EmPromocaoVinho || !product.PrecoPromocionalVinho) {
+
+            precoVinho = masks.moneyMask(product.PrecoVinho);
+            precoAnterVinho = masks.moneyMask(product.PrecoVinho);
+
+        } else {
+
+            if (product.EmPromocaoVinho && product.PrecoVinho >= 100) {
+                precoVinho = masks.numberMask(product.PrecoVinho)
+            } else {
+                precoVinho = masks.moneyMask(product.PrecoVinho)
+            };
+        
+            if (product.EmPromocaoVinho && product.PrecoPromocionalVinho >= 100) {
+                precoAnterVinho = masks.moneyMaskSpaceless(product.PrecoAnterVinho)
+            } else {
+                precoAnterVinho = masks.moneyMask(product.PrecoAnterVinho)
+            };
+
+        };
+    };
+    
+    return { precoVinho, precoAnterVinho };
 };
 
 export function processingWait(seconds) {
