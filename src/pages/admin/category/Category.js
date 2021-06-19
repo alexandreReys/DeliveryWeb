@@ -77,7 +77,8 @@ const Category = ({ operacaoCategory }) => {
 
         if (operacaoCategory === "edit") {
             const response = await categoryService.put(formData);
-            if (!response) setCategories([]);
+            if (!response) 
+                setCategories([]);
             else if (response.affectedRows > 0) {
                 await getList();
             };

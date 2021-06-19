@@ -269,3 +269,16 @@ export const clientSettings = (id, envJson) => {
 
     return { mysqlBaseUrl, appTitle };
 };
+
+export const getShortAddress = (addr) => {
+    let address = "";
+
+    address += !addr.street ? "" : addr.street;
+    address += !addr.number ? "" : ", " + addr.number;
+    address += !addr.neighborhood ? "" : " " + addr.neighborhood;
+    address += !addr.city ? "" : " " + addr.city;
+    address += !addr.state ? "" : " " + addr.state;
+    address += !addr.postalCode ? "" : " " + addr.postalCode;
+
+    return address;
+};

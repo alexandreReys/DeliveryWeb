@@ -51,7 +51,7 @@ const ProductSelect = () => {
                 closeMenuOnSelect={true}
                 cacheOptions
                 loadOptions={loadOptions}
-                placeholder={"Pesquise sua bebida favorita"}
+                placeholder={"Pesquise aqui"}
                 components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
                 // defaultOptions
                 // onInputChange={ value => value }
