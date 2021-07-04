@@ -26,6 +26,7 @@ import Payment from "pages/shopping/about/payment/Payment";
 import Delivery from "pages/shopping/about/delivery/Delivery";
 import Employment from "pages/shopping/about/employment/Employment";
 import CategoryListPosition from "pages/admin/category-list-position/CategoryListPosition"
+import AddressConfirmation from "components/modal/address-confirmation/addressConfirmation"
 
 import TestModal from "components/modal/testModal";
 import TestPrint from "components/print/TestPrint";
@@ -59,6 +60,7 @@ const Routes = () => (
     <Route path="/about-payment" component={Payment} />
     <Route path="/about-delivery" component={Delivery} />
     <Route path="/about-employment" component={Employment} />
+    <Route path="/address-confirmation" component={AddressConfirmation} />
 
     <Route path="/test-modal" component={TestModal} />
     <Route path="/test-print" component={TestPrint} />

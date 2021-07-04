@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import noImage from "assets/img/no-image.png";
 import { BsArrowLeft } from "react-icons/bs";
+import AddressConfirmation from "components/modal/address-confirmation/addressConfirmation"
+import * as mapsService from "../../../services/mapsService";
+
 import store from "store";
-import { actionAddToCart } from "store/actions";
 import { history } from "routes/history";
+import * as actions from "store/actions";
 import * as masks from "utils/masks";
+import * as utils from "utils";
 
 import "./styles.css";
 
@@ -57,6 +61,8 @@ const ProductContent = ({ selectedProduct }) => {
     const [quantity, setQuantity] = useState(!showPrice2 ? 1 : 0);
     const [quantity2, setQuantity2] = useState(0);
     const [totalQuantity, setTotalQuantity] = useState(!showPrice2 ? 1 : 0);
+
+    const [showAddressConfirmation, setShowAddressConfirmation] = useState(false);
     
     const selectedProductPrice = masks.moneyMask(selectedProduct.price);
 
@@ -67,28 +73,31 @@ const ProductContent = ({ selectedProduct }) => {
     if (!!selectedProduct.descriptionVariation) descriptionVariation = selectedProduct.descriptionVariation;
 
     const clickOnButtonAdd = () => {
-        if (quantity  > 0 ) updateCart(
-            selectedProduct, 
-            quantity, 
-            selectedProduct.price
-        );
+        const previousQuantity = store.getState().cartState.quantityOfItems
         
-        if (quantity2 > 0 ) updateCart(
-            selectedProduct, 
-            quantity2 * selectedProduct.quantityProductVariation, 
-            selectedProduct.priceProductVariation
-        );
+        if (quantity  > 0 ) updateCart(selectedProduct, quantity, selectedProduct.price);
+        if (quantity2 > 0 ) updateCart(selectedProduct, quantity2 * selectedProduct.quantityProductVariation, selectedProduct.priceProductVariation);
 
-        history.push("/");
+        if (previousQuantity === 0) {
+            if (!store.getState().deliveryAddressState.street) {
+                return history.push({ pathname: "/delivery-address", nextPath: "/" });
+            } else {
+                setShowAddressConfirmation(true);
+            };
+        } else {
+            history.push("/");
+        };
+
+        //////////////////////////////////////
         
-        function updateCart(item, qtty, price) {
-            store.dispatch(actionAddToCart({
+        async function updateCart(item, qtty, price) {
+            store.dispatch(actions.actionAddToCart({
                 id: item.id,
                 description: item.description,
                 quantity: qtty,
                 price: price,
                 image: item.image,
-                shippingTax: store.getState().defaultState.shippingTaxSettings,
+                shippingTax: await getShippingTax(),
 
                 quantityProductVariation: item.quantityProductVariation,
                 priceProductVariation: item.priceProductVariation,
@@ -99,12 +108,39 @@ const ProductContent = ({ selectedProduct }) => {
 
     return (
         <content>
+            <AddressConfirmation 
+                show={showAddressConfirmation} 
+                close={() => setShowAddressConfirmation(false)} 
+                address={store.getState().deliveryAddressState}
+            />
             <ProductDescription />
             <PromocionalPriceSelector />
             <DefaultPriceSelector />
             <ButtonAddToCart />
         </content>
     );
+
+    async function getShippingTax() {
+        const settings = store.getState().defaultState;
+        const deliveryInfo = store.getState().deliveryAddressState;
+        let customerDistance = store.getState().cartState.customerDistance;
+
+        if (!customerDistance) {
+            const addr = utils.getShortAddress(deliveryInfo);
+            const distances = await mapsService.googleDistance( addr );
+            customerDistance = (distances.distance.value / 1000).toFixed(2);
+            store.dispatch( actions.actionSetCustomerDistance(customerDistance) );
+        };
+        
+        if (!settings.deliveryAreaDistance2) return settings.shippingTaxSettings;
+
+        if (!customerDistance) return settings.shippingTaxSettings;
+    
+        return ( customerDistance <= settings.deliveryAreaDistance2 )
+            ? settings.shippingTax2Settings
+            : settings.shippingTaxSettings;
+    };
+
 
     function ProductDescription() {
         return (

@@ -54,6 +54,7 @@ function navDeliveryAddress(deliveryAddress) {
     const _deliveryAddress = deliveryAddress.street
         ? `${deliveryAddress.street}, ${deliveryAddress.number}`
         : "Endereço de Entrega";
+        
     const _deliveryAddressClick = deliveryAddress.street
         ? "Alterar"
         : "Clique aqui";

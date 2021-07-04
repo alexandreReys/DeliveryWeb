@@ -235,9 +235,6 @@ const actionSubFromCart = (state, { itemToSub }) => {
     }
 };
 
-
-
-
 const actionRemoveFromCart = (state, { itemToRemove }) => {
     const removedItem = state.addedItems.find(
         (item) => item.id === itemToRemove.id

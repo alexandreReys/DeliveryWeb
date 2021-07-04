@@ -8,26 +8,21 @@ const INITIAL_STATE = {
 
   addressSellerSettings: "",
   shippingTaxSettings: 0,
-  
+  shippingTax2Settings: 0,
   webBannerSettings: "",
   webBannerPublicIdSettings: "",
-  
   appBannerSettings: "",
   appBannerPublicIdSettings: "",
-  
   appBanner2Settings: "",
   appBanner2PublicIdSettings: "",
-  
   appBanner3Settings: "",
   appBanner3PublicIdSettings: "",
-  
   appLogoPSettings: "",
   appLogoPPublicIdSettings: "",
-  
   deliveryAreaDistance: 0,
+  deliveryAreaDistance2: 0,
   urlDeliveryMap: "",
   urlGooglePlay: "",
-  
   contactPhone: "",
   contactEmail: "",
   contactWhatsapp: "",
@@ -53,6 +48,7 @@ const functionGetSettings = (state, { settings }) => {
     ...state,
     addressSellerSettings: settings.AddressSellerSettings,
     shippingTaxSettings: settings.ShippingTaxSettings,
+    shippingTax2Settings: settings.ShippingTax2Settings,
     webBannerSettings: settings.WebBannerSettings,
     webBannerPublicIdSettings: settings.WebBannerPublicIdSettings,
     appBannerSettings: settings.AppBannerSettings,
@@ -64,6 +60,7 @@ const functionGetSettings = (state, { settings }) => {
     appLogoPSettings: settings.AppLogoPSettings,
     appLogoPPublicIdSettings: settings.AppLogoPPublicIdSettings,
     deliveryAreaDistance: settings.DeliveryAreaDistance,
+    deliveryAreaDistance2: settings.DeliveryAreaDistance2,
     urlDeliveryMap: settings.UrlDeliveryMap,
     urlGooglePlay: settings.UrlGooglePlay,
     contactPhone: settings.ContactPhone,

@@ -5,13 +5,13 @@ import { BsArrowRight } from "react-icons/bs";
 
 import store from "store";
 import BannerTop from "components/banner-top/BannerTop";
+import AddressConfirmation from "components/modal/address-confirmation/addressConfirmation"
 
 import * as categoryService from "services/categoryService";
 import * as productService from "services/productService";
 import * as settingsService from "services/settingsService";
 import * as actions from "store/actions";
 import * as utils from "utils";
-// import * as masks from "utils/masks";
 
 import "./styles.css";
 
@@ -20,6 +20,8 @@ const ShoppingList = () => {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [banner, setBanner] = useState("");
+
+    const [showAddressConfirmation, setShowAddressConfirmation] = useState(false);
 
     useEffect(() => {
         store.dispatch(actions.actionGetDeliveryAddress());
@@ -51,12 +53,17 @@ const ShoppingList = () => {
                 setProducts(store.getState().vinhoState.products);
             };
         })();
-
+        
     }, [categories, products, banner]);
-
+    
     ///////////////////////////////
     return (
         <div id="shopping-list" className="container-shopping-list">
+            <AddressConfirmation 
+                show={showAddressConfirmation} 
+                close={ () => setShowAddressConfirmation(false) } 
+                address={store.getState().deliveryAddressState}
+            />
             <BannerTop banner={banner}/>
             <Categories categories={categories}/>
             <HeaderTop />

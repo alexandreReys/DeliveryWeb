@@ -57,37 +57,37 @@ export const getPrice = (product) => {
 
 export function processingWait(seconds) {
     return new Promise((resolve) => {
-        Swal
-            .fire({
-                icon: "info",
-                title: "Processando, aguarde ...",
-                position: "top-end",
-                background: "#lime",
-                showConfirmButton: false,
-                timer: seconds * 1000,
-                timerProgressBar: true,
-            })
-            .then(() => {
-                resolve();
-            });
+        Swal.fire({
+            icon: "info",
+            title: "Processando, aguarde ...",
+            position: "top-end",
+            background: "#lime",
+            showConfirmButton: false,
+            timer: seconds * 1000,
+            timerProgressBar: true,
+        })
+        .then(() => {
+            resolve();
+        });
     });
 };
 
 export function message(title, seconds) {
     return new Promise((resolve) => {
-        Swal
-            .fire({
-                icon: "info",
-                title: title,
-                position: "top-end",
-                background: "#lime",
-                showConfirmButton: false,
-                timer: seconds * 1000,
-                timerProgressBar: true,
-            })
-            .then(() => {
-                resolve();
-            });
+        Swal.fire({
+            icon: "info",
+            title: title,
+            position: "top-end",
+            background: "#lime",
+            showConfirmButton: false,
+            timer: seconds * 1000,
+            timerProgressBar: true,
+            showCancelButton: true,
+            showCloseButton: true,
+        })
+        .then(() => {
+            resolve();
+        });
     });
 };
 

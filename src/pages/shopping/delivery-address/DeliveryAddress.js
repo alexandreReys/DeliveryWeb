@@ -117,9 +117,11 @@ const DeliveryAddress = (props) => {
         if ( customerDistance > deliveryAreaDistance ) {
             store.dispatch( actions.actionCartReset() );
 
-            utils.message( "Sinto Muito ...", 
-`Infelizmente você se encontra fora de nossa area de entrega !! 
-            
+            utils.message( 
+`Sinto Muito ...
+
+Infelizmente você se encontra fora de nossa area de entrega.
+
 Atendemos uma área de ${deliveryAreaDistance} kms e você se encontra a ${customerDistance} kms`
             );
         };

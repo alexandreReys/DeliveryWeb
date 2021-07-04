@@ -1,0 +1,75 @@
+.address-confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+.address-confirmation-wrapper {
+    background-color: #fff;
+    width: 70%;
+    max-width: 600px;
+    margin: 12rem auto;
+    transition: all .5s ease;
+}
+
+.address-confirmation-header {
+    background-color: maroon;
+    color: #e9e9e9;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.address-confirmation-header p {
+    margin-bottom: 0;
+}
+
+.address-confirmation-header span {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.address-confirmation-content {
+    padding: 1.5rem 1rem;
+}
+
+.address-confirmation-body {
+    margin-bottom: 1rem;
+}
+
+.address-confirmation-body h4 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #DD501D;
+}
+
+.address-confirmation-body p {
+    font-size: 1rem;
+    background-color: #eee;
+    color: #333;
+    padding: 1rem;
+    margin: 1rem 0 2rem 0;
+}
+
+.address-confirmation-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.address-confirmation-footer button {
+    font-size: 1rem;
+    margin-left: 2rem;
+    padding: 0.5rem 1.8rem;
+    background-color: #DD501D;
+    color: #fff;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
