@@ -1,5 +1,6 @@
 .notifications-container {
   padding: 70px 10px;
+  max-width: 1200px;
 }
 .notifications-header {
   background-color: steelblue;
@@ -70,5 +71,14 @@
   border-color: silver;
   box-shadow: 2px 2px 0 grey;
   background-color: #fff;
+}
 
+.notifications-input-title {
+  width: 30%;
+  min-width: 200px;
+}
+
+.notifications-input-msg {
+  width: 70%;
+  min-width: 500px;
 }

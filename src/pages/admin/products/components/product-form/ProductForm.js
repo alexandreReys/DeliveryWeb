@@ -86,12 +86,16 @@ function ProductForm({ propSubmit }) {
 
     /////////////////////////////////////////////////
     return (
-        <div id="product-form" className="product-form-container">
+        <div
+            id="product-form"
+            className="product-form-container"
+            // style={{width: '1200px'}}
+        >
 
             <div className="product-form-header">
                 <div className="product-form-header-text">
                     Produtos
-        </div>
+            </div>
             </div>
             <div className="product-form-buttons">
                 <button className="button" 
@@ -112,7 +116,7 @@ function ProductForm({ propSubmit }) {
 
             <main>
                 <form onSubmit={handleSubmit}>
-                    <div className="product-form-form-columns">
+                    <div className="product-form-form-columns" style={{width: 1200}}>
 
                         {/* Descrição */}
                         <div className="input-block">

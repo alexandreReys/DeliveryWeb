@@ -1,14 +1,20 @@
 .app-aside {
   min-height: 100vh;
-  /* height: 40vh;  para tamanho mobile */
-  background: rgb(36, 36, 35);
+  max-width: 170px;
+  background: #283747;
+  /* background: rgb(36, 36, 35); */
 }
 
 .container-aside {
-  padding: 15vh 10px 40vh;
-  color: cyan;
+  padding: 100px 70px 10px 20px;
 }
 
 .container-aside p {
   cursor: pointer;
+  color:#FFFDE7;
+}
+
+.container-aside p:hover {
+  color: yellow;
+  font-size: 1.4rem;
 }

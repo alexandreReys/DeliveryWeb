@@ -1,5 +1,6 @@
 .product-promotion-container {
   padding: 70px 10px;
+  max-width: 1200px;
 }
 .product-promotion-header {
   background-color: steelblue;

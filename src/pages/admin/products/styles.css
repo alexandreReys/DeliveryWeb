@@ -3,8 +3,8 @@
 }
 
 #vinhos {
-  /* margin: 0 auto; */
   padding: 70px 10px;
+  /* max-width: 1200px; */
 }
 
 #vinhos .header {
@@ -70,7 +70,14 @@
 
 #vinhos .vinho-form {
   width: 100%;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
+
+
+
+
+
+
+
   /* background: #fff; */
   /* background: rgba(228, 226, 226, 0.891); */
   /* box-shadow: 0 0 6px 0; */
@@ -80,8 +87,13 @@
 }
 
 #vinhos .vinho-list ul {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+ /* display: grid; */
+ /* grid-template-columns: 1fr 1fr 1fr; */
+
   gap: 20px;
   list-style: none;
 }
@@ -90,7 +102,7 @@
   color: red;
 }
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
   #vinhos .vinho-list ul {
     grid-template-columns: 1fr 1fr;
   }
@@ -100,7 +112,7 @@
   #vinhos .vinho-list ul {
     grid-template-columns: 1fr;
   }
-}
+} */
 
 .vinho-list-header {
   display: flex;
@@ -136,7 +148,7 @@
   color: blue;
   background-color: #eeeeee;
   cursor: pointer;
-  
+
   font-size: 0.9rem;
   font-weight: bold;
 

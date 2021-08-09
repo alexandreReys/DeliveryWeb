@@ -57,11 +57,13 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
         };
     };
 
-    const btnAcceptActive = () => 
-       order.StatusOrder === 'Novo' ? 'btn-aceitar-active' : 'btn-aceitar-disabled';
+    const btnAcceptActive = () => {
+       return order.StatusOrder === 'Novo' ? 'btn-aceitar-active' : 'btn-aceitar-disabled';
+    };
 
-    const btnRejectActive = () => 
-       order.StatusOrder === 'Novo' ? 'btn-rejeitar-active' : 'btn-rejeitar-disabled';
+    const btnRejectActive = () => {
+       return order.StatusOrder === 'Novo' ? 'btn-rejeitar-active' : 'btn-rejeitar-disabled';
+    };
 
     return (
         <div id="order-details" className="container-order-details">
@@ -153,8 +155,8 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
                         {order.CustomerNameOrder}
                         <br />
                         {!!order.CustomerDocumentOrder && order.CustomerDocumentOrder.toString() !== ''
-                            ? "Doc: Não informado"
-                            : 'Doc.: ' + order.CustomerDocumentOrder
+                            ? 'Doc.: ' + order.CustomerDocumentOrder
+                            : "Doc: Não informado"
                         }
                         <br />
                         {`Tel: ${order.CustomerPhoneNumberOrder}`}

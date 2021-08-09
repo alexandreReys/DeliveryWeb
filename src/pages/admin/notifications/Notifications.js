@@ -92,7 +92,7 @@ const Notifications = () => {
                         Titulo
                     </label>
                     <input
-                        className="notifications-input"
+                        className="notifications-input notifications-input-title"
                         name="title"
                         id="title"
                         required
@@ -108,7 +108,7 @@ const Notifications = () => {
                         Mensagem
                     </label>
                     <input
-                        className="notifications-input"
+                        className="notifications-input notifications-input-msg"
                         name="message"
                         id="message"
                         required

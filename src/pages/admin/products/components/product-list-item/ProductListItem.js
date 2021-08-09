@@ -32,7 +32,7 @@ function ProductListItem({ vinho, onDelete }) {
   };
 
   return (
-    <li className="vinho-item">
+    <li className="vinho-item" style={{width: '350px'}}>
       <header>
         <strong className="titulo">{vinho.DescricaoVinho}</strong>
       </header>

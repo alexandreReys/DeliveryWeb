@@ -195,21 +195,6 @@ export const formattedDateTime3 = (date, time) => {
     );
 };
 
-export const firstWord = (phrase) => {
-    if (!phrase) return "";
-
-    const arrWords = phrase.split(" ");
-    if (arrWords) return arrWords[0];
-    return phrase;
-};
-
-export const firstUpper = (string, separator = ' ') => {
-    return string
-      .split(separator)
-      .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
-      .join(separator);
-};
-
 // dd/mm/yyyy
 export const formatttedToday = () => {
     const today = new Date();
@@ -235,6 +220,21 @@ export const formatttedCurrentTime = () => {
     if (mm < 10) mm = "0" + mm;
 
     return hh + ":" + mm;
+};
+
+export const firstWord = (phrase) => {
+    if (!phrase) return "";
+
+    const arrWords = phrase.split(" ");
+    if (arrWords) return arrWords[0];
+    return phrase;
+};
+
+export const firstUpper = (string, separator = ' ') => {
+    return string
+      .split(separator)
+      .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
+      .join(separator);
 };
 
 export const clientSettings = (id, envJson) => {

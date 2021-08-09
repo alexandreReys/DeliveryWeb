@@ -1,5 +1,6 @@
 .product-deactivate-container {
     padding: 70px 10px;
+    max-width: 1200px;
   }
 .product-deactivate-header {
   background-color: steelblue;

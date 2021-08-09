@@ -73,7 +73,8 @@ textarea {
 
 .app-content {
   display: grid;
-  grid-template-columns: 1fr 8fr;
+  /* grid-template-columns: 1fr 100vw; */
+  grid-template-columns: 1fr 28fr;
   grid-template-rows: 100%;
 }
 

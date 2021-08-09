@@ -5,6 +5,7 @@
 #category {
   /* margin: 0 auto; */
   padding: 70px 10px;
+  max-width: 1200px;
 }
 
 
@@ -87,6 +88,10 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   list-style: none;
+
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 20px; */
 }
 
 #category #loading h5 {
