@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Sweetalert2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { TextInputMask } from "react-web-masked-text";
-import { MoneyMaskedToStringUnmasked } from "utils";
 
+// import { TextInputMask } from "react-masked-text";
+import CurrencyInput from "react-currency-input";
+
+import { MoneyMaskedToStringUnmasked } from "utils";
 import * as settingsService from "services/settingsService";
 
 import store from "store";
@@ -21,7 +23,7 @@ const Settings = () => {
 
     const [idSettings, setIdSettings] = useState(0);
     const [addressSellerSettings, setAddressSellerSettings] = useState("");
- 
+
     const [appBannerFileInputState] = useState();
     const [appBannerSettings, setAppBannerSettings] = useState("");
     const [appBannerPublicIdSettings, setAppBannerPublicIdSettings] = useState("");
@@ -70,33 +72,33 @@ const Settings = () => {
                 const response = await settingsService.get()
                 setIdSettings(response.IdSettings);
                 setAddressSellerSettings(response.AddressSellerSettings);
-                
+
                 setAppBannerSettings(response.AppBannerSettings);
                 setAppBannerPublicIdSettings(response.AppBannerPublicIdSettings);
                 setAppBannerPreview(response.AppBannerSettings);
-                
+
                 setAppBanner2Settings(response.AppBanner2Settings);
                 setAppBanner2PublicIdSettings(response.AppBanner2PublicIdSettings);
                 setAppBanner2Preview(response.AppBanner2Settings);
-                
+
                 setAppBanner3Settings(response.AppBanner3Settings);
                 setAppBanner3PublicIdSettings(response.AppBanner3PublicIdSettings);
                 setAppBanner3Preview(response.AppBanner3Settings);
-                
+
                 setAppLogoPSettings(response.AppLogoPSettings);
                 setAppLogoPPublicIdSettings(response.AppLogoPPublicIdSettings);
                 setAppLogoPPreview(response.AppLogoPSettings);
-                
+
                 setWebBannerSettings(response.WebBannerSettings);
                 setWebBannerPublicIdSettings(response.WebBannerPublicIdSettings);
                 setWebBannerPreview(response.WebBannerSettings);
-                
+
                 setUrlDeliveryMap(response.UrlDeliveryMap);
                 setUrlGooglePlay(response.UrlGooglePlay);
                 setContactPhone(response.ContactPhone);
                 setContactEmail(response.ContactEmail);
                 setContactWhatsapp(response.ContactWhatsapp);
-                
+
                 setDeliveryAreaDistance(response.DeliveryAreaDistance);
                 setShippingTaxSettings(response.ShippingTaxSettings);
                 setDeliveryAreaDistance2(response.DeliveryAreaDistance2);
@@ -131,7 +133,7 @@ const Settings = () => {
             setAppBanner2Preview(reader.result);
         };
     };
-    
+
     function appBanner3HandleFileInputChange(e) {
         const file = e.target.files[0];
         appBanner3PreviewFile(file);
@@ -230,38 +232,38 @@ const Settings = () => {
                 function updateSettingsInformation() {
                     const shippingTaxValue = MoneyMaskedToStringUnmasked(shippingTaxSettings);
                     const shippingTax2Value = MoneyMaskedToStringUnmasked(shippingTax2Settings);
-                    
+
                     settingsService.put({
                         AddressSellerSettings: addressSellerSettings,
                         IdSettings: idSettings,
-                        
+
                         AppBannerSettings: appBannerSettings,
                         AppBannerPublicIdSettings: appBannerPublicIdSettings,
                         AppBannerB64: appBannerPreview,
-                        
+
                         AppBanner2Settings: appBanner2Settings,
                         AppBanner2PublicIdSettings: appBanner2PublicIdSettings,
                         AppBanner2B64: appBanner2Preview,
-                        
+
                         AppBanner3Settings: appBanner3Settings,
                         AppBanner3PublicIdSettings: appBanner3PublicIdSettings,
                         AppBanner3B64: appBanner3Preview,
-                        
+
                         AppLogoPSettings: appLogoPSettings,
                         AppLogoPPublicIdSettings: appLogoPPublicIdSettings,
                         AppLogoPB64: appLogoPPreview,
-                        
+
                         WebBannerSettings: webBannerSettings,
                         WebBannerPublicIdSettings: webBannerPublicIdSettings,
                         WebBannerB64: webBannerPreview,
-                        
+
                         UrlDeliveryMap: urlDeliveryMap,
                         UrlGooglePlay: urlGooglePlay,
-                        
+
                         ContactPhone: contactPhone,
                         ContactEmail: contactEmail,
                         ContactWhatsapp: contactWhatsapp,
-                        
+
                         DeliveryAreaDistance: deliveryAreaDistance,
                         ShippingTaxSettings: shippingTaxValue,
                         DeliveryAreaDistance2: deliveryAreaDistance2,
@@ -319,11 +321,12 @@ const Settings = () => {
                                 Endereço do Estabelecimento
                             </label>
                             <input
+                                id="addressSellerSettings"
+                                name="addressSellerSettings"
                                 className="notifications-input"
                                 style={{ minWidth: 300 }}
-                                name="addressSellerSettings"
-                                id="addressSellerSettings"
                                 required
+                                autoFocus="true"
                                 autoComplete="new-password"
                                 value={addressSellerSettings}
                                 onChange={(e) => setAddressSellerSettings(e.target.value)}
@@ -331,7 +334,7 @@ const Settings = () => {
                         </div>
 
                         {/* contactPhone && contactWhatsapp && contactEmail */}
-                        <div style={{ display: "flex", flexDirection: "row", gap: 15, flexWrap: "wrap"}}>
+                        <div style={{ display: "flex", flexDirection: "row", gap: 15, flexWrap: "wrap" }}>
                             <div className="notifications-input-group">
                                 <label className="notifications-label" htmlFor="contactPhone">
                                     Telefone
@@ -380,13 +383,13 @@ const Settings = () => {
                         </div>
 
                         {/* shippingTaxSettings && deliveryAreaDistance */}
-                        <div style={{ display: "flex", flexDirection: "row", gap: 15, flexWrap: "wrap"}}>
+                        <div style={{ display: "flex", flexDirection: "row", gap: 15, flexWrap: "wrap" }}>
                             {/* Frete */}
                             <div className="notifications-input-group">
                                 <label className="notifications-label" htmlFor="shippingTaxSettings">
                                     Valor do Frete
                                 </label>
-                                <TextInputMask
+                                {/* <TextInputMask
                                     kind={"money"}
                                     className="notifications-input"
                                     style={{ width: 200 }}
@@ -396,14 +399,33 @@ const Settings = () => {
                                     autoComplete="new-password"
                                     value={shippingTaxSettings}
                                     onChange={(text) => setShippingTaxSettings(text)}
+                                /> */}
+
+                                <CurrencyInput
+                                    id="shippingTaxSettings"
+                                    name="shippingTaxSettings"
+                                    className="notifications-input"
+                                    style={{ width: 200 }}
+                                    prefix="R$ "
+                                    decimalSeparator=","
+                                    thousandSeparator="."
+                                    precision="2"
+                                    // selectAllOnFocus={false}
+                                    // autoFocus="false"
+                                    value={shippingTaxSettings}
+                                    onFocus={(e)=> {e.target.select()}}
+                                    onChangeEvent={(event, maskedvalue, floatvalue) => {
+                                        setShippingTaxSettings(maskedvalue)
+                                    }}
                                 />
+
                             </div>
                             {/* Distancia */}
                             <div className="notifications-input-group">
                                 <label className="notifications-label" htmlFor="deliveryAreaDistance">
                                     Área de entrega em Kms
                                 </label>
-                                <TextInputMask
+                                {/* <TextInputMask
                                     kind={"only-numbers"}
                                     className="notifications-input"
                                     style={{ width: 200 }}
@@ -414,15 +436,34 @@ const Settings = () => {
                                     autoComplete="new-password"
                                     value={deliveryAreaDistance}
                                     onChange={(text) => setDeliveryAreaDistance(text)}
+                                /> */}
+
+                                <CurrencyInput
+                                    id="deliveryAreaDistance"
+                                    name="deliveryAreaDistance"
+                                    className="notifications-input"
+                                    style={{ width: 200 }}
+                                    prefix=""
+                                    decimalSeparator=","
+                                    thousandSeparator="."
+                                    precision="0"
+                                    // selectAllOnFocus={false}
+                                    // autoFocus="false"
+                                    value={deliveryAreaDistance}
+                                    onFocus={(e)=> {e.target.select()}}
+                                    onChangeEvent={(event, maskedvalue, floatvalue) => {
+                                        setDeliveryAreaDistance(maskedvalue)
+                                    }}
                                 />
+
                             </div>
-                            
+
                             {/* Frete 2 */}
                             <div className="notifications-input-group">
                                 <label className="notifications-label" htmlFor="shippingTax2Settings">
                                     Valor do Frete 2
                                 </label>
-                                <TextInputMask
+                                {/* <TextInputMask
                                     kind={"money"}
                                     className="notifications-input"
                                     style={{ width: 200 }}
@@ -432,14 +473,35 @@ const Settings = () => {
                                     autoComplete="new-password"
                                     value={shippingTax2Settings}
                                     onChange={(text) => setShippingTax2Settings(text)}
+                                /> */}
+
+
+                                <CurrencyInput
+                                    id="shippingTax2Settings"
+                                    name="shippingTax2Settings"
+                                    className="notifications-input"
+                                    style={{ width: 200 }}
+                                    prefix="R$ "
+                                    decimalSeparator=","
+                                    thousandSeparator="."
+                                    precision="2"
+                                    // selectAllOnFocus={false}
+                                    // autoFocus="false"
+                                    value={shippingTax2Settings}
+                                    onFocus={(e)=> {e.target.select()}}
+                                    onChangeEvent={(event, maskedvalue, floatvalue) => {
+                                        setShippingTax2Settings(maskedvalue)
+                                    }}
                                 />
+
+
                             </div>
                             {/* Distancia 2 */}
                             <div className="notifications-input-group">
                                 <label className="notifications-label" htmlFor="deliveryAreaDistance2">
                                     Área para frete 2 reduzido
                                 </label>
-                                <TextInputMask
+                                {/* <TextInputMask
                                     kind={"only-numbers"}
                                     className="notifications-input"
                                     style={{ width: 200 }}
@@ -450,7 +512,26 @@ const Settings = () => {
                                     autoComplete="new-password"
                                     value={deliveryAreaDistance2}
                                     onChange={(text) => setDeliveryAreaDistance2(text)}
+                                /> */}
+
+                                <CurrencyInput
+                                    id="deliveryAreaDistance2"
+                                    name="deliveryAreaDistance2"
+                                    className="notifications-input"
+                                    style={{ width: 200 }}
+                                    prefix=""
+                                    decimalSeparator=","
+                                    thousandSeparator="."
+                                    precision="0"
+                                    // selectAllOnFocus={false}
+                                    // autoFocus="false"
+                                    value={deliveryAreaDistance2}
+                                    onFocus={(e)=> {e.target.select()}}
+                                    onChangeEvent={(event, maskedvalue, floatvalue) => {
+                                        setDeliveryAreaDistance2(maskedvalue)
+                                    }}
                                 />
+
                             </div>
                         </div>
 
@@ -506,7 +587,7 @@ const Settings = () => {
                                     onChange={webBannerHandleFileInputChange}
                                     value={webBannerFileInputState}
                                 />
-                                
+
                                 <div className="settings-app-banner-container">
                                     <img
                                         src={webBannerPreview}

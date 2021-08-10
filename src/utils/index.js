@@ -38,7 +38,8 @@ export const getPrice = (product) => {
         } else {
 
             if (product.EmPromocaoVinho && product.PrecoVinho >= 100) {
-                precoVinho = masks.numberMask(product.PrecoVinho)
+                // precoVinho = masks.numberMask(product.PrecoVinho)
+                precoVinho = masks.moneyMask(product.PrecoVinho)
             } else {
                 precoVinho = masks.moneyMask(product.PrecoVinho)
             };

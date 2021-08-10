@@ -3,8 +3,11 @@ import Select from 'react-select';
 
 import store from "store";
 import { actionVinhoList } from "store/actions";
-import { TextInputMask } from "react-web-masked-text";
 import { MoneyMaskedToStringUnmasked } from "utils";
+
+// import { TextInputMask } from "react-masked-text";
+import CurrencyInput from "react-currency-input";
+
 
 import "./styles.css";
 
@@ -127,6 +130,8 @@ function ProductForm({ propSubmit }) {
                                 id="DescricaoVinho"
                                 required
                                 autoComplete="new-password"
+                                autoFocus={true}
+                                selectAllOnFocus="true"
                                 value={DescricaoVinho}
                                 onChange={(e) => setDescricaoVinho(e.target.value)}
                             />
@@ -135,7 +140,7 @@ function ProductForm({ propSubmit }) {
                         {/* PrecoVinho */}
                         <div className="input-block">
                             <label htmlFor="PrecoVinho">Preço</label>
-                            <TextInputMask
+                            {/* <TextInputMask
                                 kind={"money"}
                                 className="product-form-input-txt"
                                 name="PrecoVinho"
@@ -145,6 +150,22 @@ function ProductForm({ propSubmit }) {
                                 value={PrecoVinho}
                                 onChange={(text) => {
                                     setPrecoVinho(text);
+                                }}
+                            /> */}
+
+                            <CurrencyInput
+                                id="PrecoVinho"
+                                name="PrecoVinho"
+                                className="product-form-input-txt"
+                                prefix="R$ "
+                                decimalSeparator=","
+                                thousandSeparator="."
+                                precision="2"
+                                // selectAllOnFocus={false}
+                                // autoFocus="false"
+                                value={PrecoVinho}
+                                onChangeEvent={ (event, maskedvalue, floatvalue) => {
+                                    setPrecoVinho(maskedvalue)
                                 }}
                             />
                         </div>
@@ -233,7 +254,7 @@ function ProductForm({ propSubmit }) {
                             </div>
 
                             <label htmlFor="QuantityProductVariation">Quantidade para Promoção</label>
-                            <TextInputMask
+                            {/* <TextInputMask
                                 kind={"only-numbers"}
                                 className="product-form-input-txt"
                                 style={{width: "40%"}}
@@ -244,6 +265,23 @@ function ProductForm({ propSubmit }) {
                                 value={QuantityProductVariation}
                                 onChange={(text) => {
                                     setQuantityProductVariation(text);
+                                }}
+                            /> */}
+
+                            <CurrencyInput  
+                                id="QuantityProductVariation"
+                                name="QuantityProductVariation"
+                                className="product-form-input-txt"
+                                style={{width: "40%"}}
+                                prefix=""
+                                decimalSeparator=","
+                                thousandSeparator="."
+                                precision="0"
+                                // selectAllOnFocus={false}
+                                // autoFocus="false"
+                                value={QuantityProductVariation}
+                                onChangeEvent={ (event, maskedvalue, floatvalue) => {
+                                    setQuantityProductVariation(maskedvalue);
                                 }}
                             />
 
@@ -260,7 +298,7 @@ function ProductForm({ propSubmit }) {
                             />
 
                             <label htmlFor="PriceProductVariation">Preço Promocional</label>
-                            <TextInputMask
+                            {/* <TextInputMask
                                 kind={"money"}
                                 className="product-form-input-txt"
                                 style={{width: "50%"}}
@@ -272,7 +310,24 @@ function ProductForm({ propSubmit }) {
                                 onChange={(text) => {
                                     setPriceProductVariation(text);
                                 }}
-                            />
+                            /> */}
+
+                            <CurrencyInput  
+                                id="PriceProductVariation"
+                                name="PriceProductVariation"
+                                className="product-form-input-txt"
+                                style={{width: "50%"}}
+                                prefix="R$ "
+                                decimalSeparator=","
+                                thousandSeparator="."
+                                precision="2"
+                                // selectAllOnFocus={false}
+                                // autoFocus="false"
+                                value={PriceProductVariation}
+                                onChangeEvent={ (event, maskedvalue, floatvalue) => {
+                                    setPriceProductVariation(maskedvalue);
+                                }}
+                            />                            
 
                         </div>
 
