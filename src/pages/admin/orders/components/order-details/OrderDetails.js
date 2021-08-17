@@ -1,16 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-// import { history } from "routes/history";
 import { connect } from "react-redux";
-
 import * as orderService from "services/orderService";
-
 import store from "store";
 import { moneyMask } from "utils/masks";
 import * as utils from "utils";
-import {
-    actionAdminModuleActivate,
-    actionSetOrderOperation,
-} from "store/actions";
+import * as actions from "store/actions";
 
 import { useReactToPrint } from "react-to-print";
 import DeliveryTicket from "components/print/DeliveryTicket";
@@ -22,7 +16,7 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
     const [order] = useState(store.getState().orderState.order);
 
     useEffect(() => {
-        store.dispatch(actionAdminModuleActivate());
+        store.dispatch(actions.actionAdminModuleActivate());
     }, []);
 
     const dateTime = utils.formattedDateTime2(order.DateOrder, order.TimeOrder);
@@ -46,14 +40,14 @@ const OrderDetails = ({ orderItems, orderHistory }) => {
     const handleAccept = () => {
         if (order.StatusOrder === 'Novo') {
             orderService.acceptOrder(order.IdOrder);
-            store.dispatch(actionSetOrderOperation("list"));
+            store.dispatch(actions.actionSetOrderOperation("list"));
         };
     };
 
     const handleReject = () => {
         if (order.StatusOrder === 'Novo') {
             orderService.rejectOrder(order.IdOrder);
-            store.dispatch(actionSetOrderOperation("list"));
+            store.dispatch(actions.actionSetOrderOperation("list"));
         };
     };
 

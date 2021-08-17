@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   errorMsgText: "Verificando ...",
   adminModule: false,
 
+  operationIsEnabledSettings: -1,
   addressSellerSettings: "",
   shippingTaxSettings: 0,
   shippingTax2Settings: 0,
@@ -46,6 +47,7 @@ export default function defaultReducer(state = INITIAL_STATE, action) {
 const functionGetSettings = (state, { settings }) => {
   return {
     ...state,
+    operationIsEnabledSettings: settings.OperationIsEnabledSettings,
     addressSellerSettings: settings.AddressSellerSettings,
     shippingTaxSettings: settings.ShippingTaxSettings,
     shippingTax2Settings: settings.ShippingTax2Settings,

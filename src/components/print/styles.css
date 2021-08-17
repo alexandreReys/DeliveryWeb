@@ -6,6 +6,7 @@
 @media print {
   html,
   body {
+    color: black;
     height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -34,11 +35,13 @@
 #DeliveryTicket .total {
   display: flex;
   font-size: 1rem;
+  color: black;
 }
 
 #DeliveryTicket .table-item {
   display: flex;
   font-size: 0.9rem;
+  color: black;
 }
 
 #DeliveryTicket .total span {

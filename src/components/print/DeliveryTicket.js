@@ -25,21 +25,21 @@ class DeliveryTicket extends React.Component {
                     <div className="ticket-header">
                         <h3>{store.getState().defaultState.appTitle}</h3>
                         <h4>
-                            <b>Pedido: {store.getState().orderState.order.IdOrder}</b>
+                            <b>PEDIDO: {store.getState().orderState.order.IdOrder}</b>
                         </h4>
-                        <h5>Entrega : Delivery para {deliveryDate}</h5>
+                        <h5>ENTREGA : Delivery para {deliveryDate}</h5>
                         <h5>
-                            Pagamento : {store.getState().orderState.order.PaymantTypeOrder}
+                            PAGAMENTO: {store.getState().orderState.order.PaymantTypeOrder}
                         </h5>
                     </div>
                     <hr />
                     <div className="delivery-info">
                         <h4>
-                            Bairro :{" "}
+                            Bairro:{" "}
                             {store.getState().orderState.order.CustomerNeighborhoodOrder}
                         </h4>
                         <p>
-                            Endereço: {store.getState().orderState.order.CustomerAddressOrder}
+                            ENDEREÇO: {store.getState().orderState.order.CustomerAddressOrder}
                         </p>
                         <h5>
                             Cliente: {store.getState().orderState.order.CustomerNameOrder}
@@ -47,11 +47,16 @@ class DeliveryTicket extends React.Component {
                     </div>
                     <hr />
                     {orderItems.map((item) => {
-                        const total = moneyMask(
-                            item.quantityOrderItem * item.priceOrderItem
-                        );
+                        const total = moneyMask( item.priceOrderItem );
                         return (
                             <div className="table-item" key={item.idProductOrderItem}>
+                                <span 
+                                    className="column-left"
+                                    style={{ width: "10%" }}
+                                >
+                                    {item.quantityOrderItem}
+                                </span>
+
                                 <span
                                     className="column-left product-description"
                                     style={{ width: "65%" }}
@@ -59,20 +64,9 @@ class DeliveryTicket extends React.Component {
                                     {item.DescricaoVinho}
                                 </span>
 
-                                <span 
-                                    className="column-right"
-                                    style={{ width: "10%" }}
-                                >
-                                    {item.quantityOrderItem}
-                                </span>
-
                                 <span
                                     className="column-right"
-                                    style={{ 
-                                        paddingTop: 3,
-                                        width: "25%", 
-                                        fontSize: "0.7rem",
-                                    }}
+                                    style={{ width: "25%" }}
                                 >
                                     {total}
                                 </span>
@@ -81,22 +75,22 @@ class DeliveryTicket extends React.Component {
                     })}
                     <hr />
                     <div className="total">
-                        <span className="column-left">Total dos produtos</span>
+                        <span className="column-left">TOTAL DOS PRODUTOS</span>
                         <span className="column-right">{totalProductsOrder}</span>
                     </div>
                     <div className="total">
-                        <span className="column-left">Frete</span>
+                        <span className="column-left">FRETE</span>
                         <span className="column-right">{shippingAmountOrder}</span>
                     </div>
                     <div
                         className="total"
                         style={{ fontWeight: "bold", fontSize: "1.2rem" }}
                     >
-                        <span className="column-left">Total a pagar</span>
+                        <span className="column-left">TOTAL A PAGAR</span>
                         <span className="column-right">{totalOrder}</span>
                     </div>
                     <div className="total">
-                        <span className="column-left">Troco</span>
+                        <span className="column-left">TROCO</span>
                         <span className="column-right">{changeValueOrder}</span>
                     </div>
 
@@ -114,9 +108,9 @@ class DeliveryTicket extends React.Component {
                     <hr />
 
                     <div className="ticket-footer">
-                        <h3>Adega da Vila</h3>
+                        <h3>{store.getState().defaultState.appTitle}</h3>
                         <h4>
-                            <b>Pedido: {store.getState().orderState.order.IdOrder}</b>
+                            <b>PEDIDO: {store.getState().orderState.order.IdOrder}</b>
                         </h4>
                         <h5>
                             {utils.formatttedToday()} {utils.formatttedCurrentTime()}

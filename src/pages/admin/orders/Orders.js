@@ -63,14 +63,18 @@ const OrdersList = () => {
                 setLoading(true);
                 const status = store.getState().orderState.selectedStatus;
                 const response = await orderService.getOrders(status);
-                setLoading(false);
 
+                setLoading(false);
                 setOrders(response);
 
                 if (response.length > 0) {
                     const atualOrderId = response[0].IdOrder;
-                    if (atualOrderId > lastOrderId) {
+                    const atualOrderStatus = response[0].StatusOrder;
+
+                    if (atualOrderStatus === 'Novo' && atualOrderId > lastOrderId) {
+
                         if (lastOrderId > 0) alertNewOrder();
+
                         setLastOrderId(atualOrderId);
                     };
                 };
@@ -84,15 +88,20 @@ const OrdersList = () => {
             setLoading(true);
             const status = store.getState().orderState.selectedStatus;
             const response = await orderService.getOrders(status);
+
+            setLoading(false);
+            setOrders(response);
+
             if (response.length > 0) {
                 const atualOrderId = response[0].IdOrder;
-                if (atualOrderId > lastOrderId) {
+                const atualOrderStatus = response[0].StatusOrder;
+
+                if (atualOrderStatus === 'Novo' && atualOrderId > lastOrderId) {
+
                     if (lastOrderId > 0) alertNewOrder();
                     setLastOrderId(atualOrderId);
                 };
             };
-            setLoading(false);
-            setOrders(response);
         })();
     }, [lastOrderId]);
 

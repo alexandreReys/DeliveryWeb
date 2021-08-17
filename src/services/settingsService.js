@@ -29,6 +29,18 @@ export const put = async (data) => {
     return resp.data;
 };
 
+export const changeOperationStatus = async (data) => {
+
+    try {
+        var resp = await api.patch("/delivery-settings/operation-status", data);
+    } catch (error) {
+        console.error("ErrorMessage (settingsService.patch.operation-status): ", error);
+        return null;
+    }
+    store.dispatch(actionGetSettings(data));
+    return resp.data;
+};
+
 const processImage = async (data) => {
 
     // if AppBanner updated

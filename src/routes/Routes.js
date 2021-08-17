@@ -33,7 +33,10 @@ import TestPrint from "components/print/TestPrint";
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/" component={ShoppingList} />
+    {/* <Route exact path="/" component={ShoppingList} /> */}
+
+    <Route exact path="/" component={Orders} />
+    <Route exact path="/shop" component={ShoppingList} />
     <Route exact path="/shopping-list-categ" component={ShoppingListCateg} />
     
     <Route path="/home" component={Home} />
@@ -64,7 +67,9 @@ const Routes = () => (
 
     <Route path="/test-modal" component={TestModal} />
     <Route path="/test-print" component={TestPrint} />
-    <Route component={ShoppingList} />
+
+    <Route component={Orders} />
+    {/* <Route component={ShoppingList} /> */}
   </Switch>
 );
 
