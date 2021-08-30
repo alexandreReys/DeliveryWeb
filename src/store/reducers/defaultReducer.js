@@ -30,6 +30,7 @@ const INITIAL_STATE = {
 };
 
 export default function defaultReducer(state = INITIAL_STATE, action) {
+
   switch (action.type) {
     case "ACTION_ADMIN_MODULE_ACTIVATE":
       return { ...state, adminModule: true };
@@ -72,6 +73,10 @@ const functionGetSettings = (state, { settings }) => {
 };
 
 const functionSetTitle = (state, { title }) => {
+
+  console.log('defaultReducer/functionSetTitle', title);
+
+
   return {
     ...state,
     appTitle: title,

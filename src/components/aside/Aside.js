@@ -29,7 +29,7 @@ const Aside = () => {
         <aside className="app-aside">
             <div className="container-aside">
 
-                { buttonOn && (
+                { !!buttonOn && (
                     <FiToggleRight
                         style={{cursor: 'pointer', color: '#33FF33', fontSize: '3rem', marginBottom: 30}}
                         data-tip="Clique para parar a operação no APP"

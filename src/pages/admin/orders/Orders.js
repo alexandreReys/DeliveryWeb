@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import ReactHowler from 'react-howler';
 import { FiRefreshCcw } from "react-icons/fi";
-import ReactTooltip from "react-tooltip";
-import StarRatings from 'react-star-ratings';
 import { connect } from "react-redux";
-
-import { moneyMask } from "utils/masks";
+import StarRatings from 'react-star-ratings';
+import ReactTooltip from "react-tooltip";
 import * as orderService from "services/orderService";
-import * as utils from "utils";
-import * as actions from "store/actions";
-import OrderDetails from "./components/order-details/OrderDetails";
 import store from "store";
-
+import * as actions from "store/actions";
+import * as utils from "utils";
+import { moneyMask } from "utils/masks";
+import OrderDetails from "./components/order-details/OrderDetails";
 import "./styles.css";
+
+
 
 //////////////////////////////////////////////////////////////////////////////
 const Orders = ({ operation }) => {
@@ -34,19 +35,12 @@ const Orders = ({ operation }) => {
 
 //////////////////////////////////////////////////////////////////////////////
 
-const alertNewOrder = () => {
-    (() => {
-        let audio = new Audio("https://www.anrsistemas.com.br/dv/beep.mp3");
-        audio.play();
-    })();
-    utils.message("Novo Pedido !!", 3);
-};
-
 const OrdersList = () => {
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState([]);
     const [lastOrderId, setLastOrderId] = useState(0);
-
+    const [alertPlay, setAlertPlay] = useState(false);
+    
     useEffect(() => {
         store.dispatch(actions.actionSetSelectedStatus("Pendente"));
         store.dispatch(actions.actionAdminModuleActivate());
@@ -54,7 +48,7 @@ const OrdersList = () => {
 
         const timeoutID = window.setInterval(() => {
             getOrdersList1();
-        }, 30000);
+        }, 15000);
 
         return () => window.clearTimeout(timeoutID);
 
@@ -80,10 +74,10 @@ const OrdersList = () => {
                 };
             })()
         };
-    
+
     }, [lastOrderId]);
 
-    const refresh = React.useCallback( async () => {
+    const refresh = React.useCallback(async () => {
         (async function loadOrders() {
             setLoading(true);
             const status = store.getState().orderState.selectedStatus;
@@ -105,9 +99,23 @@ const OrdersList = () => {
         })();
     }, [lastOrderId]);
 
+    const alertNewOrder = () => {
+        (() => {
+            // let audio = new Audio("https://www.anrsistemas.com.br/dv/beep.mp3");
+            // audio.play();
+
+            setAlertPlay(true);
+            window.setTimeout(() => { setAlertPlay(false) }, 4000);
+        })();
+        utils.message("Novo Pedido !!", 3);
+    };
 
     return (
         <div className="orders-list">
+            <ReactHowler
+                src='https://www.anrsistemas.com.br/dv/beep.mp3'
+                playing={alertPlay}
+            />
             <Header handleRefresh={refresh} />
             {loading && <Loading />}
             {!loading && <OrdersTable orders={orders} />}
@@ -280,7 +288,7 @@ const OrdersTable = ({ orders }) => {
                                     {order.CustomerNameOrder}
                                 </td>
                                 <td>
-                                    <Stars rating={order.EvaluationOrder}/>
+                                    <Stars rating={order.EvaluationOrder} />
                                 </td>
                                 <td>
                                     {utils.formattedDateTime(order.DateOrder, order.TimeOrder)}
@@ -305,14 +313,14 @@ const OrdersTable = ({ orders }) => {
     );
 };
 
-function Stars( {rating} ) {
+function Stars({ rating }) {
     return (
         <StarRatings
             rating={rating}
             numberOfStars={5}
             starDimension="15px"
             starSpacing="1px"
-            starRatedColor={rating > 2? "blue": "red"}
+            starRatedColor={rating > 2 ? "blue" : "red"}
             starEmptyColor="silver"
             isAggregateRating="true"
             name='rating'

@@ -1,7 +1,7 @@
-import { api } from "./api";
+import * as imageService from "../services/imageService";
 import store from "../store";
 import { actionGetSettings } from "../store/actions";
-import * as imageService from "../services/imageService";
+import { api } from "./api";
 
 export const get = async () => {
     try {
@@ -167,23 +167,32 @@ const processImage = async (data) => {
         IdSettings: data.IdSettings,
         AddressSellerSettings: data.AddressSellerSettings,
         UrlDeliveryMap: data.UrlDeliveryMap,
+
         UrlGooglePlay: data.UrlGooglePlay,
         ContactPhone: data.ContactPhone,
         ContactEmail: data.ContactEmail,
+
         ContactWhatsapp: data.ContactWhatsapp,
         AppBannerSettings: data.AppBannerSettings,
         AppBannerPublicIdSettings: data.AppBannerPublicIdSettings,
+
         AppLogoPSettings: data.AppLogoPSettings,
         AppLogoPPublicIdSettings: data.AppLogoPPublicIdSettings,
         WebBannerSettings: data.WebBannerSettings,
+
         WebBannerPublicIdSettings: data.WebBannerPublicIdSettings,
         AppBanner2Settings: data.AppBanner2Settings,
         AppBanner2PublicIdSettings: data.AppBanner2PublicIdSettings, 
+
         AppBanner3Settings: data.AppBanner3Settings,
         AppBanner3PublicIdSettings: data.AppBanner3PublicIdSettings,
         DeliveryAreaDistance: data.DeliveryAreaDistance,
+
         ShippingTaxSettings: data.ShippingTaxSettings,
         DeliveryAreaDistance2: data.DeliveryAreaDistance2,
         ShippingTax2Settings: data.ShippingTax2Settings,
+
+        DeliveryAreaDistance3: data.DeliveryAreaDistance3,
+        ShippingTax3Settings: data.ShippingTax3Settings,
     };
 };
