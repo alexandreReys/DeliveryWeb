@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { history } from "routes/history";
-import Sweetalert2 from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import * as notificationService from "services/notificationService";
-
 import store from "store";
 import * as actions from "store/actions";
+import Sweetalert2 from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import "./styles.css";
+
 
 const Swal = withReactContent(Sweetalert2);
 
@@ -20,7 +20,7 @@ const Notifications = () => {
     }, []);
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         const ShowNotificationsAlertAndExit = () => {
             Swal.fire({
                 icon: "success",
@@ -37,7 +37,7 @@ const Notifications = () => {
             });
         };
         
-        const confirmAndSend = async () => {
+        const confirmAndSend = () => {
             Swal.fire({
                 title: 'Confirma ?',
                 text: "Esta notificação irá para todos os clientes com o app !!",
@@ -48,15 +48,20 @@ const Notifications = () => {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Sim, enviar !!',
                 cancelButtonText: 'Cancelar',
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-                    notificationService.postNotification(title, message);
-                    ShowNotificationsAlertAndExit();
-                }
+                    const resp = await notificationService.postNotification(title, message);
+                    if ( resp.data[0].status === 'error' ) {
+                        validateErrorMessage(resp.data[0].message);
+                    } else {
+                        ShowNotificationsAlertAndExit();
+                    };
+                };
             });
         };
-        
+       
         if (!validateFields({ title, message })) return false;
+
         confirmAndSend();
     };
     
@@ -142,8 +147,8 @@ const validateErrorMessage = (message) => {
         text: "Oops ...",
         position: "top-end",
         background: "yellow",
-        showConfirmButton: false,
-        timer: 2000,
+        showConfirmButton: true,
+        timer: 10000,
         timerProgressBar: true,
     });
 };
