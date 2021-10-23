@@ -1,20 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { FaRegSquare, FaRegCheckSquare } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import { DebounceInput } from "react-debounce-input";
-
+import { FaRegCheckSquare, FaRegSquare, FaSearch } from "react-icons/fa";
 import { history } from "routes/history";
+import * as productService from "services/productService";
 import store from "store";
 import * as actions from "store/actions";
-import * as productService from "services/productService";
-
 import "./styles.css";
+
+const SeachInput = React.memo(({ setProducts, setLoading }) => {
+    const [inputValue, setInputValue] = useState('');
+    const onChange = (value) => {
+        setInputValue(value);
+        getProductsNome(value)
+    };
+
+    async function getProductsNome(text) {
+        (async function loadProductsNome(text) {
+            setLoading(true);
+            setProducts([]);
+            const response = await productService.getProductsByName(text);
+            setProducts(response);
+            setLoading(false);
+
+        })(text)
+    };
+
+    return (
+
+        <div style={{ display: "flex", flexDirection: "row" }}>
+            <div className="product-deactivate-search-container">
+                <DebounceInput
+                    className="product-deactivate-search-input"
+                    value={inputValue}
+                    minLength={2}
+                    debounceTimeout={800}
+                    onChange={(e) => onChange(e.target.value)}
+                />
+                <div
+                    className="product-deactivate-search-cancel"
+                    onClick={() => {
+                        onChange('')
+                    }}
+                >
+                    X
+                </div>
+            </div>
+            <div>
+                <FaSearch className="product-deactivate-search-button" size={22} />
+            </div>
+        </div>
+    )
+})
 
 const ProductStatus = () => {
     const [loading, setLoading] = useState(true);
     const [loadingText] = useState(store.getState().defaultState.loadingText);
     const [products, setProducts] = useState([]);
-    const [searchText, setSearchText] = useState("");
+    // const [searchText, setSearchText] = useState("");
 
     useEffect(() => {
         store.dispatch(actions.actionAdminModuleActivate());
@@ -22,10 +64,16 @@ const ProductStatus = () => {
     }, []);
 
 
-    useEffect(() => {
-        if (!loading) getProductsNome(searchText);
-        // eslint-disable-next-line
-    }, [searchText]);
+    // useEffect(() => {
+    //     if (!loading) {
+    //         if (!searchText) {
+    //             getProductsList()
+    //         } else {
+    //             getProductsNome(searchText)
+    //         }
+    //     };
+    //     // eslint-disable-next-line
+    // }, [searchText]);
 
     const getProductsList = async () => {
         async function loadProducts() {
@@ -37,15 +85,15 @@ const ProductStatus = () => {
         loadProducts();
     };
 
-    async function getProductsNome(searchText) {
-        async function loadProductsNome(searchText) {
-            setLoading(true);
-            const response = await productService.getProductsByName(searchText);
-            setLoading(false);
-            setProducts(response);
-        }
-        loadProductsNome(searchText);
-    }
+    // async function getProductsNome(searchText) {
+    //     async function loadProductsNome(searchText) {
+    //         setLoading(true);
+    //         const response = await productService.getProductsByName(searchText);
+    //         setLoading(false);
+    //         setProducts(response);
+    //     }
+    //     loadProductsNome(searchText);
+    // }
 
     const handleExit = () => {
         history.push("orders");
@@ -74,31 +122,9 @@ const ProductStatus = () => {
 
             <div className="product-deactivate-search">
                 <div></div>
-                <div style={{ display: "flex", flexDirection: "row" }}>
 
-                    <div className="product-deactivate-search-container">
-                        
-                        <DebounceInput
-                            className="product-deactivate-search-input"
-                            value={searchText}
-                            minLength={2}
-                            debounceTimeout={800}
-                            onChange={(e) => setSearchText(e.target.value)}
-                        />
-                        
-                        <div
-                            className="product-deactivate-search-cancel"
-                            onClick={() => setSearchText("")}
-                        >
-                            X
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <FaSearch className="product-deactivate-search-button" size={22} />
-                    </div>
+                <SeachInput setProducts={setProducts} setLoading={setLoading}/>
 
-                </div>
             </div>
 
             {!!loading && (
@@ -114,7 +140,7 @@ const ProductStatus = () => {
     );
 };
 
-const Product = ({ product }) => {
+const Product = React.memo(({ product }) => {
     const [active, setActive] = useState(product.StatusVinho);
     return (
         <>
@@ -160,6 +186,6 @@ const Product = ({ product }) => {
             </div>
         </>
     )
-}
+})
 
 export default ProductStatus;

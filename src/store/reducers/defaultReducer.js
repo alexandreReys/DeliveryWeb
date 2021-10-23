@@ -73,10 +73,6 @@ const functionGetSettings = (state, { settings }) => {
 };
 
 const functionSetTitle = (state, { title }) => {
-
-  console.log('defaultReducer/functionSetTitle', title);
-
-
   return {
     ...state,
     appTitle: title,

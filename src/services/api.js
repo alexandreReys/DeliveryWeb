@@ -1,10 +1,10 @@
 import axios from "axios";
-import * as utils from "../utils";
-import * as loginService from "./loginService";
+import store from "store";
 import * as envJson from "../.env.json";
 import * as settings from "../.settings.json";
 import * as actions from "../store/actions";
-import store from "store";
+import * as utils from "../utils";
+import * as loginService from "./loginService";
 
 let mysqlBaseUrl;
 let appTitle;

@@ -27,15 +27,11 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 
-
-
-
-
 const Routes = () => (
   <Switch>
     {/* <Route exact path="/" component={ShoppingList} /> */}
 
-    <Route exact path="/" component={Products} />
+    <PrivateRoute exact path="/" component={Products} />
     <Route exact path="/shop" component={ShoppingList} />
     <Route exact path="/shopping-list-categ" component={ShoppingListCateg} />
     
